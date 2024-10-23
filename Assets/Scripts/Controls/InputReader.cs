@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Controls;
 
 [CreateAssetMenu(fileName = "InputReader")]
-public class InputReader : ScriptableObject, Controls.IPlayerActions
+public class InputReader : ScriptableObject, IPlayerActions
 {
     public event Action JumpEvent;
     public event Action DodgeEvent;
@@ -43,5 +44,9 @@ public class InputReader : ScriptableObject, Controls.IPlayerActions
     public void OnMove(InputAction.CallbackContext context)
     {
         MovementValue = context.ReadValue<Vector2>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
     }
 }
