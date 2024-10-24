@@ -20,8 +20,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Vector3 movement = CalculateMovement();
-
-        stateMachine.CharacterController.Move(stateMachine.FreeLookMovement * deltaTime * movement);
+        Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
@@ -38,7 +37,7 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
     }
 
-    protected Vector3 CalculateMovement()
+    private Vector3 CalculateMovement()
     {
         Vector3 forward = stateMachine.MainCameraTransform.forward;
         Vector3 right = stateMachine.MainCameraTransform.right;
@@ -53,7 +52,7 @@ public class PlayerFreeLookState : PlayerBaseState
         return forward * stateMachine.InputReader.MovementValue.y + right * stateMachine.InputReader.MovementValue.x;
     }
 
-    protected void FaceMovementDirection(Vector3 movement, float deltaTime)
+    private void FaceMovementDirection(Vector3 movement, float deltaTime)
     {
         stateMachine.transform.rotation = Quaternion.Lerp(
             stateMachine.transform.rotation,
