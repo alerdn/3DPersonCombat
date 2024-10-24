@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
+    private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
     private float AnimatorDampTime = .1f;
 
@@ -13,7 +12,9 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, .1f);
 
+        stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
     }
 
     public override void Tick(float deltaTime)
@@ -34,7 +35,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Exit()
     {
-
+        stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
     }
 
     protected Vector3 CalculateMovement()
@@ -58,5 +59,12 @@ public class PlayerFreeLookState : PlayerBaseState
             stateMachine.transform.rotation,
             Quaternion.LookRotation(movement),
             deltaTime * stateMachine.RotationDamping);
+    }
+
+    private void OnToggleTarget()
+    {
+        if (!stateMachine.Targeter.SelectTarget()) return;
+
+        stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
     }
 }

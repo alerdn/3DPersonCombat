@@ -1212,6 +1212,7 @@ MonoBehaviour:
     type: 2}
   <CharacterController>k__BackingField: {fileID: 1864496135239076768}
   <Animator>k__BackingField: {fileID: 6988202913747320121}
+  <Targeter>k__BackingField: {fileID: 2153323114177594034}
   <FreeLookMovement>k__BackingField: 6
   <RotationDamping>k__BackingField: 10
 --- !u!95 &6988202913747320121

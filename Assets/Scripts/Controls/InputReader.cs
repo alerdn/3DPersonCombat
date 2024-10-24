@@ -10,6 +10,7 @@ public class InputReader : ScriptableObject, IPlayerActions
 {
     public event Action JumpEvent;
     public event Action DodgeEvent;
+    public event Action ToggleTargetEvent;
 
     public Vector2 MovementValue { get; private set; }
 
@@ -46,7 +47,12 @@ public class InputReader : ScriptableObject, IPlayerActions
         MovementValue = context.ReadValue<Vector2>();
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    public void OnLook(InputAction.CallbackContext context) { }
+
+    public void OnToggleTarget(InputAction.CallbackContext context)
     {
+        if (!context.performed) return;
+
+        ToggleTargetEvent?.Invoke();
     }
 }
