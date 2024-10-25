@@ -26,6 +26,7 @@ public class Targeter : MonoBehaviour
 
         foreach (Target target in _targets)
         {
+            // WorldToViewportPoint retorna valores entre 0 e 1
             Vector2 viewPos = _mainCamera.WorldToViewportPoint(target.transform.position);
 
             if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
