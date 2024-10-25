@@ -70,4 +70,14 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Animator.SetFloat(TargetingForwardHash, stateMachine.InputReader.MovementValue.y, .1f, deltaTime);
         stateMachine.Animator.SetFloat(TargetingRightHash, stateMachine.InputReader.MovementValue.x, .1f, deltaTime);
     }
+
+    private void FaceTarget()
+    {
+        if (!stateMachine.Targeter.CurrentTarget) return;
+
+        Vector3 lookPos = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.transform.position;
+        lookPos.y = 0f;
+
+        stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+    }
 }
