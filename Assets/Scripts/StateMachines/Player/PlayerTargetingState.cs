@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
     private readonly int TargetingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
+    private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
+    private readonly int TargetingRightHash = Animator.StringToHash("TargetingRight");
 
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -26,6 +29,8 @@ public class PlayerTargetingState : PlayerBaseState
         Vector3 movement = CalculateMovement();
         Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
+        UpdateAnimator(deltaTime);
+
         FaceTarget();
     }
 
@@ -48,5 +53,21 @@ public class PlayerTargetingState : PlayerBaseState
         movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
 
         return movement;
+    }
+
+    private void UpdateAnimator(float deltaTime)
+    {
+        Vector3 movement = stateMachine.InputReader.MovementValue;
+        if (movement.y != 0)
+        {
+            movement.y = movement.y > 0 ? 1 : -1;
+        }
+        if (movement.x != 0)
+        {
+            movement.x = movement.x > 0 ? 1 : -1;
+        }
+
+        stateMachine.Animator.SetFloat(TargetingForwardHash, stateMachine.InputReader.MovementValue.y, .1f, deltaTime);
+        stateMachine.Animator.SetFloat(TargetingRightHash, stateMachine.InputReader.MovementValue.x, .1f, deltaTime);
     }
 }
