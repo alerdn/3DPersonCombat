@@ -287,8 +287,8 @@ MonoBehaviour:
   m_MaxDollyOut: 5000
   m_MinimumDistance: 1
   m_MaximumDistance: 5000
-  m_MinimumFOV: 60
-  m_MaximumFOV: 65
+  m_MinimumFOV: 40
+  m_MaximumFOV: 45
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
 --- !u!114 &7102616167810171718
@@ -1175,6 +1175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544128400562270597, guid: 8ee4a5721bfa5ba459faf73d4a351228,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon_Axe_01
       objectReference: {fileID: 0}
     - target: {fileID: 6504087031504652186, guid: 8ee4a5721bfa5ba459faf73d4a351228,
         type: 3}

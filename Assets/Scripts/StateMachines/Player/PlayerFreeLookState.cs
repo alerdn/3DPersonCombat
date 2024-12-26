@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
@@ -15,10 +16,18 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, .1f);
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
+        stateMachine.InputReader.SwitchWeaponEvent += OnSwitchWeapon;
+        stateMachine.InputReader.SwitchSecondaryWeaponEvent += OnSwitchSecondaryWeapon;
     }
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.InputReader.IsAttacking)
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+            return;
+        }
+
         Vector3 movement = CalculateMovement();
         Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
@@ -35,6 +44,8 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
+        stateMachine.InputReader.SwitchWeaponEvent -= OnSwitchWeapon;
+        stateMachine.InputReader.SwitchSecondaryWeaponEvent -= OnSwitchSecondaryWeapon;
     }
 
     private Vector3 CalculateMovement()
@@ -64,5 +75,15 @@ public class PlayerFreeLookState : PlayerBaseState
         if (!stateMachine.Targeter.SelectTarget()) return;
 
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+    }
+
+    private void OnSwitchWeapon()
+    {
+        stateMachine.SwitchPrimaryWeapon();
+    }
+
+    private void OnSwitchSecondaryWeapon()
+    {
+        stateMachine.SwitchSecondaryWeapon();
     }
 }

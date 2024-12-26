@@ -71,6 +71,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d7b7df9-4fb4-45a5-9114-a7b8fbd97c9f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7973ec3-d222-46aa-a890-bb4d2205d51c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchSecondaryWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""c69c7019-57d5-4265-aa80-afe04117637b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +254,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f6b0f47-ab77-435a-9422-b43274035638"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0f548c1-3b6c-4645-bbb6-bd443518d3db"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a1128cc-7851-4137-b6ee-452689779e6b"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fb89215-eb14-4a47-93c0-7421d754129b"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bee7914-e111-447f-a2c8-20739f41d134"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchSecondaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc21e2cb-9871-4536-9236-ec70e86ea5ef"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchSecondaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -268,6 +361,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_ToggleTarget = m_Player.FindAction("ToggleTarget", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_SwitchWeapon = m_Player.FindAction("SwitchWeapon", throwIfNotFound: true);
+        m_Player_SwitchSecondaryWeapon = m_Player.FindAction("SwitchSecondaryWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -334,6 +430,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_ToggleTarget;
+    private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_SwitchWeapon;
+    private readonly InputAction m_Player_SwitchSecondaryWeapon;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -343,6 +442,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @ToggleTarget => m_Wrapper.m_Player_ToggleTarget;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @SwitchWeapon => m_Wrapper.m_Player_SwitchWeapon;
+        public InputAction @SwitchSecondaryWeapon => m_Wrapper.m_Player_SwitchSecondaryWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +469,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ToggleTarget.started += instance.OnToggleTarget;
             @ToggleTarget.performed += instance.OnToggleTarget;
             @ToggleTarget.canceled += instance.OnToggleTarget;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @SwitchWeapon.started += instance.OnSwitchWeapon;
+            @SwitchWeapon.performed += instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
+            @SwitchSecondaryWeapon.started += instance.OnSwitchSecondaryWeapon;
+            @SwitchSecondaryWeapon.performed += instance.OnSwitchSecondaryWeapon;
+            @SwitchSecondaryWeapon.canceled += instance.OnSwitchSecondaryWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -386,6 +497,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ToggleTarget.started -= instance.OnToggleTarget;
             @ToggleTarget.performed -= instance.OnToggleTarget;
             @ToggleTarget.canceled -= instance.OnToggleTarget;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @SwitchWeapon.started -= instance.OnSwitchWeapon;
+            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
+            @SwitchSecondaryWeapon.started -= instance.OnSwitchSecondaryWeapon;
+            @SwitchSecondaryWeapon.performed -= instance.OnSwitchSecondaryWeapon;
+            @SwitchSecondaryWeapon.canceled -= instance.OnSwitchSecondaryWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -428,5 +548,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnToggleTarget(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnSwitchWeapon(InputAction.CallbackContext context);
+        void OnSwitchSecondaryWeapon(InputAction.CallbackContext context);
     }
 }

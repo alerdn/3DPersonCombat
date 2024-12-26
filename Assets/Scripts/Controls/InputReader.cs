@@ -11,7 +11,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action JumpEvent;
     public event Action DodgeEvent;
     public event Action ToggleTargetEvent;
+    public event Action SwitchWeaponEvent;
+    public event Action SwitchSecondaryWeaponEvent;
 
+    public bool IsAttacking { get; private set; }
     public Vector2 MovementValue { get; private set; }
 
     private Controls _constrols;
@@ -54,5 +57,30 @@ public class InputReader : ScriptableObject, IPlayerActions
         if (!context.performed) return;
 
         ToggleTargetEvent?.Invoke();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            IsAttacking = true;
+        }
+        else if (context.canceled)
+        {
+            IsAttacking = false;
+        }
+    }
+
+    public void OnSwitchWeapon(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        SwitchWeaponEvent?.Invoke();
+    }
+
+    public void OnSwitchSecondaryWeapon(InputAction.CallbackContext context) { 
+        if (!context.performed) return;
+
+        SwitchSecondaryWeaponEvent?.Invoke();
     }
 }

@@ -16,10 +16,18 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, .1f);
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
+        stateMachine.InputReader.SwitchWeaponEvent += OnSwitchWeapon;
+        stateMachine.InputReader.SwitchSecondaryWeaponEvent += OnSwitchSecondaryWeapon;
     }
 
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.InputReader.IsAttacking)
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+            return;
+        }
+
         if (!stateMachine.Targeter.CurrentTarget)
         {
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
@@ -37,6 +45,8 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
+        stateMachine.InputReader.SwitchWeaponEvent -= OnSwitchWeapon;
+        stateMachine.InputReader.SwitchSecondaryWeaponEvent -= OnSwitchSecondaryWeapon;
     }
 
     private void OnToggleTarget()
@@ -71,13 +81,13 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Animator.SetFloat(TargetingRightHash, stateMachine.InputReader.MovementValue.x, .1f, deltaTime);
     }
 
-    private void FaceTarget()
+    private void OnSwitchWeapon()
     {
-        if (!stateMachine.Targeter.CurrentTarget) return;
+        stateMachine.SwitchPrimaryWeapon();
+    }
 
-        Vector3 lookPos = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.transform.position;
-        lookPos.y = 0f;
-
-        stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+    private void OnSwitchSecondaryWeapon()
+    {
+        stateMachine.SwitchSecondaryWeapon();
     }
 }
