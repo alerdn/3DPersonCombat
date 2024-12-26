@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBaseState : MonoBehaviour
+public abstract class EnemyBaseState : State
 {
-    // Start is called before the first frame update
-    void Start()
+    protected EnemyStateMachine stateMachine;
+
+    public EnemyBaseState(EnemyStateMachine stateMachine)
     {
-        
+        this.stateMachine = stateMachine;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsInChaseRange()
     {
-        
+        float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= stateMachine.PlayerChasingRange * stateMachine.PlayerChasingRange;
+    }
+
+    protected void Move(float deltaTime)
+    {
+        Move(Vector3.zero, deltaTime);
+    }
+
+    protected void Move(Vector3 motion, float deltaTime)
+    {
+        Vector3 force = stateMachine.ForceReceiver.Movement;
+        stateMachine.CharacterController.Move((motion + force) * deltaTime);
     }
 }

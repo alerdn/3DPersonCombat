@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        _rigidbody.velocity = transform.forward * 20f;
+        _rigidbody.velocity = transform.forward * 15f;
 
         _time += Time.deltaTime;
         if (_time > 5f)

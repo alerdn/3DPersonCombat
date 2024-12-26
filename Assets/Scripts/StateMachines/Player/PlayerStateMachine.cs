@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
+    public static PlayerStateMachine Instance;
+
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
@@ -50,6 +50,17 @@ public class PlayerStateMachine : StateMachine
 
     private int _currentPrimaryWeaponIndex = -1;
     private int _currentSecondaryWeaponIndex = -1;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {

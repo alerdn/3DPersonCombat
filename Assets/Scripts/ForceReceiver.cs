@@ -5,7 +5,7 @@ public class ForceReceiver : MonoBehaviour
     public Vector3 Movement => _impact + Vector3.up * _verticalVelocity;
 
     [SerializeField] private CharacterController _controller;
-    [SerializeField] private float _drag;
+    [SerializeField] private float _drag = .1f;
 
     private float _verticalVelocity;
     private Vector3 _impact;
