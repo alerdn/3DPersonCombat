@@ -33,7 +33,7 @@ public class PlayerStateMachine : StateMachine
     {
         get
         {
-            if (_currentPrimaryWeaponIndex == -1) return null;
+            if (_currentPrimaryWeaponIndex <= -1) return null;
             return PrimaryWeapons[_currentPrimaryWeaponIndex];
         }
     }
@@ -41,7 +41,7 @@ public class PlayerStateMachine : StateMachine
     {
         get
         {
-            if (_currentSecondaryWeaponIndex == -1) return null;
+            if (_currentSecondaryWeaponIndex <= -1) return null;
             return SecondaryWeapons[_currentSecondaryWeaponIndex];
         }
     }
@@ -64,6 +64,11 @@ public class PlayerStateMachine : StateMachine
 
     public void SwitchPrimaryWeapon()
     {
+        if (_currentPrimaryWeaponIndex < -1)
+        {
+            _currentPrimaryWeaponIndex += 9;
+        }
+
         CurrentPrimaryWeapon?.gameObject.SetActive(false);
         _currentPrimaryWeaponIndex = (_currentPrimaryWeaponIndex + 1) % PrimaryWeapons.Length;
         CurrentPrimaryWeapon?.gameObject.SetActive(true);
@@ -71,9 +76,9 @@ public class PlayerStateMachine : StateMachine
         if (CurrentPrimaryWeapon?.IsTwoHanded == true || CurrentSecondaryWeapon?.IsTwoHanded == true)
         {
             CurrentSecondaryWeapon?.gameObject.SetActive(false);
-            _currentSecondaryWeaponIndex = -1;
+            _currentSecondaryWeaponIndex -= 10;
         }
-        else if (_currentSecondaryWeaponIndex == -1)
+        else if (_currentSecondaryWeaponIndex < -1)
         {
             SwitchSecondaryWeapon();
         }
@@ -81,6 +86,11 @@ public class PlayerStateMachine : StateMachine
 
     public void SwitchSecondaryWeapon()
     {
+        if (_currentSecondaryWeaponIndex < -1)
+        {
+            _currentSecondaryWeaponIndex += 9;
+        }
+
         CurrentSecondaryWeapon?.gameObject.SetActive(false);
         _currentSecondaryWeaponIndex = (_currentSecondaryWeaponIndex + 1) % SecondaryWeapons.Length;
         CurrentSecondaryWeapon?.gameObject.SetActive(true);
@@ -88,9 +98,9 @@ public class PlayerStateMachine : StateMachine
         if (CurrentSecondaryWeapon?.IsTwoHanded == true || CurrentPrimaryWeapon?.IsTwoHanded == true)
         {
             CurrentPrimaryWeapon?.gameObject.SetActive(false);
-            _currentPrimaryWeaponIndex = -1;
+            _currentPrimaryWeaponIndex -= 10;
         }
-        else if (_currentPrimaryWeaponIndex == -1)
+        else if (_currentPrimaryWeaponIndex < -1)
         {
             SwitchPrimaryWeapon();
         }
