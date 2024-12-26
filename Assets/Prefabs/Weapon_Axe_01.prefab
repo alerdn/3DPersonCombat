@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Machado
   <IsTwoHanded>k__BackingField: 0
+  <IsRanged>k__BackingField: 0
   <EquipOffset>k__BackingField: {x: -0.0445, y: 0, z: -0.14}
   <EquipRotation>k__BackingField: {x: 90, y: 0, z: -16}
   <Attacks>k__BackingField:
@@ -101,6 +102,8 @@ MonoBehaviour:
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 20
   _hitBox: {fileID: 4743174051080882685}
+  _projectilePrefab: {fileID: 0}
+  _firePoint: {fileID: 0}
 --- !u!1 &2457666168438364537
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,9 +157,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.26
-  m_Height: 0.53
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.56, z: 0}
 --- !u!114 &4743174051080882685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaef8d61473ba442baab5c23fe25a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnHit: 0
 --- !u!1001 &2005360487674359512
 PrefabInstance:
   m_ObjectHideFlags: 0
