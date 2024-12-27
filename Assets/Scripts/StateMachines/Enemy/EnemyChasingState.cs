@@ -23,8 +23,14 @@ public class EnemyChasingState : EnemyBaseState
             stateMachine.SwitchState(new EnemyIdleState(stateMachine));
             return;
         }
+        if (IsInAttackRange())
+        {
+            stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
+            return;
+        }
 
         MoveToPlayer(deltaTime);
+        FacePlayer();
 
         stateMachine.Animator.SetFloat(SpeedHash, 1f, .1f, deltaTime);
     }
@@ -45,4 +51,10 @@ public class EnemyChasingState : EnemyBaseState
         stateMachine.Agent.velocity = stateMachine.CharacterController.velocity;
     }
 
+    private bool IsInAttackRange()
+    {
+        float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= stateMachine.AttackRange * stateMachine.AttackRange;
+    }
 }

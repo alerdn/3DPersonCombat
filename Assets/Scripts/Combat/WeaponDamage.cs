@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponDamage : MonoBehaviour
 {
+    [SerializeField] private string _myTag = "Player";
     [SerializeField] private bool _destroyOnHit;
 
     private List<Collider> _alreadyCollidedWith = new List<Collider>();
@@ -21,7 +22,7 @@ public class WeaponDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) return;
+        if (other.CompareTag(_myTag)) return;
 
         if (_alreadyCollidedWith.Contains(other)) return;
         _alreadyCollidedWith.Add(other);

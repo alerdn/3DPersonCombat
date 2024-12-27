@@ -9,7 +9,7 @@ public abstract class EnemyBaseState : State
         this.stateMachine = stateMachine;
     }
 
-    public bool IsInChaseRange()
+    protected bool IsInChaseRange()
     {
         float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
 
@@ -25,5 +25,15 @@ public abstract class EnemyBaseState : State
     {
         Vector3 force = stateMachine.ForceReceiver.Movement;
         stateMachine.CharacterController.Move((motion + force) * deltaTime);
+    }
+
+    protected void FacePlayer()
+    {
+        if (stateMachine.Player == null) return;
+
+        Vector3 lookPos = stateMachine.Player.transform.position - stateMachine.transform.position;
+        lookPos.y = 0;
+
+        stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
     }
 }

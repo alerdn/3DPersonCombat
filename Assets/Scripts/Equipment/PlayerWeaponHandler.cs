@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponHandler : MonoBehaviour
+public class PlayerWeaponHandler : MonoBehaviour
 {
     private PlayerStateMachine _stateMachine;
 
