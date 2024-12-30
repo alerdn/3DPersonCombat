@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action SwitchSecondaryWeaponEvent;
 
     public bool IsAttacking { get; private set; }
+    public bool IsBlocking { get; private set; }
     public Vector2 MovementValue { get; private set; }
 
     private Controls _constrols;
@@ -71,6 +72,18 @@ public class InputReader : ScriptableObject, IPlayerActions
         }
     }
 
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            IsBlocking = true;
+        }
+        else if (context.canceled)
+        {
+            IsBlocking = false;
+        }
+    }
+
     public void OnSwitchWeapon(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
@@ -78,7 +91,8 @@ public class InputReader : ScriptableObject, IPlayerActions
         SwitchWeaponEvent?.Invoke();
     }
 
-    public void OnSwitchSecondaryWeapon(InputAction.CallbackContext context) { 
+    public void OnSwitchSecondaryWeapon(InputAction.CallbackContext context)
+    {
         if (!context.performed) return;
 
         SwitchSecondaryWeaponEvent?.Invoke();
