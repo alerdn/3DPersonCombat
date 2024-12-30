@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -48,5 +49,11 @@ public class ForceReceiver : MonoBehaviour
     public void Jump(float jumpForce)
     {
         _verticalVelocity += jumpForce;
+    }
+
+    public void Reset()
+    {
+        _impact = Vector3.zero;
+        _verticalVelocity = 0f;
     }
 }
