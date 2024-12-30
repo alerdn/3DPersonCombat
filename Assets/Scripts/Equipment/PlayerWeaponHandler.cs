@@ -18,12 +18,4 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         _stateMachine.CurrentWeapon?.DisableHitBox();
     }
-
-    public void Fire(int attackIndex)
-    {
-        Vector3 targetPosition = _stateMachine.Targeter.CurrentTarget?.transform.position ?? _stateMachine.transform.forward * 100f;
-        Attack attack = _stateMachine.CurrentWeapon.Attacks[attackIndex];
-
-        _stateMachine.CurrentWeapon?.Fire(_stateMachine.CharacterController, targetPosition, attack.Damage, attack.Knockback);
-    }
 }

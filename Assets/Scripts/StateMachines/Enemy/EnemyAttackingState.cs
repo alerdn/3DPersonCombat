@@ -12,7 +12,7 @@ public class EnemyAttackingState : EnemyBaseState
     {
         FacePlayer();
 
-        stateMachine.Weapon.SetAttack(stateMachine.AttackDamage, stateMachine.AttackKnockback);
+        stateMachine.Weapon.SetAttack(stateMachine.AttackDamage, stateMachine.AttackKnockback, UnitType.Player);
 
         stateMachine.Animator.CrossFadeInFixedTime(AttackHash, .1f);
 

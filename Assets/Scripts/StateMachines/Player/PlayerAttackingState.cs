@@ -12,7 +12,7 @@ public class PlayerAttackingState : PlayerBaseState
         if (_weapon)
         {
             _attack = _weapon.Attacks[attackIndex];
-            _weapon.SetAttack(_attack.Damage, _attack.Knockback);
+            _weapon.SetAttack(_attack.Damage, _attack.Knockback, UnitType.Enemy);
         }
     }
 

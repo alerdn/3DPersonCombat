@@ -16,20 +16,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Weapon[] PrimaryWeapons { get; private set; }
     [field: SerializeField] public Weapon[] SecondaryWeapons { get; private set; }
 
-    public Weapon CurrentWeapon
-    {
-        get
-        {
-            if (CurrentSecondaryWeapon?.IsTwoHanded == true)
-            {
-                return CurrentSecondaryWeapon;
-            }
-            else
-            {
-                return CurrentPrimaryWeapon;
-            }
-        }
-    }
+    public Weapon CurrentWeapon => CurrentPrimaryWeapon;
 
     public Weapon CurrentPrimaryWeapon
     {
@@ -89,46 +76,16 @@ public class PlayerStateMachine : StateMachine
 
     public void SwitchPrimaryWeapon()
     {
-        if (_currentPrimaryWeaponIndex < -1)
-        {
-            _currentPrimaryWeaponIndex += 9;
-        }
-
         CurrentPrimaryWeapon?.gameObject.SetActive(false);
         _currentPrimaryWeaponIndex = (_currentPrimaryWeaponIndex + 1) % PrimaryWeapons.Length;
         CurrentPrimaryWeapon?.gameObject.SetActive(true);
-
-        if (CurrentPrimaryWeapon?.IsTwoHanded == true || CurrentSecondaryWeapon?.IsTwoHanded == true)
-        {
-            CurrentSecondaryWeapon?.gameObject.SetActive(false);
-            _currentSecondaryWeaponIndex -= 10;
-        }
-        else if (_currentSecondaryWeaponIndex < -1)
-        {
-            SwitchSecondaryWeapon();
-        }
     }
 
     public void SwitchSecondaryWeapon()
     {
-        if (_currentSecondaryWeaponIndex < -1)
-        {
-            _currentSecondaryWeaponIndex += 9;
-        }
-
         CurrentSecondaryWeapon?.gameObject.SetActive(false);
         _currentSecondaryWeaponIndex = (_currentSecondaryWeaponIndex + 1) % SecondaryWeapons.Length;
         CurrentSecondaryWeapon?.gameObject.SetActive(true);
-
-        if (CurrentSecondaryWeapon?.IsTwoHanded == true || CurrentPrimaryWeapon?.IsTwoHanded == true)
-        {
-            CurrentPrimaryWeapon?.gameObject.SetActive(false);
-            _currentPrimaryWeaponIndex -= 10;
-        }
-        else if (_currentPrimaryWeaponIndex < -1)
-        {
-            SwitchPrimaryWeapon();
-        }
     }
 
     private void HandleTakeDamage()

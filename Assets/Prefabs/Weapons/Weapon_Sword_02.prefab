@@ -53,10 +53,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
-  m_Height: 0.88
+  m_Radius: 0.13025904
+  m_Height: 1.1356832
   m_Direction: 1
-  m_Center: {x: 0, y: 0.78, z: 0}
+  m_Center: {x: 0.00000052217644, y: 0.7425112, z: 7.8938595e-16}
 --- !u!54 &3122542231387938224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -145,8 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Espada
-  <IsTwoHanded>k__BackingField: 0
-  <IsRanged>k__BackingField: 0
   <EquipOffset>k__BackingField: {x: -0.05, y: 0, z: -0.178}
   <EquipRotation>k__BackingField: {x: 90, y: 16, z: 0}
   <Attacks>k__BackingField:
@@ -175,8 +173,6 @@ MonoBehaviour:
     <Damage>k__BackingField: 20
     <Knockback>k__BackingField: 10
   _hitBox: {fileID: 1296402759913339476}
-  _projectilePrefab: {fileID: 0}
-  _firePoint: {fileID: 0}
 --- !u!1001 &881350420704847673
 PrefabInstance:
   m_ObjectHideFlags: 0

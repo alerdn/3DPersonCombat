@@ -3,10 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Flags]
+public enum UnitType
+{
+    None,
+    Player,
+    Enemy
+}
+
 public class WeaponDamage : MonoBehaviour
 {
     [SerializeField] private Collider _myCollider;
-    [SerializeField] private bool _destroyOnHit;
+    [SerializeField] private UnitType _targets;
 
     private List<Collider> _alreadyCollidedWith = new List<Collider>();
     private int _damage;
@@ -17,10 +25,11 @@ public class WeaponDamage : MonoBehaviour
         _alreadyCollidedWith.Clear();
     }
 
-    public void SetAttack(int damage, float knockback)
+    public void SetAttack(int damage, float knockback, UnitType targets)
     {
         _damage = damage;
         _knockback = knockback;
+        _targets = targets;
     }
 
     public void SetMyCollider(Collider myCollider)
@@ -31,6 +40,11 @@ public class WeaponDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other == _myCollider) return;
+
+        if (!other.tag.TryToEnum(out UnitType unitType) || !_targets.HasFlag(unitType))
+        {
+            return;
+        }
 
         if (_alreadyCollidedWith.Contains(other)) return;
         _alreadyCollidedWith.Add(other);
@@ -44,11 +58,6 @@ public class WeaponDamage : MonoBehaviour
         {
             Vector3 direction = (other.transform.position - _myCollider.transform.position).normalized;
             forceReceiver.AddForce(direction * _knockback);
-        }
-
-        if (_destroyOnHit)
-        {
-            Destroy(gameObject);
         }
     }
 }
