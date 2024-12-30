@@ -13,6 +13,10 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
+    [field: SerializeField] public float DodgeDuration { get; private set; }
+    [field: SerializeField] public float DodgeLength { get; private set; }
+    [field: SerializeField] public float DodgeCooldown { get; private set; }
+    [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public Weapon[] PrimaryWeapons { get; private set; }
     [field: SerializeField] public Weapon[] SecondaryWeapons { get; private set; }
 
@@ -36,6 +40,7 @@ public class PlayerStateMachine : StateMachine
     }
 
     public Transform MainCameraTransform { get; private set; }
+    public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
 
     private int _currentPrimaryWeaponIndex = -1;
     private int _currentSecondaryWeaponIndex = -1;
@@ -72,6 +77,11 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerFreeLookState(this));
         SwitchPrimaryWeapon();
         SwitchSecondaryWeapon();
+    }
+
+    public void SetDodgeTime(float dodgeTime)
+    {
+        PreviousDodgeTime = dodgeTime;
     }
 
     public void SwitchPrimaryWeapon()
