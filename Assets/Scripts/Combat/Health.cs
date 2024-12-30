@@ -4,6 +4,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public event Action OnTakeDamage;
+    public event Action OnDie;
 
     [SerializeField] private int _maxHealth = 100;
 
@@ -23,7 +24,7 @@ public class Health : MonoBehaviour
 
         if (_health == 0)
         {
-            Debug.Log("I'm dead!");
+            OnDie?.Invoke();
         }
 
         Debug.Log($"{name} Health: {_health}");
