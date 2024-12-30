@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaef8d61473ba442baab5c23fe25a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _myCollider: {fileID: 0}
+  _destroyOnHit: 0
 --- !u!1 &881350419689563957
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Espada
   <IsTwoHanded>k__BackingField: 0
+  <IsRanged>k__BackingField: 0
   <EquipOffset>k__BackingField: {x: -0.05, y: 0, z: -0.178}
   <EquipRotation>k__BackingField: {x: 90, y: 16, z: 0}
   <Attacks>k__BackingField:
@@ -154,6 +157,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 10
+    <Knockback>k__BackingField: 10
   - <AnimationName>k__BackingField: Sword_Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
@@ -161,6 +165,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 15
+    <Knockback>k__BackingField: 10
   - <AnimationName>k__BackingField: Sword_Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
@@ -168,7 +173,10 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.05
     <Force>k__BackingField: 15
     <Damage>k__BackingField: 20
+    <Knockback>k__BackingField: 10
   _hitBox: {fileID: 1296402759913339476}
+  _projectilePrefab: {fileID: 0}
+  _firePoint: {fileID: 0}
 --- !u!1001 &881350420704847673
 PrefabInstance:
   m_ObjectHideFlags: 0

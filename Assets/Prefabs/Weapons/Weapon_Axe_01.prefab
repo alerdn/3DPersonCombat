@@ -59,6 +59,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 8
     <Damage>k__BackingField: 10
+    <Knockback>k__BackingField: 10
   - <AnimationName>k__BackingField: Axe_Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
@@ -66,6 +67,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 15
+    <Knockback>k__BackingField: 10
   - <AnimationName>k__BackingField: Axe_Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
@@ -73,6 +75,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 20
+    <Knockback>k__BackingField: 10
   _hitBox: {fileID: 4743174051080882685}
   _projectilePrefab: {fileID: 0}
   _firePoint: {fileID: 0}
@@ -144,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaef8d61473ba442baab5c23fe25a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myTag: Player
+  _myCollider: {fileID: 0}
   _destroyOnHit: 0
 --- !u!1001 &2005360487674359512
 PrefabInstance:

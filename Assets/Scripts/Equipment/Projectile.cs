@@ -13,10 +13,11 @@ public class Projectile : MonoBehaviour
         _weaponDamage = GetComponent<WeaponDamage>();
     }
 
-    public void Init(Vector3 targetPosition, int damage)
+    public void Init(Collider myCollider, Vector3 targetPosition, int damage, float knockback)
     {
         _target = targetPosition;
-        _weaponDamage.SetDamage(damage);
+        _weaponDamage.SetAttack(damage, knockback);
+        _weaponDamage.SetMyCollider(myCollider);
         transform.LookAt(_target);
     }
 

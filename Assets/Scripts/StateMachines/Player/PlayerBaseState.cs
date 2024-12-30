@@ -13,7 +13,7 @@ public abstract class PlayerBaseState : State
     {
         Move(Vector3.zero, deltaTime);
     }
-    
+
     protected void Move(Vector3 motion, float deltaTime)
     {
         Vector3 force = stateMachine.ForceReceiver.Movement;
@@ -28,5 +28,17 @@ public abstract class PlayerBaseState : State
         lookPos.y = 0f;
 
         stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+    }
+
+    protected void ReturnToLocomotion()
+    {
+        if (stateMachine.Targeter.CurrentTarget != null)
+        {
+            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+        }
     }
 }

@@ -8,6 +8,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public Targeter Targeter { get; private set; }
+    [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
@@ -50,6 +51,16 @@ public class PlayerStateMachine : StateMachine
 
     private int _currentPrimaryWeaponIndex = -1;
     private int _currentSecondaryWeaponIndex = -1;
+
+    private void OnEnable()
+    {
+        Health.OnTakeDamage += HandleTakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        Health.OnTakeDamage -= HandleTakeDamage;
+    }
 
     private void Awake()
     {
@@ -115,5 +126,10 @@ public class PlayerStateMachine : StateMachine
         {
             SwitchPrimaryWeapon();
         }
+    }
+
+    private void HandleTakeDamage()
+    {
+        SwitchState(new PlayerImpactState(this));
     }
 }

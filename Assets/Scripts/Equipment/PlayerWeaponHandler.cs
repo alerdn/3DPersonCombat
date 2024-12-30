@@ -22,8 +22,8 @@ public class PlayerWeaponHandler : MonoBehaviour
     public void Fire(int attackIndex)
     {
         Vector3 targetPosition = _stateMachine.Targeter.CurrentTarget?.transform.position ?? _stateMachine.transform.forward * 100f;
-        int damage = _stateMachine.CurrentWeapon.Attacks[attackIndex].Damage;
+        Attack attack = _stateMachine.CurrentWeapon.Attacks[attackIndex];
 
-        _stateMachine.CurrentWeapon?.Fire(targetPosition, damage);
+        _stateMachine.CurrentWeapon?.Fire(_stateMachine.CharacterController, targetPosition, attack.Damage, attack.Knockback);
     }
 }

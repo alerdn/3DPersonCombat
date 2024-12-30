@@ -1324,6 +1324,7 @@ MonoBehaviour:
   <CharacterController>k__BackingField: {fileID: 1864496135239076768}
   <Animator>k__BackingField: {fileID: 6988202913747320121}
   <Targeter>k__BackingField: {fileID: 2153323114177594034}
+  <Health>k__BackingField: {fileID: 3066934078550099189}
   <ForceReceiver>k__BackingField: {fileID: 581617269717071974}
   <FreeLookMovementSpeed>k__BackingField: 6
   <RotationDamping>k__BackingField: 10
@@ -1393,6 +1394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 1864496135239076768}
+  _agent: {fileID: 0}
   _drag: 0.1
 --- !u!114 &3156533527961423358
 MonoBehaviour:
@@ -2730,7 +2732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8267220584867511789
 Transform:
   m_ObjectHideFlags: 0

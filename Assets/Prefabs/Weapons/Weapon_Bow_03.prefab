@@ -868,6 +868,7 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0
     <Force>k__BackingField: 0
     <Damage>k__BackingField: 40
+    <Knockback>k__BackingField: 20
   _hitBox: {fileID: 0}
   _projectilePrefab: {fileID: 1289322175958482559, guid: ef576742c1990494f91cb48dc4668710,
     type: 3}

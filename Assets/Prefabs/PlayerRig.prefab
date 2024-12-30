@@ -1286,6 +1286,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -44.1185
       objectReference: {fileID: 0}
+    - target: {fileID: 1655047017407086725, guid: 8ee4a5721bfa5ba459faf73d4a351228,
+        type: 3}
+      propertyPath: _myCollider
+      value: 
+      objectReference: {fileID: 2344416626920474296}
     - target: {fileID: 1845143774491277222, guid: 8ee4a5721bfa5ba459faf73d4a351228,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1646,6 +1651,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 10.910044
       objectReference: {fileID: 0}
+    - target: {fileID: 5778705461473153517, guid: 8ee4a5721bfa5ba459faf73d4a351228,
+        type: 3}
+      propertyPath: _myCollider
+      value: 
+      objectReference: {fileID: 2344416626920474296}
     - target: {fileID: 5810385129800117844, guid: 8ee4a5721bfa5ba459faf73d4a351228,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2016,6 +2026,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ee4a5721bfa5ba459faf73d4a351228, type: 3}
+--- !u!143 &2344416626920474296 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 1864496135239076768, guid: 8ee4a5721bfa5ba459faf73d4a351228,
+    type: 3}
+  m_PrefabInstance: {fileID: 4136855168121490712}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &6454250203168698401 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6988202913747320121, guid: 8ee4a5721bfa5ba459faf73d4a351228,

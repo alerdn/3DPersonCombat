@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -24,14 +23,14 @@ public class Weapon : MonoBehaviour
         _hitBox?.gameObject.SetActive(false);
     }
 
-    public void SetDamage(int damage)
+    public void SetAttack(int damage, float knockback)
     {
-        _hitBox?.SetDamage(damage);
+        _hitBox?.SetAttack(damage, knockback);
     }
 
-    public void Fire(Vector3 targetPosition, int damage)
+    public void Fire(Collider myCollider, Vector3 targetPosition, int damage, float knockback)
     {
         Instantiate(_projectilePrefab, _firePoint.position, Quaternion.identity)
-            .Init(targetPosition, damage);
+            .Init(myCollider, targetPosition, damage, knockback);
     }
 }
