@@ -7,9 +7,6 @@ public class PlayerTargetingState : PlayerBaseState
     private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
     private readonly int TargetingRightHash = Animator.StringToHash("TargetingRight");
 
-    private Vector2 _dodgingDirection;
-    private float _remainingDodgeTime;
-
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -45,7 +42,7 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
 
-        Vector3 movement = CalculateMovement(deltaTime);
+        Vector3 movement = CalculateMovement();
         Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
         UpdateAnimator(deltaTime);
@@ -68,26 +65,12 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
     }
 
-    private Vector3 CalculateMovement(float deltaTime)
+    private Vector3 CalculateMovement()
     {
         Vector3 movement = new Vector3();
 
-        if (_remainingDodgeTime > 0f)
-        {
-            movement += stateMachine.transform.forward * _dodgingDirection.y * stateMachine.DodgeLength / stateMachine.DodgeDuration;
-            movement += stateMachine.transform.right * _dodgingDirection.x * stateMachine.DodgeLength / stateMachine.DodgeDuration;
-
-            _remainingDodgeTime = Mathf.Max(_remainingDodgeTime - deltaTime, 0);
-            if (_remainingDodgeTime == 0)
-            {
-                stateMachine.Health.SetInvulnerable(false);
-            }
-        }
-        else
-        {
-            movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
-            movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
-        }
+        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
 
         return movement;
     }
@@ -110,12 +93,14 @@ public class PlayerTargetingState : PlayerBaseState
 
     private void OnDodge()
     {
-        if (Time.time - stateMachine.PreviousDodgeTime < stateMachine.DodgeCooldown) return;
-
-        stateMachine.Health.SetInvulnerable(true);
-        stateMachine.SetDodgeTime(Time.time);
-        _dodgingDirection = stateMachine.InputReader.MovementValue;
-        _remainingDodgeTime = stateMachine.DodgeDuration;
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.SwitchState(new PlayerDodgingState(stateMachine, Vector2.down));
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue));
+        }
     }
 
     private void OnJump()
