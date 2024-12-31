@@ -27,6 +27,13 @@ public class PlayerFallingState : PlayerBaseState
         if (stateMachine.CharacterController.isGrounded)
         {
             ReturnToLocomotion();
+            return;
+        }
+
+        if (stateMachine.InputReader.IsAttacking)
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 3));
+            return;
         }
 
         FaceTarget();

@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
 
     public void EnableHitBox()
     {
-        _hitBox?.gameObject.SetActive(true);
+        _hitBox.gameObject.SetActive(true);
     }
 
     public void DisableHitBox()

@@ -38,7 +38,7 @@ public class PlayerDodgingState : PlayerBaseState
         _remainingDodgeTime -= deltaTime;
         if (_remainingDodgeTime <= 0)
         {
-            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+            ReturnToLocomotion();
         }
     }
 

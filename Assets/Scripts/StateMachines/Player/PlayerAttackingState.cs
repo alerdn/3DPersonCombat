@@ -3,42 +3,28 @@ using UnityEngine;
 public class PlayerAttackingState : PlayerBaseState
 {
     private Attack _attack;
-    private Weapon _weapon;
     private bool _alreadyAppliedForce;
 
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
-        _weapon = stateMachine.CurrentWeapon;
-        if (_weapon)
-        {
-            _attack = _weapon.Attacks[attackIndex];
-            _weapon.SetAttack(_attack.Damage, _attack.Knockback, UnitType.Enemy);
-        }
+        Weapon _weapon = stateMachine.CurrentWeapon;
+
+        _attack = _weapon.Attacks[attackIndex];
+        _weapon.SetAttack(_attack.Damage, _attack.Knockback, UnitType.Enemy);
     }
 
     public override void Enter()
     {
-        if (_attack == null) return;
-
+        if (!stateMachine.Stamina.TryUseStamina(_attack.StaminaCost))
+        {
+            ReturnToLocomotion();
+            return;
+        }
         stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
     }
 
     public override void Tick(float deltaTime)
     {
-        if (_attack == null)
-        {
-            if (stateMachine.Targeter.CurrentTarget != null)
-            {
-                stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-            }
-            else
-            {
-                stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-            }
-
-            return;
-        }
-
         Move(deltaTime);
 
         FaceTarget();
@@ -59,20 +45,13 @@ public class PlayerAttackingState : PlayerBaseState
         }
         else
         {
-            if (stateMachine.Targeter.CurrentTarget != null)
-            {
-                stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-            }
-            else
-            {
-                stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-            }
+            ReturnToLocomotion();
         }
     }
 
     public override void Exit()
     {
-
+        stateMachine.CurrentWeapon.DisableHitBox();
     }
 
     private void TryComboAttack(float normalizedTime)

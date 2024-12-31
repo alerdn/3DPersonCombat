@@ -36,7 +36,5 @@ public class Health : MonoBehaviour
         {
             OnDie?.Invoke();
         }
-
-        Debug.Log($"{name} Health: {_health}");
     }
 }

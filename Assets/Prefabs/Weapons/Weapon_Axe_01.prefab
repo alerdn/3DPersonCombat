@@ -58,6 +58,7 @@ MonoBehaviour:
     <Force>k__BackingField: 8
     <Damage>k__BackingField: 10
     <Knockback>k__BackingField: 10
+    <StaminaCost>k__BackingField: 30
   - <AnimationName>k__BackingField: Axe_Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
@@ -66,6 +67,7 @@ MonoBehaviour:
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 15
     <Knockback>k__BackingField: 10
+    <StaminaCost>k__BackingField: 30
   - <AnimationName>k__BackingField: Axe_Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
@@ -74,6 +76,16 @@ MonoBehaviour:
     <Force>k__BackingField: 10
     <Damage>k__BackingField: 20
     <Knockback>k__BackingField: 10
+    <StaminaCost>k__BackingField: 30
+  - <AnimationName>k__BackingField: JumpingAttack
+    <TransitionDuration>k__BackingField: 0.2
+    <ComboStateIndex>k__BackingField: -1
+    <ComboAttackTime>k__BackingField: 0
+    <ForceTime>k__BackingField: 0.35
+    <Force>k__BackingField: 10
+    <Damage>k__BackingField: 40
+    <Knockback>k__BackingField: 10
+    <StaminaCost>k__BackingField: 50
   _hitBox: {fileID: 4743174051080882685}
 --- !u!1 &2457666168438364537
 GameObject:

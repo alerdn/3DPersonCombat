@@ -41,4 +41,21 @@ public abstract class PlayerBaseState : State
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
         }
     }
+
+    protected void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    }
+
+    protected void OnDodge()
+    {
+        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            stateMachine.SwitchState(new PlayerDodgingState(stateMachine, Vector2.down));
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue));
+        }
+    }
 }

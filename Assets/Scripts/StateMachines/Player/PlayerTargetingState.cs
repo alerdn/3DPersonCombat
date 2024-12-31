@@ -91,23 +91,6 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Animator.SetFloat(TargetingRightHash, stateMachine.InputReader.MovementValue.x, .1f, deltaTime);
     }
 
-    private void OnDodge()
-    {
-        if (stateMachine.InputReader.MovementValue == Vector2.zero)
-        {
-            stateMachine.SwitchState(new PlayerDodgingState(stateMachine, Vector2.down));
-        }
-        else
-        {
-            stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue));
-        }
-    }
-
-    private void OnJump()
-    {
-        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
-    }
-
     private void OnSwitchWeapon()
     {
         stateMachine.SwitchPrimaryWeapon();

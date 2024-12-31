@@ -17,6 +17,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.SwitchWeaponEvent += OnSwitchWeapon;
         stateMachine.InputReader.SwitchSecondaryWeaponEvent += OnSwitchSecondaryWeapon;
     }
@@ -26,6 +27,12 @@ public class PlayerFreeLookState : PlayerBaseState
         if (stateMachine.InputReader.IsAttacking)
         {
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+            return;
+        }
+
+        if (stateMachine.InputReader.IsBlocking)
+        {
+            stateMachine.SwitchState(new PlayerBlockingState(stateMachine));
             return;
         }
 
@@ -46,6 +53,7 @@ public class PlayerFreeLookState : PlayerBaseState
     {
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.SwitchWeaponEvent -= OnSwitchWeapon;
         stateMachine.InputReader.SwitchSecondaryWeaponEvent -= OnSwitchSecondaryWeapon;
     }
@@ -77,11 +85,6 @@ public class PlayerFreeLookState : PlayerBaseState
         if (!stateMachine.Targeter.SelectTarget()) return;
 
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-    }
-
-    private void OnJump()
-    {
-        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
     }
 
     private void OnSwitchWeapon()

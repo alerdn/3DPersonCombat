@@ -29,6 +29,12 @@ public class PlayerJumpingState : PlayerBaseState
             return;
         }
 
+        if (stateMachine.InputReader.IsAttacking)
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 3));
+            return;
+        }
+
         FaceTarget();
     }
 
