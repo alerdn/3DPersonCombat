@@ -3,11 +3,12 @@ using UnityEngine;
 public class PlayerAttackingState : PlayerBaseState
 {
     private Attack _attack;
+    private Weapon _weapon;
     private bool _alreadyAppliedForce;
 
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
-        Weapon _weapon = stateMachine.CurrentWeapon;
+        _weapon = stateMachine.CurrentWeapon;
 
         _attack = _weapon.Attacks[attackIndex];
         _weapon.SetAttack(_attack.Damage, _attack.Knockback, UnitType.Enemy);
@@ -15,11 +16,6 @@ public class PlayerAttackingState : PlayerBaseState
 
     public override void Enter()
     {
-        if (!stateMachine.Stamina.TryUseStamina(_attack.StaminaCost))
-        {
-            ReturnToLocomotion();
-            return;
-        }
         stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
     }
 
@@ -60,7 +56,10 @@ public class PlayerAttackingState : PlayerBaseState
 
         if (normalizedTime < _attack.ComboAttackTime) return;
 
-        stateMachine.SwitchState(new PlayerAttackingState(stateMachine, _attack.ComboStateIndex));
+        if (CanAttack(_attack.ComboStateIndex))
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, _attack.ComboStateIndex));
+        }
     }
 
     private void TryApplyForce()

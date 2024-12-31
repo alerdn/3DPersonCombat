@@ -32,8 +32,11 @@ public class PlayerFallingState : PlayerBaseState
 
         if (stateMachine.InputReader.IsAttacking)
         {
-            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 3));
-            return;
+            if (CanAttack(3))
+            {
+                stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 3));
+                return;
+            }
         }
 
         FaceTarget();

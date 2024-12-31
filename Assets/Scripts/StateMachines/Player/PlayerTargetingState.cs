@@ -26,8 +26,11 @@ public class PlayerTargetingState : PlayerBaseState
     {
         if (stateMachine.InputReader.IsAttacking)
         {
-            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
-            return;
+            if (CanAttack(0))
+            {
+                stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+                return;
+            }
         }
 
         if (stateMachine.InputReader.IsBlocking)
@@ -42,7 +45,7 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
 
-        Vector3 movement = CalculateMovement();
+        Vector3 movement = CalculateTargetingMovement();
         Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
         UpdateAnimator(deltaTime);
@@ -63,16 +66,6 @@ public class PlayerTargetingState : PlayerBaseState
     {
         stateMachine.Targeter.CancelTarget();
         stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-    }
-
-    private Vector3 CalculateMovement()
-    {
-        Vector3 movement = new Vector3();
-
-        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
-        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
-
-        return movement;
     }
 
     private void UpdateAnimator(float deltaTime)

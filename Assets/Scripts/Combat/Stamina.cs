@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Stamina : MonoBehaviour
 {
-    [SerializeField] private int _maxStamina = 100;
+    [SerializeField] private float _maxStamina = 100f;
     [SerializeField] private float _recoveryTime = 1f;
     [SerializeField] private float _recoveryRate = 20;
 
-    private int _stamina;
+    private float _stamina;
     private float _remainingRecoveryTime;
 
     private void Start()
@@ -21,7 +21,7 @@ public class Stamina : MonoBehaviour
 
         if (_remainingRecoveryTime == 0)
         {
-            _stamina = Mathf.Min(_stamina + (int)(_recoveryRate * Time.deltaTime), _maxStamina);
+            _stamina = Mathf.Min(_stamina + (_recoveryRate * Time.deltaTime), _maxStamina);
         }
 
         Debug.Log($"Stamina: {_stamina}");

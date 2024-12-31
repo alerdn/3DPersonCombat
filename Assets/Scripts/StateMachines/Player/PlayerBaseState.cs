@@ -20,6 +20,38 @@ public abstract class PlayerBaseState : State
         stateMachine.CharacterController.Move((motion + force) * deltaTime);
     }
 
+    protected Vector3 CalculateFreelookMovement()
+    {
+        Vector3 forward = stateMachine.MainCameraTransform.forward;
+        Vector3 right = stateMachine.MainCameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        return forward * stateMachine.InputReader.MovementValue.y + right * stateMachine.InputReader.MovementValue.x;
+    }
+
+    protected Vector3 CalculateTargetingMovement()
+    {
+        Vector3 movement = new Vector3();
+
+        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+
+        return movement;
+    }
+
+    protected void FaceMovementDirection(Vector3 movement, float deltaTime)
+    {
+        stateMachine.transform.rotation = Quaternion.Lerp(
+            stateMachine.transform.rotation,
+            Quaternion.LookRotation(movement),
+            deltaTime * stateMachine.RotationDamping);
+    }
+
     protected void FaceTarget()
     {
         if (!stateMachine.Targeter.CurrentTarget) return;
@@ -57,5 +89,10 @@ public abstract class PlayerBaseState : State
         {
             stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue));
         }
+    }
+
+    protected bool CanAttack(int attackIndex)
+    {
+        return stateMachine.Stamina.TryUseStamina(stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaCost);
     }
 }
