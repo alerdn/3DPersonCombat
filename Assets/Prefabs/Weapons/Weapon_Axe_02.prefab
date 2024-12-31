@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaef8d61473ba442baab5c23fe25a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myTag: Enemy
-  _destroyOnHit: 0
+  _myCollider: {fileID: 0}
+  _targets: 0
 --- !u!136 &9011866793694799555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -66,10 +66,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.19
-  m_Height: 0.79
+  m_Radius: 0.25
+  m_Height: 1.0570427
   m_Direction: 1
-  m_Center: {x: -0.07, y: 0.56, z: 0}
+  m_Center: {x: -0.07000066, y: 0.4264788, z: 0.0000000046849253}
 --- !u!1 &681452405407456447
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,14 +117,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Machadinha
-  <IsTwoHanded>k__BackingField: 0
-  <IsRanged>k__BackingField: 0
   <EquipOffset>k__BackingField: {x: 0, y: 0, z: 0}
   <EquipRotation>k__BackingField: {x: 0, y: 0, z: 0}
   <Attacks>k__BackingField: []
   _hitBox: {fileID: 115963298027722512}
-  _projectilePrefab: {fileID: 0}
-  _firePoint: {fileID: 0}
 --- !u!1001 &3733752160874553221
 PrefabInstance:
   m_ObjectHideFlags: 0

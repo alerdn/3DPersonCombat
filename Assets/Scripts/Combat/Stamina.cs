@@ -1,8 +1,22 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Stamina : MonoBehaviour
 {
+    public event Action<float, float> OnStaminaChanged;
+
+    public float CurrentStamina
+    {
+        get => _stamina; private set
+        {
+            if (value == _stamina) return;
+
+            _stamina = value;
+            OnStaminaChanged?.Invoke(_stamina, _maxStamina);
+        }
+    }
+
     [SerializeField] private float _maxStamina = 100f;
     [SerializeField] private float _recoveryTime = 1f;
     [SerializeField] private float _recoveryRate = 20;
@@ -12,7 +26,7 @@ public class Stamina : MonoBehaviour
 
     private void Start()
     {
-        _stamina = _maxStamina;
+        CurrentStamina = _maxStamina;
     }
 
     private void Update()
@@ -21,20 +35,18 @@ public class Stamina : MonoBehaviour
 
         if (_remainingRecoveryTime == 0)
         {
-            _stamina = Mathf.Min(_stamina + (_recoveryRate * Time.deltaTime), _maxStamina);
+            CurrentStamina = Mathf.Min(CurrentStamina + (_recoveryRate * Time.deltaTime), _maxStamina);
         }
-
-        Debug.Log($"Stamina: {_stamina}");
     }
 
     public bool TryUseStamina(int amount)
     {
-        if (_stamina < amount)
+        if (CurrentStamina < amount)
         {
             return false;
         }
 
-        _stamina = Mathf.Max(_stamina - amount, 0);
+        CurrentStamina = Mathf.Max(CurrentStamina - amount, 0);
         _remainingRecoveryTime = _recoveryTime;
         return true;
     }

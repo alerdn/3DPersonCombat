@@ -1980,7 +1980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxStamina: 100
-  _recoveryTime: 1
+  _recoveryTime: 2
   _recoveryRate: 20
 --- !u!114 &8364300835363221849
 MonoBehaviour:

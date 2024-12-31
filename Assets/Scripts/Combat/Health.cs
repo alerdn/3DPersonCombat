@@ -5,8 +5,19 @@ public class Health : MonoBehaviour
 {
     public event Action OnTakeDamage;
     public event Action OnDie;
+    public event Action<int, int> OnHealthChanged;
 
     public bool IsDead => _health == 0;
+    public int CurrentHealth
+    {
+        get => _health; private set
+        {
+            if (value == _health) return;
+
+            _health = value;
+            OnHealthChanged?.Invoke(_health, _maxHealth);
+        }
+    }
 
     [SerializeField] private int _maxHealth = 100;
 
@@ -15,7 +26,7 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        _health = _maxHealth;
+        CurrentHealth = _maxHealth;
     }
 
     public void SetInvulnerable(bool isInvulnerable)
@@ -25,14 +36,14 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (_health == 0) return;
+        if (CurrentHealth == 0) return;
 
         if (_isInvulnerable) return;
 
-        _health = Mathf.Max(_health - damage, 0);
+        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
         OnTakeDamage?.Invoke();
 
-        if (_health == 0)
+        if (CurrentHealth == 0)
         {
             OnDie?.Invoke();
         }
