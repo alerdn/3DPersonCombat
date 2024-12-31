@@ -1870,9 +1870,10 @@ MonoBehaviour:
   <LedgeDetector>k__BackingField: {fileID: 347928975722418304}
   <ForceReceiver>k__BackingField: {fileID: 581617269717071974}
   <FreeLookMovementSpeed>k__BackingField: 6
+  <BlockingMovementSpeed>k__BackingField: 4
   <RotationDamping>k__BackingField: 10
   <DodgeDuration>k__BackingField: 0.6
-  <DodgeLength>k__BackingField: 5
+  <DodgeLength>k__BackingField: 4
   <JumpForce>k__BackingField: 4
   <PrimaryWeapons>k__BackingField:
   - {fileID: 7618760234453812756}

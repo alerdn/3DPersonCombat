@@ -35,7 +35,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
         if (stateMachine.InputReader.IsBlocking)
         {
-            stateMachine.SwitchState(new PlayerBlockingState(stateMachine));
+            stateMachine.SwitchState(new PlayerBlockingFreeState(stateMachine));
             return;
         }
 
