@@ -18,6 +18,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float RotationDamping { get; private set; }
     [field: SerializeField] public float DodgeDuration { get; private set; }
     [field: SerializeField] public float DodgeLength { get; private set; }
+    [field: SerializeField] public int DodgeStaminaCost { get; internal set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public Weapon[] PrimaryWeapons { get; private set; }
     [field: SerializeField] public Weapon[] SecondaryWeapons { get; private set; }
@@ -78,6 +79,8 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new PlayerFreeLookState(this));
         SwitchPrimaryWeapon();
         SwitchSecondaryWeapon();
+
+        Health.SetStaminaComponent(Stamina);
     }
 
     public void SwitchPrimaryWeapon()

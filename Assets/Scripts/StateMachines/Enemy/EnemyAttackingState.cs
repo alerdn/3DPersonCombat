@@ -5,7 +5,7 @@ public class EnemyAttackingState : EnemyBaseState
     private readonly int AttackHash = Animator.StringToHash("Attack");
     private readonly int LocomotionHash = Animator.StringToHash("Locomotion");
     private readonly int SpeedHash = Animator.StringToHash("Speed");
-    private float _attackDelay = .2f;
+    private float _attackDelay;
     private bool _isAttacking = false;
 
     public EnemyAttackingState(EnemyStateMachine stateMachine) : base(stateMachine)
@@ -16,6 +16,8 @@ public class EnemyAttackingState : EnemyBaseState
     {
         FacePlayer();
         stateMachine.Animator.CrossFadeInFixedTime(LocomotionHash, .1f);
+
+        _attackDelay = Random.Range(.2f, 1f);
     }
 
     public override void Tick(float deltaTime)

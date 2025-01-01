@@ -1874,6 +1874,7 @@ MonoBehaviour:
   <RotationDamping>k__BackingField: 10
   <DodgeDuration>k__BackingField: 0.6
   <DodgeLength>k__BackingField: 4
+  <DodgeStaminaCost>k__BackingField: 20
   <JumpForce>k__BackingField: 4
   <PrimaryWeapons>k__BackingField:
   - {fileID: 7618760234453812756}

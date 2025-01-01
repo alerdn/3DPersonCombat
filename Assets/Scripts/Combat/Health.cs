@@ -23,6 +23,7 @@ public class Health : MonoBehaviour
 
     private int _health;
     private bool _isInvulnerable;
+    private Stamina _stamina;
 
     private void Start()
     {
@@ -34,11 +35,23 @@ public class Health : MonoBehaviour
         _isInvulnerable = isInvulnerable;
     }
 
+    public void SetStaminaComponent(Stamina stamina)
+    {
+        _stamina = stamina;
+    }
+
     public void TakeDamage(int damage)
     {
         if (CurrentHealth == 0) return;
 
-        if (_isInvulnerable) return;
+        if (_isInvulnerable && _stamina)
+        {
+            // Tem stamina suficiente para bloquear o dano
+            if (_stamina.TryUseStamina(damage))
+            {
+                return;
+            }
+        }
 
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
         OnTakeDamage?.Invoke();

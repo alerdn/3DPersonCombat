@@ -81,6 +81,8 @@ public abstract class PlayerBaseState : State
 
     protected void OnDodge()
     {
+        if (!stateMachine.Stamina.TryUseStamina(stateMachine.DodgeStaminaCost)) return;
+        
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.SwitchState(new PlayerDodgingState(stateMachine, Vector2.down));
