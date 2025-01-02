@@ -14,7 +14,7 @@ public class PlayerBlockingTargetState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Health.SetInvulnerable(true);
+        stateMachine.Health.SetBlocking(true);
         stateMachine.Animator.CrossFadeInFixedTime(BlockingTargetBlendTreeHash, .1f);
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
@@ -44,7 +44,7 @@ public class PlayerBlockingTargetState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.Health.SetInvulnerable(false);
+        stateMachine.Health.SetBlocking(false);
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
     }
 

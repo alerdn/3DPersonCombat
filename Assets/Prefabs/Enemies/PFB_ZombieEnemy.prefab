@@ -3302,7 +3302,7 @@ MonoBehaviour:
   <MovementSpeed>k__BackingField: 4
   <PlayerChasingRange>k__BackingField: 10
   <AttackRange>k__BackingField: 1.5
-  <AttackDamage>k__BackingField: 10
+  <AttackDamage>k__BackingField: 25
   <AttackKnockback>k__BackingField: 20
 --- !u!195 &1387725855154189577
 NavMeshAgent:

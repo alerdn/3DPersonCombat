@@ -41,15 +41,28 @@ public class Stamina : MonoBehaviour
 
     public bool TryUseStamina(int amount)
     {
-        _remainingRecoveryTime = _recoveryTime;
-
         if (CurrentStamina < amount)
         {
-            CurrentStamina = 0;
             return false;
         }
 
         CurrentStamina = Mathf.Max(CurrentStamina - amount, 0);
+        _remainingRecoveryTime = _recoveryTime;
         return true;
+    }
+
+    public float BlockAttack(float damage)
+    {
+        _remainingRecoveryTime = _recoveryTime;
+
+        if (CurrentStamina < damage)
+        {
+            float remainingDamage = damage - CurrentStamina;
+            CurrentStamina = 0;
+            return -remainingDamage;
+        }
+
+        CurrentStamina -= damage;
+        return 0;
     }
 }

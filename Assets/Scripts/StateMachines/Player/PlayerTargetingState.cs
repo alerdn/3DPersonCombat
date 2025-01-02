@@ -24,6 +24,8 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        //TODO: Trocar o alvo quando mexer na câmera
+
         if (stateMachine.InputReader.IsAttacking)
         {
             if (CanAttack(0))

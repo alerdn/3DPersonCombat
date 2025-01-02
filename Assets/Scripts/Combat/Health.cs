@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int _maxHealth = 100;
 
     private int _health;
-    private bool _isInvulnerable;
+    private bool _isBlocking;
     private Stamina _stamina;
 
     private void Start()
@@ -30,9 +30,9 @@ public class Health : MonoBehaviour
         CurrentHealth = _maxHealth;
     }
 
-    public void SetInvulnerable(bool isInvulnerable)
+    public void SetBlocking(bool isBlocking)
     {
-        _isInvulnerable = isInvulnerable;
+        _isBlocking = isBlocking;
     }
 
     public void SetStaminaComponent(Stamina stamina)
@@ -44,13 +44,10 @@ public class Health : MonoBehaviour
     {
         if (CurrentHealth == 0) return;
 
-        if (_isInvulnerable && _stamina)
+        if (_isBlocking && _stamina)
         {
-            // Tem stamina suficiente para bloquear o dano
-            if (_stamina.TryUseStamina(damage))
-            {
-                return;
-            }
+            damage = Mathf.RoundToInt(_stamina.BlockAttack(damage));
+            if (damage == 0) return;
         }
 
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);

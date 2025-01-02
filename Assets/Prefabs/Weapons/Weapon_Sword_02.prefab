@@ -156,7 +156,7 @@ MonoBehaviour:
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 10
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 30
+    <StaminaCost>k__BackingField: 20
   - <AnimationName>k__BackingField: Sword_Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
@@ -165,7 +165,7 @@ MonoBehaviour:
     <Force>k__BackingField: 5
     <Damage>k__BackingField: 15
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 30
+    <StaminaCost>k__BackingField: 20
   - <AnimationName>k__BackingField: Sword_Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
@@ -183,7 +183,7 @@ MonoBehaviour:
     <Force>k__BackingField: 15
     <Damage>k__BackingField: 40
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 50
+    <StaminaCost>k__BackingField: 40
   _hitBox: {fileID: 1296402759913339476}
 --- !u!1001 &881350420704847673
 PrefabInstance:

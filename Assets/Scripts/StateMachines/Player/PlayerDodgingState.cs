@@ -16,7 +16,7 @@ public class PlayerDodgingState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Health.SetInvulnerable(true);
+        stateMachine.Health.SetBlocking(true);
         _remainingDodgeTime = stateMachine.DodgeDuration;
 
         stateMachine.Animator.SetFloat(DodgingForwardHash, _dodgingDirection.y);
