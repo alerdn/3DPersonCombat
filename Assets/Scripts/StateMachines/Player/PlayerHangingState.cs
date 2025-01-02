@@ -16,9 +16,7 @@ public class PlayerHangingState : PlayerBaseState
     {
         stateMachine.transform.rotation = Quaternion.LookRotation(_ledgeForward, Vector3.up);
 
-        stateMachine.CharacterController.enabled = false;
-        stateMachine.transform.position = _closestPoint - (stateMachine.LedgeDetector.transform.position - stateMachine.transform.position);
-        stateMachine.CharacterController.enabled = true;
+        stateMachine.SetPosition(_closestPoint - (stateMachine.LedgeDetector.transform.position - stateMachine.transform.position));
 
         stateMachine.Animator.CrossFadeInFixedTime(HangingHash, 0.1f);
     }

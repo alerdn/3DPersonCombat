@@ -127,10 +127,15 @@ public class PlayerStateMachine : StateMachine
         Inventory.ReplanishHealItem();
         Health.RestoreHealth();
 
-        CharacterController.enabled = false;
-        transform.position = CheckpointManager.Instance.GetLastCheckpoint();
-        CharacterController.enabled = true;
+        SetPosition(CheckpointManager.Instance.GetLastCheckpoint());
 
         SwitchState(new PlayerFreeLookState(this));
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        CharacterController.enabled = false;
+        transform.position = position;
+        CharacterController.enabled = true;
     }
 }

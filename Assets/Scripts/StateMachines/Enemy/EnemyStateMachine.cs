@@ -23,6 +23,8 @@ public class EnemyStateMachine : StateMachine
 
     public PlayerStateMachine Player { get; private set; }
 
+    private Vector3 _initialPosition;
+
     private void OnEnable()
     {
         Health.OnTakeDamage += HandleTakeDamage;
@@ -43,6 +45,7 @@ public class EnemyStateMachine : StateMachine
         Agent.updateRotation = false;
 
         SwitchState(new EnemyIdleState(this));
+        _initialPosition = transform.position;
     }
 
     private void HandleTakeDamage()
@@ -53,5 +56,19 @@ public class EnemyStateMachine : StateMachine
     private void HandleDie()
     {
         SwitchState(new EnemyDeadState(this));
+    }
+
+    public void Respawn()
+    {
+        Ragdoll.ToggleRagdoll(false);
+        Weapon.gameObject.SetActive(true);
+
+        Health.RestoreHealth();
+
+        CharacterController.enabled = false;
+        transform.position = _initialPosition;
+        CharacterController.enabled = true;
+
+        SwitchState(new EnemyIdleState(this));
     }
 }
