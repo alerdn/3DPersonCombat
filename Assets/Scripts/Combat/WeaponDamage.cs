@@ -52,6 +52,7 @@ public class WeaponDamage : MonoBehaviour
         if (other.TryGetComponent(out Health health))
         {
             health.TakeDamage(_damage);
+            AudioManager.Instance.PlayCue("Attack");
         }
 
         if (other.TryGetComponent(out ForceReceiver forceReceiver))
@@ -59,5 +60,6 @@ public class WeaponDamage : MonoBehaviour
             Vector3 direction = (other.transform.position - _myCollider.transform.position).normalized;
             forceReceiver.AddForce(direction * _knockback);
         }
+
     }
 }

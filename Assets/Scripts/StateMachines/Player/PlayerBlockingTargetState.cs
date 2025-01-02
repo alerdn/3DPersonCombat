@@ -18,6 +18,8 @@ public class PlayerBlockingTargetState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(BlockingTargetBlendTreeHash, .1f);
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
+        stateMachine.InputReader.UseItemEvent += OnUseItem;
+        stateMachine.InputReader.SwitchItemEvent += OnSwitchItem;
     }
 
     public override void Tick(float deltaTime)
@@ -46,6 +48,8 @@ public class PlayerBlockingTargetState : PlayerBaseState
     {
         stateMachine.Health.SetBlocking(false);
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
+        stateMachine.InputReader.UseItemEvent -= OnUseItem;
+        stateMachine.InputReader.SwitchItemEvent -= OnSwitchItem;
     }
 
     private void OnToggleTarget()

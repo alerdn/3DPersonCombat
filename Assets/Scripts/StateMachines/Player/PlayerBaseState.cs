@@ -93,6 +93,16 @@ public abstract class PlayerBaseState : State
         }
     }
 
+    protected void OnUseItem()
+    {
+        stateMachine.Inventory.UseItem();
+    }
+
+    protected void OnSwitchItem()
+    {
+        stateMachine.Inventory.SwitchItem();
+    }
+
     protected bool CanAttack(int attackIndex)
     {
         return stateMachine.Stamina.TryUseStamina(stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaCost);

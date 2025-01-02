@@ -65,4 +65,11 @@ public class Health : MonoBehaviour
             OnDie?.Invoke();
         }
     }
+
+    public void RestoreHealth(int heal)
+    {
+        if (CurrentHealth == 0) return;
+
+        CurrentHealth = Mathf.Min(CurrentHealth + heal, _maxHealth);
+    }
 }

@@ -13,6 +13,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
     [field: SerializeField] public LedgeDetector LedgeDetector { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
+    [field: SerializeField] public Inventory Inventory { get; private set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
     [field: SerializeField] public float BlockingMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
@@ -20,6 +21,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float DodgeLength { get; private set; }
     [field: SerializeField] public int DodgeStaminaCost { get; internal set; }
     [field: SerializeField] public float JumpForce { get; private set; }
+    [field: SerializeField] public GameObject EstusFlask { get; private set; }
     [field: SerializeField] public Weapon[] PrimaryWeapons { get; private set; }
     [field: SerializeField] public Weapon[] SecondaryWeapons { get; private set; }
 
@@ -68,12 +70,12 @@ public class PlayerStateMachine : StateMachine
         }
 
         Instance = this;
+
+        MainCameraTransform = Camera.main.transform;
     }
 
     private void Start()
     {
-        MainCameraTransform = Camera.main.transform;
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
