@@ -82,7 +82,7 @@ public abstract class PlayerBaseState : State
     protected void OnDodge()
     {
         if (!stateMachine.Stamina.TryUseStamina(stateMachine.DodgeStaminaCost)) return;
-        
+
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.SwitchState(new PlayerDodgingState(stateMachine, Vector2.down));
@@ -96,5 +96,10 @@ public abstract class PlayerBaseState : State
     protected bool CanAttack(int attackIndex)
     {
         return stateMachine.Stamina.TryUseStamina(stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaCost);
+    }
+
+    protected void HandleLedgeDetect(Vector3 ledgeForward, Vector3 closestPoint)
+    {
+        stateMachine.SwitchState(new PlayerHangingState(stateMachine, ledgeForward, closestPoint));
     }
 }

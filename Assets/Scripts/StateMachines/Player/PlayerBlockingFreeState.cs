@@ -43,7 +43,6 @@ public class PlayerBlockingFreeState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.Health.SetBlocking(false);
-
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
     }
 

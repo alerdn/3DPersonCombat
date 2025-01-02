@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
     private int _health;
     private bool _isBlocking;
     private Stamina _stamina;
+    private bool _isInvulnerable;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class Health : MonoBehaviour
     public void SetBlocking(bool isBlocking)
     {
         _isBlocking = isBlocking;
+        _stamina.SetBlocking(isBlocking);
     }
 
     public void SetStaminaComponent(Stamina stamina)
@@ -40,9 +42,14 @@ public class Health : MonoBehaviour
         _stamina = stamina;
     }
 
+    public void SetInvulnerable(bool isInvulnerable)
+    {
+        _isInvulnerable = isInvulnerable;
+    }
+
     public void TakeDamage(int damage)
     {
-        if (CurrentHealth == 0) return;
+        if (CurrentHealth == 0 || _isInvulnerable) return;
 
         if (_isBlocking && _stamina)
         {

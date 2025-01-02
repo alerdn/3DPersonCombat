@@ -23,6 +23,7 @@ public class Stamina : MonoBehaviour
 
     private float _stamina;
     private float _remainingRecoveryTime;
+    private bool _isBlocking;
 
     private void Start()
     {
@@ -35,7 +36,13 @@ public class Stamina : MonoBehaviour
 
         if (_remainingRecoveryTime == 0)
         {
-            CurrentStamina = Mathf.Min(CurrentStamina + (_recoveryRate * Time.deltaTime), _maxStamina);
+            float staminaPerFrame = _recoveryRate * Time.deltaTime;
+            if (_isBlocking)
+            {
+                staminaPerFrame *= .25f;
+            }
+
+            CurrentStamina = Mathf.Min(CurrentStamina + staminaPerFrame, _maxStamina);
         }
     }
 
@@ -59,10 +66,15 @@ public class Stamina : MonoBehaviour
         {
             float remainingDamage = damage - CurrentStamina;
             CurrentStamina = 0;
-            return -remainingDamage;
+            return remainingDamage;
         }
 
         CurrentStamina -= damage;
         return 0;
+    }
+
+    public void SetBlocking(bool isBlocking)
+    {
+        _isBlocking = isBlocking;
     }
 }

@@ -75,6 +75,7 @@ public class PlayerStateMachine : StateMachine
         MainCameraTransform = Camera.main.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         SwitchState(new PlayerFreeLookState(this));
         SwitchPrimaryWeapon();

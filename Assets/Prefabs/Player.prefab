@@ -1874,7 +1874,7 @@ MonoBehaviour:
   <RotationDamping>k__BackingField: 10
   <DodgeDuration>k__BackingField: 0.6
   <DodgeLength>k__BackingField: 4
-  <DodgeStaminaCost>k__BackingField: 20
+  <DodgeStaminaCost>k__BackingField: 15
   <JumpForce>k__BackingField: 4
   <PrimaryWeapons>k__BackingField:
   - {fileID: 7618760234453812756}
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxStamina: 100
-  _recoveryTime: 2
+  _recoveryTime: 1.75
   _recoveryRate: 20
 --- !u!114 &8364300835363221849
 MonoBehaviour:

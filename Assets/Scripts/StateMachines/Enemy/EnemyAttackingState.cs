@@ -33,7 +33,7 @@ public class EnemyAttackingState : EnemyBaseState
             stateMachine.Animator.CrossFadeInFixedTime(AttackHash, .1f);
         }
 
-        if (_isAttacking && GetNormalizedTime(stateMachine.Animator) >= 1f)
+        if (_isAttacking && GetNormalizedTime(stateMachine.Animator, "Attack") >= 1f)
         {
             stateMachine.SwitchState(new EnemyChasingState(stateMachine));
         }

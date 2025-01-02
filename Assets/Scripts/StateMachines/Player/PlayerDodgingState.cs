@@ -16,7 +16,7 @@ public class PlayerDodgingState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Health.SetBlocking(true);
+        stateMachine.Health.SetInvulnerable(true);
         _remainingDodgeTime = stateMachine.DodgeDuration;
 
         stateMachine.Animator.SetFloat(DodgingForwardHash, _dodgingDirection.y);
@@ -26,10 +26,7 @@ public class PlayerDodgingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        Vector3 movement = Vector3.zero;
-
-        movement += stateMachine.transform.forward * _dodgingDirection.y * stateMachine.DodgeLength / stateMachine.DodgeDuration;
-        movement += stateMachine.transform.right * _dodgingDirection.x * stateMachine.DodgeLength / stateMachine.DodgeDuration;
+        Vector3 movement = CalculateMovement();
 
         Move(movement, deltaTime);
 
@@ -44,5 +41,24 @@ public class PlayerDodgingState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.Health.SetInvulnerable(false);
+    }
+
+    private Vector3 CalculateMovement()
+    {
+        Vector3 movement = new Vector3();
+        Vector3 forward = stateMachine.MainCameraTransform.forward;
+        Vector3 right = stateMachine.MainCameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        movement += forward * _dodgingDirection.y * stateMachine.DodgeLength / stateMachine.DodgeDuration;
+        movement += right * _dodgingDirection.x * stateMachine.DodgeLength / stateMachine.DodgeDuration;
+
+        return movement;
     }
 }
