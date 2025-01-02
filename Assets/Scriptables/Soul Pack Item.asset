@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2511fdb733bcacc4c9e91b555475329c, type: 3}
   m_Name: Soul Pack Item
   m_EditorClassIdentifier: 
+  _souls: 500

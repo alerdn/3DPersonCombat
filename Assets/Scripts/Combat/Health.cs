@@ -66,10 +66,9 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void RestoreHealth(int heal)
+    public void RestoreHealth(int heal = 0)
     {
-        if (CurrentHealth == 0) return;
-
+        if (heal == 0) heal = _maxHealth;
         CurrentHealth = Mathf.Min(CurrentHealth + heal, _maxHealth);
     }
 }

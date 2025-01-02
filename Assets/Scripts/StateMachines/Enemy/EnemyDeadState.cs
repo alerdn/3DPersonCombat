@@ -12,7 +12,7 @@ public class EnemyDeadState : EnemyBaseState
         stateMachine.Weapon.gameObject.SetActive(false);
         GameObject.Destroy(stateMachine.Target);
 
-        //TODO: dar almas ao player
+        PlayerStateMachine.Instance.Inventory.Souls += stateMachine.SoulsValue;
     }
 
     public override void Tick(float deltaTime)

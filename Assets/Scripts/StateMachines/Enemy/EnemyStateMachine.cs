@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : StateMachine
 {
+
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
@@ -18,6 +19,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float AttackRange { get; private set; } = 2f;
     [field: SerializeField] public int AttackDamage { get; private set; } = 10;
     [field: SerializeField] public float AttackKnockback { get; private set; }
+    [field: SerializeField] public int SoulsValue;
 
     public PlayerStateMachine Player { get; private set; }
 

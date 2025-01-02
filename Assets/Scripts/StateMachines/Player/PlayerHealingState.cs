@@ -10,6 +10,8 @@ public class PlayerHealingState : PlayerBaseState
 
     public override void Enter()
     {
+        AudioManager.Instance.PlayCue("Heal");
+
         stateMachine.EstusFlask.SetActive(true);
         stateMachine.Animator.CrossFadeInFixedTime(HealHash, 0.1f);
     }

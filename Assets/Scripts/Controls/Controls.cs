@@ -125,6 +125,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""9710aad4-1836-461e-a3bd-22e0d77841f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -413,6 +422,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0804974e-5032-4cde-8c63-bd368495b1bf"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf6c2d34-0673-46c4-9fa4-646640e56021"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -460,6 +491,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_SwitchSecondaryWeapon = m_Player.FindAction("SwitchSecondaryWeapon", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -532,6 +564,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwitchSecondaryWeapon;
     private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_SwitchItem;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -547,6 +580,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @SwitchSecondaryWeapon => m_Wrapper.m_Player_SwitchSecondaryWeapon;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -589,6 +623,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchItem.started += instance.OnSwitchItem;
             @SwitchItem.performed += instance.OnSwitchItem;
             @SwitchItem.canceled += instance.OnSwitchItem;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -626,6 +663,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchItem.started -= instance.OnSwitchItem;
             @SwitchItem.performed -= instance.OnSwitchItem;
             @SwitchItem.canceled -= instance.OnSwitchItem;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -674,5 +714,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnSwitchSecondaryWeapon(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnSwitchItem(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

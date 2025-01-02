@@ -1880,6 +1880,8 @@ MonoBehaviour:
   <DodgeStaminaCost>k__BackingField: 15
   <JumpForce>k__BackingField: 4
   <EstusFlask>k__BackingField: {fileID: 4385307518209060505}
+  <SoulDropPrefab>k__BackingField: {fileID: 5634801220878805813, guid: d9cf568305873fa4cab493763c9056b7,
+    type: 3}
   <PrimaryWeapons>k__BackingField:
   - {fileID: 7618760234453812756}
   - {fileID: 5661721800415534264}
@@ -2014,8 +2016,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items:
-  - {fileID: 11400000, guid: cf858b1429ec8fc43bfeab6e4c286e88, type: 2}
-  - {fileID: 11400000, guid: 7690cd194e8c96a4cb3c97f873d32fdc, type: 2}
+  - Item: {fileID: 11400000, guid: cf858b1429ec8fc43bfeab6e4c286e88, type: 2}
+    Quantity: 0
+  - Item: {fileID: 11400000, guid: 7690cd194e8c96a4cb3c97f873d32fdc, type: 2}
+    Quantity: 10
 --- !u!1 &4357487011032067051
 GameObject:
   m_ObjectHideFlags: 0

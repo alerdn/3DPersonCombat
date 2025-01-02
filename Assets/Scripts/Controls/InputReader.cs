@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action SwitchSecondaryWeaponEvent;
     public event Action UseItemEvent;
     public event Action SwitchItemEvent;
+    public event Action InteractEvent;
 
     public bool IsAttacking { get; private set; }
     public bool IsBlocking { get; private set; }
@@ -112,5 +113,12 @@ public class InputReader : ScriptableObject, IPlayerActions
         if (!context.performed) return;
 
         SwitchItemEvent?.Invoke();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        InteractEvent?.Invoke();
     }
 }

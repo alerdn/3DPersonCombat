@@ -1,10 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public record ItemInventory
+{
+    public Item Item;
+    public int Quantity;
+}
+
 public class Inventory : MonoBehaviour
 {
-    private Item CurrentItem
+    private ItemInventory CurrentItem
     {
         get
         {
@@ -13,18 +21,44 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    [SerializeField] private List<Item> _items = new List<Item>();
+    public int Souls { get => _souls; set => _souls = Mathf.Max(value, 0); }
+
+    [SerializeField] private List<ItemInventory> _items = new List<ItemInventory>();
 
     private int _currentItemIndex;
 
+    [Header("Debug")]
+    [SerializeField] private int _souls;
+
     public void UseItem()
     {
-        CurrentItem?.Use();
+        if (CurrentItem == null || CurrentItem.Quantity == 0) return;
+
+        CurrentItem.Item.Use();
+        CurrentItem.Quantity--;
     }
 
     public void SwitchItem()
     {
         _currentItemIndex = (_currentItemIndex + 1) % _items.Count;
         Debug.Log($"Current item: {CurrentItem}");
+    }
+
+    public ItemInventory GetHealItem()
+    {
+        foreach (ItemInventory item in _items)
+        {
+            if (item.Item is HealItem)
+            {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public void ReplanishHealItem()
+    {
+        GetHealItem().Quantity = 10;
     }
 }

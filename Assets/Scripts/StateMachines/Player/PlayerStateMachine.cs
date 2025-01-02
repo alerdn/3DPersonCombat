@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
@@ -22,6 +23,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public int DodgeStaminaCost { get; internal set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public GameObject EstusFlask { get; private set; }
+    [field: SerializeField] public SoulCollectableItem SoulDropPrefab { get; private set; }
     [field: SerializeField] public Weapon[] PrimaryWeapons { get; private set; }
     [field: SerializeField] public Weapon[] SecondaryWeapons { get; private set; }
 
@@ -84,6 +86,7 @@ public class PlayerStateMachine : StateMachine
         SwitchSecondaryWeapon();
 
         Health.SetStaminaComponent(Stamina);
+        Inventory.ReplanishHealItem();
     }
 
     public void SwitchPrimaryWeapon()
@@ -108,5 +111,26 @@ public class PlayerStateMachine : StateMachine
     private void HandleDie()
     {
         SwitchState(new PlayerDeadState(this));
+    }
+
+    public void DropSouls()
+    {
+        Instantiate(SoulDropPrefab, transform.position, Quaternion.identity).Init(Inventory.Souls);
+        Inventory.Souls = 0;
+    }
+
+    public void Respawn()
+    {
+        Ragdoll.ToggleRagdoll(false);
+        CurrentWeapon.gameObject.SetActive(true);
+
+        Inventory.ReplanishHealItem();
+        Health.RestoreHealth();
+
+        CharacterController.enabled = false;
+        transform.position = CheckpointManager.Instance.GetLastCheckpoint();
+        CharacterController.enabled = true;
+
+        SwitchState(new PlayerFreeLookState(this));
     }
 }
