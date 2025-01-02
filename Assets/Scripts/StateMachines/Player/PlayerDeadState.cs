@@ -10,6 +10,9 @@ public class PlayerDeadState : PlayerBaseState
     {
         stateMachine.Ragdoll.ToggleRagdoll(true);
         stateMachine.CurrentWeapon.gameObject.SetActive(false);
+
+        //TODO: dropar almas do player
+        //TODO: reiniciar o player, mas não a fase toda
     }
 
     public override void Tick(float deltaTime)

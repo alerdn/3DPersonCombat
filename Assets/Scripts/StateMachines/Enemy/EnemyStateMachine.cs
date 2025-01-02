@@ -52,13 +52,4 @@ public class EnemyStateMachine : StateMachine
     {
         SwitchState(new EnemyDeadState(this));
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, PlayerChasingRange);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
-    }
 }

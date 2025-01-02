@@ -11,6 +11,8 @@ public class EnemyDeadState : EnemyBaseState
         stateMachine.Ragdoll.ToggleRagdoll(true);
         stateMachine.Weapon.gameObject.SetActive(false);
         GameObject.Destroy(stateMachine.Target);
+
+        //TODO: dar almas ao player
     }
 
     public override void Tick(float deltaTime)
