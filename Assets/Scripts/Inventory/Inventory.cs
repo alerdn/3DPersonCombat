@@ -6,8 +6,19 @@ using UnityEngine;
 [Serializable]
 public record ItemInventory
 {
+    public event Action<int> OnQuantityChanged;
+
     public Item Item;
-    public int Quantity;
+    public int Quantity
+    {
+        get => _quantity; set
+        {
+            _quantity = value;
+            OnQuantityChanged?.Invoke(_quantity);
+        }
+    }
+
+    private int _quantity;
 }
 
 public class Inventory : MonoBehaviour
@@ -26,8 +37,15 @@ public class Inventory : MonoBehaviour
     [SerializeField] private List<ItemInventory> _items = new List<ItemInventory>();
     [SerializeField] private SOInt _souls;
 
+    [Header("Heal")]
+    [SerializeField] private int _healItemQuantity = 10;
+
     private int _currentItemIndex;
 
+    private void Start()
+    {
+        _souls.Value = 0;
+    }
 
     public void UseItem()
     {
@@ -40,7 +58,6 @@ public class Inventory : MonoBehaviour
     public void SwitchItem()
     {
         _currentItemIndex = (_currentItemIndex + 1) % _items.Count;
-        Debug.Log($"Current item: {CurrentItem}");
     }
 
     public ItemInventory GetHealItem()
@@ -58,6 +75,6 @@ public class Inventory : MonoBehaviour
 
     public void ReplanishHealItem()
     {
-        GetHealItem().Quantity = 10;
+        GetHealItem().Quantity = _healItemQuantity;
     }
 }

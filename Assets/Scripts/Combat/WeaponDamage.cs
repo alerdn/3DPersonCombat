@@ -32,11 +32,6 @@ public class WeaponDamage : MonoBehaviour
         _targets = targets;
     }
 
-    public void SetMyCollider(Collider myCollider)
-    {
-        _myCollider = myCollider;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other == _myCollider) return;

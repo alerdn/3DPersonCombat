@@ -9,6 +9,7 @@ public class DisplaySOInt : MonoBehaviour
     private void Start()
     {
         _soInt.OnValueChanged += OnValueChanged;
+        OnValueChanged(_soInt.Value);
     }
 
     private void OnDestroy()

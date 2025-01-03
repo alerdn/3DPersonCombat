@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4228089242784240352}
   - component: {fileID: 5960368445502018362}
-  - component: {fileID: 3122542231387938224}
   - component: {fileID: 1296402759913339476}
   m_Layer: 0
   m_Name: Hitbox
@@ -57,33 +56,6 @@ CapsuleCollider:
   m_Height: 1.1356832
   m_Direction: 1
   m_Center: {x: 0.00000052217644, y: 0.7425112, z: 7.8938595e-16}
---- !u!54 &3122542231387938224
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 66800164325647190}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1296402759913339476
 MonoBehaviour:
   m_ObjectHideFlags: 0

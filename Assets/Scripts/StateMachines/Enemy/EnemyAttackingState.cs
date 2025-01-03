@@ -31,11 +31,11 @@ public class EnemyAttackingState : EnemyBaseState
         {
             _isTransitioning = true;
             stateMachine.Animator.CrossFadeInFixedTime(LocomotionHash, .1f);
-            stateMachine.Animator.SetFloat(SpeedHash, 0f, .1f, deltaTime);
         }
 
         if (_isTransitioning)
         {
+            stateMachine.Animator.SetFloat(SpeedHash, 0f, .1f, deltaTime);
             _transitionDelay = Mathf.Max(_transitionDelay - Time.deltaTime, 0);
 
             if (_transitionDelay == 0)
