@@ -4,6 +4,8 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private UnityEvent _onInteract;
+    [SerializeField] private UnityEvent _inRangeEvent;
+    [SerializeField] private UnityEvent _outOfRangeEvent;
 
     private bool _inRange;
 
@@ -32,6 +34,7 @@ public class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inRange = true;
+            _inRangeEvent?.Invoke();
         }
     }
 
@@ -40,6 +43,7 @@ public class Interactable : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inRange = false;
+            _outOfRangeEvent?.Invoke();
         }
     }
 }

@@ -62,12 +62,23 @@ public class EnemyStateMachine : StateMachine
     {
         Ragdoll.ToggleRagdoll(false);
         Weapon.gameObject.SetActive(true);
+        gameObject.AddComponent<Target>();
 
         Health.RestoreHealth();
 
+        // Resetando posição
         CharacterController.enabled = false;
         transform.position = _initialPosition;
         CharacterController.enabled = true;
+
+        // Resetando agent
+        Agent.enabled = false;
+        Agent.enabled = true;
+        if (Agent.isOnNavMesh)
+        {
+            Agent.ResetPath();
+        }
+        Agent.velocity = Vector3.zero;
 
         SwitchState(new EnemyIdleState(this));
     }

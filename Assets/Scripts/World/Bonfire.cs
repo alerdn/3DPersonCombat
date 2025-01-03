@@ -15,5 +15,7 @@ public class Bonfire : MonoBehaviour
         CheckpointManager.Instance.SetLastCheckpoint(_spawnPoint.position);
 
         EnemyManager.Instance.RespawnAll();
+
+        AudioManager.Instance.PlayCue("Rest");
     }
 }

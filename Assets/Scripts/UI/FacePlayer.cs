@@ -11,6 +11,6 @@ public class FacePlayer : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(_player);
+        transform.forward = _player.forward;
     }
 }

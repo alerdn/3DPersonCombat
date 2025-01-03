@@ -32,7 +32,7 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.SwitchWeaponEvent += OnSwitchWeapon;
         stateMachine.InputReader.SwitchSecondaryWeaponEvent += OnSwitchSecondaryWeapon;
         stateMachine.InputReader.UseItemEvent += OnUseItem;
-        stateMachine.InputReader.SwitchItemEvent += OnSwitchItem;
+        stateMachine.InputReader.SwitchItemEvent += stateMachine.SwitchItem;
     }
 
     public override void Tick(float deltaTime)
@@ -73,7 +73,7 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.SwitchWeaponEvent -= OnSwitchWeapon;
         stateMachine.InputReader.SwitchSecondaryWeaponEvent -= OnSwitchSecondaryWeapon;
         stateMachine.InputReader.UseItemEvent -= OnUseItem;
-        stateMachine.InputReader.SwitchItemEvent -= OnSwitchItem;
+        stateMachine.InputReader.SwitchItemEvent -= stateMachine.SwitchItem;
     }
 
     private void OnToggleTarget()

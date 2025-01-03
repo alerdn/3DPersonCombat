@@ -5,6 +5,10 @@ public class PlayerStateMachine : StateMachine
 {
     public static PlayerStateMachine Instance;
 
+    public event Action<Weapon> OnWeaponSwitched;
+    public event Action<Weapon> OnShieldSwitched;
+    public event Action<ItemInventory> OnItemSwitched;
+
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
@@ -94,6 +98,8 @@ public class PlayerStateMachine : StateMachine
         CurrentPrimaryWeapon?.gameObject.SetActive(false);
         _currentPrimaryWeaponIndex = (_currentPrimaryWeaponIndex + 1) % PrimaryWeapons.Length;
         CurrentPrimaryWeapon?.gameObject.SetActive(true);
+
+        OnWeaponSwitched?.Invoke(CurrentPrimaryWeapon);
     }
 
     public void SwitchSecondaryWeapon()
@@ -101,6 +107,15 @@ public class PlayerStateMachine : StateMachine
         CurrentSecondaryWeapon?.gameObject.SetActive(false);
         _currentSecondaryWeaponIndex = (_currentSecondaryWeaponIndex + 1) % SecondaryWeapons.Length;
         CurrentSecondaryWeapon?.gameObject.SetActive(true);
+
+        OnShieldSwitched?.Invoke(CurrentSecondaryWeapon);
+    }
+
+    public void SwitchItem()
+    {
+        Inventory.SwitchItem();
+
+        OnItemSwitched?.Invoke(Inventory.CurrentItem);
     }
 
     private void HandleTakeDamage()

@@ -12,7 +12,7 @@ public record ItemInventory
 
 public class Inventory : MonoBehaviour
 {
-    private ItemInventory CurrentItem
+    public ItemInventory CurrentItem
     {
         get
         {
@@ -21,14 +21,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public int Souls { get => _souls; set => _souls = Mathf.Max(value, 0); }
+    public int Souls { get => _souls.Value; set => _souls.Value = Mathf.Max(value, 0); }
 
     [SerializeField] private List<ItemInventory> _items = new List<ItemInventory>();
+    [SerializeField] private SOInt _souls;
 
     private int _currentItemIndex;
 
-    [Header("Debug")]
-    [SerializeField] private int _souls;
 
     public void UseItem()
     {

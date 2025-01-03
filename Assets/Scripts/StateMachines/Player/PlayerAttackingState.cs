@@ -17,6 +17,7 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
+        AudioManager.Instance.PlayCue("Swing");
     }
 
     public override void Tick(float deltaTime)

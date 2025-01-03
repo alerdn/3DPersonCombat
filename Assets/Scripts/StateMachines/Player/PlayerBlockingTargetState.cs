@@ -19,7 +19,7 @@ public class PlayerBlockingTargetState : PlayerBaseState
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
         stateMachine.InputReader.UseItemEvent += OnUseItem;
-        stateMachine.InputReader.SwitchItemEvent += OnSwitchItem;
+        stateMachine.InputReader.SwitchItemEvent += stateMachine.SwitchItem;
     }
 
     public override void Tick(float deltaTime)
@@ -49,7 +49,7 @@ public class PlayerBlockingTargetState : PlayerBaseState
         stateMachine.Health.SetBlocking(false);
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
         stateMachine.InputReader.UseItemEvent -= OnUseItem;
-        stateMachine.InputReader.SwitchItemEvent -= OnSwitchItem;
+        stateMachine.InputReader.SwitchItemEvent -= stateMachine.SwitchItem;
     }
 
     private void OnToggleTarget()
