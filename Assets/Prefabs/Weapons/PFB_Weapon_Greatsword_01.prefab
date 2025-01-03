@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4608926135480018719}
   - component: {fileID: 4364215520881653540}
   m_Layer: 0
-  m_Name: Weapon_Greatsword_01
+  m_Name: PFB_Weapon_Greatsword_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

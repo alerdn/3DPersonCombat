@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6576417088127589719}
   - component: {fileID: 6576417088127589712}
   m_Layer: 0
-  m_Name: House
+  m_Name: PFB_House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

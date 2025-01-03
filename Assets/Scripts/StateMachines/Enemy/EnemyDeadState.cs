@@ -10,7 +10,7 @@ public class EnemyDeadState : EnemyBaseState
     {
         stateMachine.Ragdoll.ToggleRagdoll(true);
         stateMachine.Weapon.gameObject.SetActive(false);
-        GameObject.Destroy(stateMachine.Target);
+        Object.Destroy(stateMachine.Target);
 
         PlayerStateMachine.Instance.Inventory.Souls += stateMachine.SoulsValue;
     }

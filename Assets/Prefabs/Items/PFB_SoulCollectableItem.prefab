@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4531678556064538182}
   - component: {fileID: 7865651426683055982}
   m_Layer: 0
-  m_Name: Soul Collectable Item
+  m_Name: PFB_SoulCollectableItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

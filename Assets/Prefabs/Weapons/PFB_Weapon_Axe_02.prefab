@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 2338500478284311038}
   - component: {fileID: 1666143668852039826}
   m_Layer: 0
-  m_Name: Weapon_Axe_02
+  m_Name: PFB_Weapon_Axe_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

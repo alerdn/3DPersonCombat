@@ -9,10 +9,9 @@ public class SoulCollectableItem : CollectableItem
         _souls = souls;
     }
 
-    public override void Collect()
+    protected override void OnCollect()
     {
         AudioManager.Instance.PlayCue("SoulRecovered");
         PlayerStateMachine.Instance.Inventory.Souls += _souls;
-        Destroy(gameObject);
     }
 }
