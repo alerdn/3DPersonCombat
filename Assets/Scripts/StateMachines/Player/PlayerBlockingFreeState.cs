@@ -17,6 +17,7 @@ public class PlayerBlockingFreeState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(BlockingFreeBlendTreeHash, .1f);
 
         stateMachine.InputReader.ToggleTargetEvent += OnToggleTarget;
+        stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.UseItemEvent += OnUseItem;
         stateMachine.InputReader.SwitchItemEvent += stateMachine.SwitchItem;
     }
@@ -46,6 +47,7 @@ public class PlayerBlockingFreeState : PlayerBaseState
     {
         stateMachine.Health.SetBlocking(false);
         stateMachine.InputReader.ToggleTargetEvent -= OnToggleTarget;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.UseItemEvent -= OnUseItem;
         stateMachine.InputReader.SwitchItemEvent -= stateMachine.SwitchItem;
     }
