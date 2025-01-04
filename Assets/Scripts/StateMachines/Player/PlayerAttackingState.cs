@@ -11,9 +11,9 @@ public class PlayerAttackingState : PlayerBaseState
         _weapon = stateMachine.CurrentWeapon;
         _attack = _weapon.Attacks[attackIndex];
 
-        float damageMultiplier = _attack.DamageMultiplier;
-        int damage = Mathf.RoundToInt(_weapon.Damage * damageMultiplier);
-        
+        int damage = GetAttackDamage(attackIndex);
+        Debug.Log($"damage: {damage}");
+
         _weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
     }
 

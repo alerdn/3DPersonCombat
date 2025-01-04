@@ -13,6 +13,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public Targeter Targeter { get; private set; }
+    [field: SerializeField] public CharacterStat Stat { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
@@ -91,6 +92,20 @@ public class PlayerStateMachine : StateMachine
 
         Health.SetStaminaComponent(Stamina);
         Inventory.ReplanishHealItem();
+
+        Health.SetMaxHealth(Stat.Vigor, true);
+        Stamina.SetMaxStamina(Stat.Fortitude, true);
+
+        InputReader.IncreaseStrengthEvent += IncreaseStrength;
+        InputReader.IncreaseVigorEvent += IncreaseVigor;
+        InputReader.IncreaseFortitudeEvent += IncreaseFortitude;
+    }
+
+    private void OnDestroy()
+    {
+        InputReader.IncreaseStrengthEvent -= IncreaseStrength;
+        InputReader.IncreaseVigorEvent -= IncreaseVigor;
+        InputReader.IncreaseFortitudeEvent -= IncreaseFortitude;
     }
 
     public void SwitchPrimaryWeapon()
@@ -152,5 +167,22 @@ public class PlayerStateMachine : StateMachine
         CharacterController.enabled = false;
         transform.position = position;
         CharacterController.enabled = true;
+    }
+
+    public void IncreaseStrength()
+    {
+        Stat.Strength++;
+    }
+
+    public void IncreaseVigor()
+    {
+        Stat.Vigor++;
+        Health.SetMaxHealth(Stat.Vigor);
+    }
+
+    public void IncreaseFortitude()
+    {
+        Stat.Fortitude++;
+        Stamina.SetMaxStamina(Stat.Fortitude);
     }
 }

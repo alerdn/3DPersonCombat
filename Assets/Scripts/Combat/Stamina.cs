@@ -6,6 +6,7 @@ public class Stamina : MonoBehaviour
 {
     public event Action<float, float> OnStaminaChanged;
 
+    public float MaxStamina => _currentMaxStamina;
     public float CurrentStamina
     {
         get => _stamina; private set
@@ -13,21 +14,25 @@ public class Stamina : MonoBehaviour
             if (value == _stamina) return;
 
             _stamina = value;
-            OnStaminaChanged?.Invoke(_stamina, _maxStamina);
+            OnStaminaChanged?.Invoke(_stamina, _currentMaxStamina);
         }
     }
 
-    [SerializeField] private float _maxStamina = 100f;
+    [SerializeField] private float _initialMaxStamina = 100f;
     [SerializeField] private float _recoveryTime = 1f;
     [SerializeField] private float _recoveryRate = 20;
 
-    private float _stamina;
+    [Header("Debug")]
+    [SerializeField] private float _stamina;
+    [SerializeField] private float _currentMaxStamina;
+
     private float _remainingRecoveryTime;
     private bool _isBlocking;
 
     private void Start()
     {
-        CurrentStamina = _maxStamina;
+        _currentMaxStamina = _initialMaxStamina;
+        CurrentStamina = _currentMaxStamina;
     }
 
     private void Update()
@@ -42,8 +47,14 @@ public class Stamina : MonoBehaviour
                 staminaPerFrame *= .25f;
             }
 
-            CurrentStamina = Mathf.Min(CurrentStamina + staminaPerFrame, _maxStamina);
+            CurrentStamina = Mathf.Min(CurrentStamina + staminaPerFrame, _currentMaxStamina);
         }
+    }
+
+    public void SetMaxStamina(float multiplier, bool restoreStamina = false)
+    {
+        _currentMaxStamina = _initialMaxStamina * multiplier;
+        if (restoreStamina) CurrentStamina = _currentMaxStamina;
     }
 
     public bool TryUseStamina(float amount)

@@ -134,6 +134,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseStrength"",
+                    ""type"": ""Button"",
+                    ""id"": ""65af2032-977d-4cc2-a345-aa30e3df8374"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseVigor"",
+                    ""type"": ""Button"",
+                    ""id"": ""62fbc3dc-a9b1-4833-8d91-84d43a18d9d2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseFortitude"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecf190dc-ea3b-43ce-9882-53c1819f3348"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -444,6 +471,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7dd3ceca-3635-4209-b616-4e53717e7ce6"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncreaseStrength"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c223fbc7-07f6-4973-81dd-8d69241c160f"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncreaseVigor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67051502-0503-4d81-9154-f8e9c9f5295e"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncreaseFortitude"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -492,6 +552,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_IncreaseStrength = m_Player.FindAction("IncreaseStrength", throwIfNotFound: true);
+        m_Player_IncreaseVigor = m_Player.FindAction("IncreaseVigor", throwIfNotFound: true);
+        m_Player_IncreaseFortitude = m_Player.FindAction("IncreaseFortitude", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -565,6 +628,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_SwitchItem;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_IncreaseStrength;
+    private readonly InputAction m_Player_IncreaseVigor;
+    private readonly InputAction m_Player_IncreaseFortitude;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -581,6 +647,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @IncreaseStrength => m_Wrapper.m_Player_IncreaseStrength;
+        public InputAction @IncreaseVigor => m_Wrapper.m_Player_IncreaseVigor;
+        public InputAction @IncreaseFortitude => m_Wrapper.m_Player_IncreaseFortitude;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -626,6 +695,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @IncreaseStrength.started += instance.OnIncreaseStrength;
+            @IncreaseStrength.performed += instance.OnIncreaseStrength;
+            @IncreaseStrength.canceled += instance.OnIncreaseStrength;
+            @IncreaseVigor.started += instance.OnIncreaseVigor;
+            @IncreaseVigor.performed += instance.OnIncreaseVigor;
+            @IncreaseVigor.canceled += instance.OnIncreaseVigor;
+            @IncreaseFortitude.started += instance.OnIncreaseFortitude;
+            @IncreaseFortitude.performed += instance.OnIncreaseFortitude;
+            @IncreaseFortitude.canceled += instance.OnIncreaseFortitude;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -666,6 +744,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @IncreaseStrength.started -= instance.OnIncreaseStrength;
+            @IncreaseStrength.performed -= instance.OnIncreaseStrength;
+            @IncreaseStrength.canceled -= instance.OnIncreaseStrength;
+            @IncreaseVigor.started -= instance.OnIncreaseVigor;
+            @IncreaseVigor.performed -= instance.OnIncreaseVigor;
+            @IncreaseVigor.canceled -= instance.OnIncreaseVigor;
+            @IncreaseFortitude.started -= instance.OnIncreaseFortitude;
+            @IncreaseFortitude.performed -= instance.OnIncreaseFortitude;
+            @IncreaseFortitude.canceled -= instance.OnIncreaseFortitude;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -715,5 +802,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnUseItem(InputAction.CallbackContext context);
         void OnSwitchItem(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnIncreaseStrength(InputAction.CallbackContext context);
+        void OnIncreaseVigor(InputAction.CallbackContext context);
+        void OnIncreaseFortitude(InputAction.CallbackContext context);
     }
 }

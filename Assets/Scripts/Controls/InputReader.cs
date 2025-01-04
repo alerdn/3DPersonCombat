@@ -17,6 +17,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action SwitchItemEvent;
     public event Action InteractEvent;
 
+    public event Action IncreaseStrengthEvent;
+    public event Action IncreaseVigorEvent;
+    public event Action IncreaseFortitudeEvent;
+
     public bool IsAttacking { get; private set; }
     public bool IsBlocking { get; private set; }
     public Vector2 MovementValue { get; private set; }
@@ -120,5 +124,26 @@ public class InputReader : ScriptableObject, IPlayerActions
         if (!context.performed) return;
 
         InteractEvent?.Invoke();
+    }
+
+    public void OnIncreaseStrength(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        IncreaseStrengthEvent?.Invoke();
+    }
+
+    public void OnIncreaseVigor(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        IncreaseVigorEvent?.Invoke();
+    }
+
+    public void OnIncreaseFortitude(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        IncreaseFortitudeEvent?.Invoke();
     }
 }

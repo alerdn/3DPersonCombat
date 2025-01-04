@@ -100,13 +100,24 @@ public abstract class PlayerBaseState : State
 
     protected bool CanAttack(int attackIndex)
     {
-        float staminaMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaMultiplier;
-        float staminaCost = stateMachine.CurrentWeapon.StaminaCost * staminaMultiplier;
+        float staminaCost = GetAttackStaminaCost(attackIndex);
         return stateMachine.Stamina.TryUseStamina(staminaCost);
     }
 
     protected void HandleLedgeDetect(Vector3 ledgeForward, Vector3 closestPoint)
     {
         stateMachine.SwitchState(new PlayerHangingState(stateMachine, ledgeForward, closestPoint));
+    }
+
+    protected int GetAttackDamage(int attackIndex)
+    {
+        float damageMultiplier = stateMachine.Stat.Strength * stateMachine.CurrentWeapon.Attacks[attackIndex].DamageMultiplier;
+        return Mathf.RoundToInt(stateMachine.CurrentWeapon.Damage * damageMultiplier);
+    }
+
+    protected float GetAttackStaminaCost(int attackIndex)
+    {
+        float staminaMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaMultiplier;
+        return stateMachine.CurrentWeapon.StaminaCost * staminaMultiplier;
     }
 }

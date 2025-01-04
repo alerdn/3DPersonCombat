@@ -1812,6 +1812,7 @@ GameObject:
   - component: {fileID: 6504087031504652186}
   - component: {fileID: 1788016193416029199}
   - component: {fileID: 6988202913747320121}
+  - component: {fileID: 5026085111420823581}
   - component: {fileID: 1864496135239076768}
   - component: {fileID: 581617269717071974}
   - component: {fileID: 3156533527961423358}
@@ -1866,6 +1867,7 @@ MonoBehaviour:
   <CharacterController>k__BackingField: {fileID: 1864496135239076768}
   <Animator>k__BackingField: {fileID: 6988202913747320121}
   <Targeter>k__BackingField: {fileID: 2153323114177594034}
+  <Stat>k__BackingField: {fileID: 5026085111420823581}
   <Health>k__BackingField: {fileID: 3066934078550099189}
   <Stamina>k__BackingField: {fileID: 8318123543584311153}
   <Ragdoll>k__BackingField: {fileID: 8364300835363221849}
@@ -1909,6 +1911,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5026085111420823581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323348895624547364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40e7d7cb06112724b94f4558679c72ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _strength: 10
+  _vigor: 10
+  _fortitude: 10
 --- !u!143 &1864496135239076768
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1974,7 +1991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d38b248e33a9f449d1e93929576337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _initialMaxHealth: 10
+  _currentMaxHealth: 0
 --- !u!114 &8318123543584311153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,9 +2005,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0097cbe8cfd0746aee57e4ffdb1c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStamina: 100
+  _initialMaxStamina: 10
   _recoveryTime: 1.75
   _recoveryRate: 40
+  _currentMaxStamina: 0
 --- !u!114 &8364300835363221849
 MonoBehaviour:
   m_ObjectHideFlags: 0

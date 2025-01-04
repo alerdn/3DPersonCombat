@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     public event Action<int, int> OnHealthChanged;
 
     public bool IsDead => _health == 0;
+    public int MaxHealth => _currentMaxHealth;
     public int CurrentHealth
     {
         get => _health; private set
@@ -15,20 +16,30 @@ public class Health : MonoBehaviour
             if (value == _health) return;
 
             _health = value;
-            OnHealthChanged?.Invoke(_health, _maxHealth);
+            OnHealthChanged?.Invoke(_health, _currentMaxHealth);
         }
     }
 
-    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private int _initialMaxHealth = 100;
 
-    private int _health;
-    private bool _isBlocking;
+    [Header("Debug")]
+    [SerializeField] private int _health;
+    [SerializeField] private int _currentMaxHealth;
+
     private Stamina _stamina;
+    private bool _isBlocking;
     private bool _isInvulnerable;
 
     private void Start()
     {
-        CurrentHealth = _maxHealth;
+        _currentMaxHealth = _initialMaxHealth;
+        CurrentHealth = _currentMaxHealth;
+    }
+
+    public void SetMaxHealth(int multiplier, bool restoreHealth = false)
+    {
+        _currentMaxHealth = _initialMaxHealth * multiplier;
+        if (restoreHealth) CurrentHealth = _currentMaxHealth;
     }
 
     public void SetBlocking(bool isBlocking)
@@ -68,7 +79,7 @@ public class Health : MonoBehaviour
 
     public void RestoreHealth(int heal = 0)
     {
-        if (heal == 0) heal = _maxHealth;
-        CurrentHealth = Mathf.Min(CurrentHealth + heal, _maxHealth);
+        if (heal == 0) heal = _currentMaxHealth;
+        CurrentHealth = Mathf.Min(CurrentHealth + heal, _currentMaxHealth);
     }
 }
