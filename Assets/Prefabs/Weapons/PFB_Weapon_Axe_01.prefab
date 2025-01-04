@@ -49,8 +49,8 @@ MonoBehaviour:
   <Name>k__BackingField: Machado
   <Sprite>k__BackingField: {fileID: 21300000, guid: 254236421bb02bd4b820506e4889a751,
     type: 3}
-  <EquipOffset>k__BackingField: {x: -0.0445, y: 0, z: -0.14}
-  <EquipRotation>k__BackingField: {x: 90, y: 0, z: -16}
+  <Damage>k__BackingField: 100
+  <StaminaCost>k__BackingField: 20
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Axe_Attack1
     <TransitionDuration>k__BackingField: 0.1
@@ -58,36 +58,36 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0.6
     <ForceTime>k__BackingField: 0.25
     <Force>k__BackingField: 8
-    <Damage>k__BackingField: 10
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 20
+    <DamageMultiplier>k__BackingField: 1
+    <StaminaMultiplier>k__BackingField: 1
   - <AnimationName>k__BackingField: Axe_Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
     <ComboAttackTime>k__BackingField: 0.5
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 10
-    <Damage>k__BackingField: 15
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 20
+    <DamageMultiplier>k__BackingField: 1
+    <StaminaMultiplier>k__BackingField: 1
   - <AnimationName>k__BackingField: Axe_Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
     <ComboAttackTime>k__BackingField: 0
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 10
-    <Damage>k__BackingField: 20
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 30
+    <DamageMultiplier>k__BackingField: 1.5
+    <StaminaMultiplier>k__BackingField: 1.5
   - <AnimationName>k__BackingField: JumpingAttack
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
     <ComboAttackTime>k__BackingField: 0
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 10
-    <Damage>k__BackingField: 40
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 40
+    <DamageMultiplier>k__BackingField: 2
+    <StaminaMultiplier>k__BackingField: 2
   _hitBox: {fileID: 4743174051080882685}
 --- !u!1 &2457666168438364537
 GameObject:

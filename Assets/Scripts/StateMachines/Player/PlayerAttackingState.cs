@@ -9,9 +9,12 @@ public class PlayerAttackingState : PlayerBaseState
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
         _weapon = stateMachine.CurrentWeapon;
-
         _attack = _weapon.Attacks[attackIndex];
-        _weapon.SetAttack(_attack.Damage, _attack.Knockback, UnitType.Enemy);
+
+        float damageMultiplier = _attack.DamageMultiplier;
+        int damage = Mathf.RoundToInt(_weapon.Damage * damageMultiplier);
+        
+        _weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
     }
 
     public override void Enter()

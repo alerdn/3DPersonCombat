@@ -100,7 +100,9 @@ public abstract class PlayerBaseState : State
 
     protected bool CanAttack(int attackIndex)
     {
-        return stateMachine.Stamina.TryUseStamina(stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaCost);
+        float staminaMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaMultiplier;
+        float staminaCost = stateMachine.CurrentWeapon.StaminaCost * staminaMultiplier;
+        return stateMachine.Stamina.TryUseStamina(staminaCost);
     }
 
     protected void HandleLedgeDetect(Vector3 ledgeForward, Vector3 closestPoint)

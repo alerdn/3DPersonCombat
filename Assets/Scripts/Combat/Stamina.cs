@@ -46,7 +46,7 @@ public class Stamina : MonoBehaviour
         }
     }
 
-    public bool TryUseStamina(int amount)
+    public bool TryUseStamina(float amount)
     {
         if (CurrentStamina < amount)
         {

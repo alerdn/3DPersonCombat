@@ -10,7 +10,7 @@ public class Attack
     [field: SerializeField] public float ComboAttackTime { get; private set; }
     [field: SerializeField] public float ForceTime { get; private set; }
     [field: SerializeField] public float Force { get; private set; }
-    [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public int Knockback { get; private set; }
-    [field: SerializeField] public int StaminaCost { get; private set; } = 30;
+    [field: SerializeField] public float DamageMultiplier { get; private set; } = 1f;
+    [field: SerializeField] public float StaminaMultiplier { get; private set; } = 1f;
 }

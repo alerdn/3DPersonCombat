@@ -119,8 +119,8 @@ MonoBehaviour:
   <Name>k__BackingField: Espada Grande
   <Sprite>k__BackingField: {fileID: 21300000, guid: c0de80f93c5c37c4bb7fab61710a7fb6,
     type: 3}
-  <EquipOffset>k__BackingField: {x: -0.05, y: 0, z: -0.178}
-  <EquipRotation>k__BackingField: {x: 90, y: 16, z: 0}
+  <Damage>k__BackingField: 150
+  <StaminaCost>k__BackingField: 40
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Greatsword_Attack1
     <TransitionDuration>k__BackingField: 0.1
@@ -128,36 +128,36 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0.6
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 5
-    <Damage>k__BackingField: 20
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 25
+    <DamageMultiplier>k__BackingField: 1
+    <StaminaMultiplier>k__BackingField: 1
   - <AnimationName>k__BackingField: Greatsword_Attack2
     <TransitionDuration>k__BackingField: 0.1
     <ComboStateIndex>k__BackingField: 2
     <ComboAttackTime>k__BackingField: 0.5
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 5
-    <Damage>k__BackingField: 30
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 25
+    <DamageMultiplier>k__BackingField: 1
+    <StaminaMultiplier>k__BackingField: 1
   - <AnimationName>k__BackingField: Greatsword_Attack3
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
     <ComboAttackTime>k__BackingField: 0
     <ForceTime>k__BackingField: 0.2
     <Force>k__BackingField: 15
-    <Damage>k__BackingField: 40
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 40
+    <DamageMultiplier>k__BackingField: 1.5
+    <StaminaMultiplier>k__BackingField: 1.5
   - <AnimationName>k__BackingField: JumpingAttack
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
     <ComboAttackTime>k__BackingField: 0
     <ForceTime>k__BackingField: 0.05
     <Force>k__BackingField: 15
-    <Damage>k__BackingField: 60
     <Knockback>k__BackingField: 10
-    <StaminaCost>k__BackingField: 50
+    <DamageMultiplier>k__BackingField: 2
+    <StaminaMultiplier>k__BackingField: 2
   _hitBox: {fileID: 2463646147114728049}
 --- !u!1 &7276526258500151477
 GameObject:

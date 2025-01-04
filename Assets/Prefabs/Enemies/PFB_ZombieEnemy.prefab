@@ -3545,7 +3545,7 @@ MonoBehaviour:
   <MovementSpeed>k__BackingField: 4
   <PlayerChasingRange>k__BackingField: 10
   <AttackRange>k__BackingField: 1.25
-  <AttackDamage>k__BackingField: 25
+  <AttackDamage>k__BackingField: 30
   <AttackKnockback>k__BackingField: 20
   SoulsValue: 100
 --- !u!195 &1387725855154189577
@@ -3594,7 +3594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d38b248e33a9f449d1e93929576337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
+  _maxHealth: 300
 --- !u!143 &1899186007827444866
 CharacterController:
   m_ObjectHideFlags: 0

@@ -1884,8 +1884,8 @@ MonoBehaviour:
     type: 3}
   <PrimaryWeapons>k__BackingField:
   - {fileID: 7618760234453812756}
-  - {fileID: 1829226660683155448}
   - {fileID: 5661721800415534264}
+  - {fileID: 1829226660683155448}
   <SecondaryWeapons>k__BackingField:
   - {fileID: 2357974860909551960}
 --- !u!95 &6988202913747320121
@@ -1989,7 +1989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxStamina: 100
   _recoveryTime: 1.75
-  _recoveryRate: 30
+  _recoveryRate: 40
 --- !u!114 &8364300835363221849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2018,10 +2018,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _items:
   - Item: {fileID: 11400000, guid: cf858b1429ec8fc43bfeab6e4c286e88, type: 2}
-    Quantity: 0
   - Item: {fileID: 11400000, guid: 7690cd194e8c96a4cb3c97f873d32fdc, type: 2}
-    Quantity: 10
   _souls: {fileID: 11400000, guid: 975ce7851e28ea14ea9e9dedd890d51c, type: 2}
+  _healItemQuantity: 10
 --- !u!1 &4357487011032067051
 GameObject:
   m_ObjectHideFlags: 0
