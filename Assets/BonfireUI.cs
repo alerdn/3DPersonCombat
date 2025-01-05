@@ -32,7 +32,8 @@ public class BonfireUI : MonoBehaviour
     public void Show()
     {
         _player.InputReader.SetControllerMode(ControllerMode.UI);
-        _nextLevel = _player.CharacterStat.Level + 1;
+
+        _nextLevel = _player.CharacterStat.Level;
         _nextVigor = _player.CharacterStat.Vigor;
         _nextEndurance = _player.CharacterStat.Endurance;
         _nextStrength = _player.CharacterStat.Strength;
@@ -40,7 +41,7 @@ public class BonfireUI : MonoBehaviour
 
         _levelText.text = _player.CharacterStat.Level.ToString();
         _soulsHeldText.text = _player.Inventory.Souls.ToString();
-        _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
+        _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1).ToString();
 
         _vigorText.text = _player.CharacterStat.Vigor.ToString();
         _enduranceText.text = _player.CharacterStat.Endurance.ToString();
@@ -51,98 +52,32 @@ public class BonfireUI : MonoBehaviour
 
     public void OnClick_IncreaseVigor()
     {
-        if (_nextVigor == 50) return;
-
-        if (_player.CharacterStat.GetSoulsToNextLevel(_nextLevel) <= _souls)
-        {
-            _nextVigor++;
-            _nextLevel++;
-            _souls -= _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
-
-            _levelText.text = _nextLevel.ToString();
-            _vigorText.text = _nextVigor.ToString();
-            _soulsHeldText.text = _souls.ToString();
-            _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
-        }
+        IncreaseAttribute(ref _nextVigor, ref _vigorText);
     }
 
     public void OnClick_DecreaseVigor()
     {
-        if (_nextVigor > _player.CharacterStat.Vigor)
-        {
-            _nextVigor--;
-            _nextLevel--;
-            _souls += _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
-
-            _levelText.text = _nextLevel.ToString();
-            _vigorText.text = _nextVigor.ToString();
-            _soulsHeldText.text = _souls.ToString();
-            _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
-        }
+        DecreaseAttribute(ref _nextVigor, ref _vigorText, _player.CharacterStat.Vigor);
     }
 
     public void OnClick_IncreaseEndurance()
     {
-        if (_nextEndurance == 50) return;
-
-        if (_player.CharacterStat.GetSoulsToNextLevel(_nextLevel) <= _souls)
-        {
-            _nextEndurance++;
-            _nextLevel++;
-            _souls -= _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
-
-            _levelText.text = _nextLevel.ToString();
-            _enduranceText.text = _nextEndurance.ToString();
-            _soulsHeldText.text = _souls.ToString();
-            _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
-        }
+        IncreaseAttribute(ref _nextEndurance, ref _enduranceText);
     }
 
     public void OnClick_DecreaseEndurance()
     {
-        if (_nextEndurance > _player.CharacterStat.Endurance)
-        {
-            _nextEndurance--;
-            _nextLevel--;
-            _souls += _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
-
-            _levelText.text = _nextLevel.ToString();
-            _enduranceText.text = _nextEndurance.ToString();
-            _soulsHeldText.text = _souls.ToString();
-            _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
-        }
+        DecreaseAttribute(ref _nextEndurance, ref _enduranceText, _player.CharacterStat.Endurance);
     }
 
     public void OnClick_IncreaseStrength()
     {
-        if (_nextStrength == 50) return;
-
-        if (_player.CharacterStat.GetSoulsToNextLevel(_nextLevel) <= _souls)
-        {
-            _nextStrength++;
-            _nextLevel++;
-            _souls -= _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
-
-            _levelText.text = _nextLevel.ToString();
-            _strengthText.text = _nextStrength.ToString();
-            _soulsHeldText.text = _souls.ToString();
-            _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
-        }
+        IncreaseAttribute(ref _nextStrength, ref _strengthText);
     }
 
     public void OnClick_DecreaseStrength()
     {
-        if (_nextStrength > _player.CharacterStat.Strength)
-        {
-            _nextStrength--;
-            _nextLevel--;
-            _souls += _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
-
-            _levelText.text = _nextLevel.ToString();
-            _strengthText.text = _nextStrength.ToString();
-            _soulsHeldText.text = _souls.ToString();
-            _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel).ToString();
-        }
+        DecreaseAttribute(ref _nextStrength, ref _strengthText, _player.CharacterStat.Strength);
     }
 
     public void OnClick_Confirm()
@@ -159,6 +94,36 @@ public class BonfireUI : MonoBehaviour
     public void OnClick_Cancel()
     {
         Hide();
+    }
+
+    private void IncreaseAttribute(ref int attribute, ref TMP_Text attributeText)
+    {
+        if (attribute == 50) return;
+
+        if (_player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1) > _souls) return;
+
+        attribute++;
+        _nextLevel++;
+        _souls -= _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
+
+        _levelText.text = _nextLevel.ToString();
+        attributeText.text = attribute.ToString();
+        _soulsHeldText.text = _souls.ToString();
+        _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1).ToString();
+    }
+
+    private void DecreaseAttribute(ref int attribute, ref TMP_Text attributeText, int playerAttribute)
+    {
+        if (attribute <= playerAttribute) return;
+
+        attribute--;
+        _souls += _player.CharacterStat.GetSoulsToNextLevel(_nextLevel);
+        _nextLevel--;
+
+        _levelText.text = _nextLevel.ToString();
+        attributeText.text = attribute.ToString();
+        _soulsHeldText.text = _souls.ToString();
+        _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1).ToString();
     }
 
     private void Hide()

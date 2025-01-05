@@ -17,4 +17,10 @@ public class SOInt : ScriptableObject
     }
 
     [SerializeField] private int _value;
+    [SerializeField] private bool _resetOnEnable;
+
+    private void OnEnable()
+    {
+        if (_resetOnEnable) Value = 0;
+    }
 }

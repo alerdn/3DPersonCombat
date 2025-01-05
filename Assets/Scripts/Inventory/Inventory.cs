@@ -42,11 +42,6 @@ public class Inventory : MonoBehaviour
 
     private int _currentItemIndex;
 
-    private void Start()
-    {
-        _souls.Value = 0;
-    }
-
     public void UseItem()
     {
         if (CurrentItem == null || CurrentItem.Quantity == 0) return;
