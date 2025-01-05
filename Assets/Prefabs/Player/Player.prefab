@@ -1904,7 +1904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _strength: 10
   _vigor: 10
-  _fortitude: 10
+  _endurance: 10
 --- !u!114 &3066934078550099189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1917,7 +1917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d38b248e33a9f449d1e93929576337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialMaxHealth: 10
+  _initialMaxHealth: 5
+  _vigorMultiplier: 5
   _health: 0
   _currentMaxHealth: 0
 --- !u!114 &8318123543584311153

@@ -12,7 +12,6 @@ public class PlayerAttackingState : PlayerBaseState
         _attack = _weapon.Attacks[attackIndex];
 
         int damage = GetAttackDamage(attackIndex);
-        Debug.Log($"damage: {damage}");
 
         _weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
     }

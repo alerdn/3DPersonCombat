@@ -6,13 +6,24 @@ using UnityEngine;
 public class BonfireUI : MonoBehaviour
 {
     [SerializeField] private GameObject _frame;
+    [SerializeField] private Color _unchangedColor;
+    [SerializeField] private Color _increasedColor;
 
+
+    [Header("Action")]
     [SerializeField] private TMP_Text _levelText;
     [SerializeField] private TMP_Text _soulsHeldText;
     [SerializeField] private TMP_Text _soulsRequiredText;
     [SerializeField] private TMP_Text _vigorText;
     [SerializeField] private TMP_Text _enduranceText;
     [SerializeField] private TMP_Text _strengthText;
+
+    [Header("Info")]
+    [SerializeField] private TMP_Text _hpText;
+    [SerializeField] private TMP_Text _staminaText;
+    [SerializeField] private TMP_Text _weapon1DamageText;
+    [SerializeField] private TMP_Text _weapon2DamageText;
+    [SerializeField] private TMP_Text _weapon3DamageText;
 
     PlayerStateMachine _player;
     private int _souls;
@@ -21,6 +32,9 @@ public class BonfireUI : MonoBehaviour
     private int _nextVigor;
     private int _nextEndurance;
     private int _nextStrength;
+
+    private int _nextHp;
+    private float _nextStamina;
 
     private void Start()
     {
@@ -33,6 +47,7 @@ public class BonfireUI : MonoBehaviour
     {
         _player.InputReader.SetControllerMode(ControllerMode.UI);
 
+        // Action
         _nextLevel = _player.CharacterStat.Level;
         _nextVigor = _player.CharacterStat.Vigor;
         _nextEndurance = _player.CharacterStat.Endurance;
@@ -46,6 +61,9 @@ public class BonfireUI : MonoBehaviour
         _vigorText.text = _player.CharacterStat.Vigor.ToString();
         _enduranceText.text = _player.CharacterStat.Endurance.ToString();
         _strengthText.text = _player.CharacterStat.Strength.ToString();
+
+        // Info
+        UpdateBaseStats();
 
         _frame.SetActive(true);
     }
@@ -110,6 +128,8 @@ public class BonfireUI : MonoBehaviour
         attributeText.text = attribute.ToString();
         _soulsHeldText.text = _souls.ToString();
         _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1).ToString();
+
+        UpdateBaseStats();
     }
 
     private void DecreaseAttribute(ref int attribute, ref TMP_Text attributeText, int playerAttribute)
@@ -124,11 +144,77 @@ public class BonfireUI : MonoBehaviour
         attributeText.text = attribute.ToString();
         _soulsHeldText.text = _souls.ToString();
         _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1).ToString();
+
+        UpdateBaseStats();
+    }
+
+    private void UpdateBaseStats()
+    {
+        _nextHp = _player.Health.InitialMaxHealth * _nextVigor * _player.Health.VigorMultiplier;
+        _nextStamina = _player.Stamina.InitialMaxStamina * _nextEndurance;
+
+        _hpText.text = _nextHp.ToString();
+        _staminaText.text = _nextStamina.ToString();
+        _weapon1DamageText.text = _player.PrimaryWeapons[0].GetDamageBase(_nextStrength).ToString();
+        _weapon2DamageText.text = _player.PrimaryWeapons[1].GetDamageBase(_nextStrength).ToString();
+        _weapon3DamageText.text = _player.PrimaryWeapons[2].GetDamageBase(_nextStrength).ToString();
+
+        if (_nextHp > _player.Health.MaxHealth)
+        {
+            _hpText.color = _increasedColor;
+        }
+        else
+        {
+            _hpText.color = _unchangedColor;
+        }
+
+        if (_nextStamina > _player.Stamina.MaxStamina)
+        {
+            _staminaText.color = _increasedColor;
+        }
+        else
+        {
+            _staminaText.color = _unchangedColor;
+        }
+
+        if (_nextVigor > _player.CharacterStat.Vigor)
+        {
+            _vigorText.color = _increasedColor;
+        }
+        else
+        {
+            _vigorText.color = _unchangedColor;
+        }
+
+        if (_nextEndurance > _player.CharacterStat.Endurance)
+        {
+            _enduranceText.color = _increasedColor;
+        }
+        else
+        {
+            _enduranceText.color = _unchangedColor;
+        }
+
+        if (_nextStrength > _player.CharacterStat.Strength)
+        {
+            _strengthText.color = _increasedColor;
+            _weapon1DamageText.color = _increasedColor;
+            _weapon2DamageText.color = _increasedColor;
+            _weapon3DamageText.color = _increasedColor;
+        }
+        else
+        {
+            _strengthText.color = _unchangedColor;
+            _weapon1DamageText.color = _unchangedColor;
+            _weapon2DamageText.color = _unchangedColor;
+            _weapon3DamageText.color = _unchangedColor;
+        }
     }
 
     private void Hide()
     {
         _player.InputReader.SetControllerMode(ControllerMode.Gameplay);
+        _player.SwitchState(new PlayerFreeLookState(_player));
         _frame.SetActive(false);
     }
 }

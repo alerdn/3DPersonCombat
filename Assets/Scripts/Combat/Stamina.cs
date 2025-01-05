@@ -7,6 +7,7 @@ public class Stamina : MonoBehaviour
     public event Action<float, float> OnStaminaChanged;
 
     public float MaxStamina => _currentMaxStamina;
+    public float InitialMaxStamina => _initialMaxStamina;
     public float CurrentStamina
     {
         get => _stamina; private set
@@ -51,9 +52,9 @@ public class Stamina : MonoBehaviour
         }
     }
 
-    public void SetMaxStamina(float multiplier, bool restoreStamina = false)
+    public void SetMaxStamina(float endurance, bool restoreStamina = false)
     {
-        _currentMaxStamina = _initialMaxStamina * multiplier;
+        _currentMaxStamina = _initialMaxStamina * endurance;
         if (restoreStamina) CurrentStamina = _currentMaxStamina;
     }
 

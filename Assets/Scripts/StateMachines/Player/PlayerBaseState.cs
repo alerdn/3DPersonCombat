@@ -111,8 +111,10 @@ public abstract class PlayerBaseState : State
 
     protected int GetAttackDamage(int attackIndex)
     {
-        float damageMultiplier = stateMachine.CharacterStat.Strength * stateMachine.CurrentWeapon.Attacks[attackIndex].DamageMultiplier;
-        return Mathf.RoundToInt(stateMachine.CurrentWeapon.Damage * damageMultiplier);
+        int baseDamage = stateMachine.CurrentWeapon.GetDamageBase(stateMachine.CharacterStat.Strength);
+        float damageMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].DamageMultiplier;
+        
+        return Mathf.RoundToInt(baseDamage * damageMultiplier);
     }
 
     protected float GetAttackStaminaCost(int attackIndex)

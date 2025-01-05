@@ -7,6 +7,7 @@ public class Bonfire : MonoBehaviour
     public void Rest()
     {
         PlayerStateMachine player = PlayerStateMachine.Instance;
+        player.SwitchState(new PlayerRestingState(player));
 
         player.SetPosition(_spawnPoint.position);
         player.Health.RestoreHealth();

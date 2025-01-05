@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
 
     public bool IsDead => _health == 0;
     public int MaxHealth => _currentMaxHealth;
+    public int InitialMaxHealth => _initialMaxHealth;
+    public int VigorMultiplier => _vigorMultiplier;
     public int CurrentHealth
     {
         get => _health; private set
@@ -21,6 +23,7 @@ public class Health : MonoBehaviour
     }
 
     [SerializeField] private int _initialMaxHealth = 100;
+    [SerializeField] private int _vigorMultiplier = 5;
 
     [Header("Debug")]
     [SerializeField] private int _health;
@@ -36,9 +39,9 @@ public class Health : MonoBehaviour
         CurrentHealth = _currentMaxHealth;
     }
 
-    public void SetMaxHealth(int multiplier, bool restoreHealth = false)
+    public void SetMaxHealth(int vigor, bool restoreHealth = false)
     {
-        _currentMaxHealth = _initialMaxHealth * multiplier;
+        _currentMaxHealth = _initialMaxHealth * vigor * _vigorMultiplier;
         if (restoreHealth) CurrentHealth = _currentMaxHealth;
     }
 

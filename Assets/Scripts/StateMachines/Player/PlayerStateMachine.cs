@@ -55,6 +55,7 @@ public class PlayerStateMachine : StateMachine
 
     private int _currentPrimaryWeaponIndex = -1;
     private int _currentSecondaryWeaponIndex = -1;
+    private SoulCollectableItem _lastSoulsDropped;
 
     private void OnEnable()
     {
@@ -133,7 +134,14 @@ public class PlayerStateMachine : StateMachine
 
     public void DropSouls()
     {
-        Instantiate(SoulDropPrefab, transform.position, Quaternion.identity).Init(Inventory.Souls);
+        if (_lastSoulsDropped != null)
+        {
+            Destroy(_lastSoulsDropped.gameObject);
+        }
+
+        _lastSoulsDropped = Instantiate(SoulDropPrefab, transform.position, Quaternion.identity);
+        _lastSoulsDropped.Init(Inventory.Souls);
+
         Inventory.Souls = 0;
     }
 
@@ -148,6 +156,8 @@ public class PlayerStateMachine : StateMachine
         SetPosition(CheckpointManager.Instance.GetLastCheckpoint());
 
         SwitchState(new PlayerFreeLookState(this));
+
+        EnemyManager.Instance.RespawnAll();
     }
 
     public void SetPosition(Vector3 position)

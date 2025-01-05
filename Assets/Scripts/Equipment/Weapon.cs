@@ -24,4 +24,9 @@ public class Weapon : MonoBehaviour
     {
         _hitBox.SetAttack(damage, knockback, targets);
     }
+
+    public int GetDamageBase(int strength)
+    {
+        return Mathf.RoundToInt(Damage + strength * 10);
+    }
 }

@@ -3547,7 +3547,7 @@ MonoBehaviour:
   <AttackRange>k__BackingField: 1.25
   <AttackDamage>k__BackingField: 30
   <AttackKnockback>k__BackingField: 20
-  SoulsValue: 100
+  SoulsValue: 300
 --- !u!195 &1387725855154189577
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3595,6 +3595,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialMaxHealth: 300
+  _vigorMultiplier: 0
+  _health: 0
   _currentMaxHealth: 0
 --- !u!143 &1899186007827444866
 CharacterController:
