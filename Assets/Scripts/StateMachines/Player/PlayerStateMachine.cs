@@ -13,7 +13,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public Targeter Targeter { get; private set; }
-    [field: SerializeField] public CharacterStat Stat { get; private set; }
+    [field: SerializeField] public CharacterStat CharacterStat { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
@@ -83,8 +83,7 @@ public class PlayerStateMachine : StateMachine
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        InputReader.SetControllerMode(ControllerMode.Gameplay);
 
         SwitchState(new PlayerFreeLookState(this));
         SwitchPrimaryWeapon();
@@ -93,19 +92,8 @@ public class PlayerStateMachine : StateMachine
         Health.SetStaminaComponent(Stamina);
         Inventory.ReplanishHealItem();
 
-        Health.SetMaxHealth(Stat.Vigor, true);
-        Stamina.SetMaxStamina(Stat.Fortitude, true);
-
-        InputReader.IncreaseStrengthEvent += IncreaseStrength;
-        InputReader.IncreaseVigorEvent += IncreaseVigor;
-        InputReader.IncreaseFortitudeEvent += IncreaseFortitude;
-    }
-
-    private void OnDestroy()
-    {
-        InputReader.IncreaseStrengthEvent -= IncreaseStrength;
-        InputReader.IncreaseVigorEvent -= IncreaseVigor;
-        InputReader.IncreaseFortitudeEvent -= IncreaseFortitude;
+        Health.SetMaxHealth(CharacterStat.Vigor, true);
+        Stamina.SetMaxStamina(CharacterStat.Endurance, true);
     }
 
     public void SwitchPrimaryWeapon()
@@ -169,20 +157,20 @@ public class PlayerStateMachine : StateMachine
         CharacterController.enabled = true;
     }
 
-    public void IncreaseStrength()
+    public void SetStrength(int nextStrength)
     {
-        Stat.Strength++;
+        CharacterStat.Strength = nextStrength;
     }
 
-    public void IncreaseVigor()
+    public void SetVigor(int nextVigor)
     {
-        Stat.Vigor++;
-        Health.SetMaxHealth(Stat.Vigor);
+        CharacterStat.Vigor = nextVigor;
+        Health.SetMaxHealth(CharacterStat.Vigor, true);
     }
 
-    public void IncreaseFortitude()
+    public void SetEndurance(int nextEndurance)
     {
-        Stat.Fortitude++;
-        Stamina.SetMaxStamina(Stat.Fortitude);
+        CharacterStat.Endurance = nextEndurance;
+        Stamina.SetMaxStamina(CharacterStat.Endurance);
     }
 }

@@ -7,6 +7,7 @@ public class HealthUI : MonoBehaviour
     [SerializeField] private Image _healthBar;
 
     private RectTransform _rectTransform;
+    private float _originalWidth;
 
     private void Awake()
     {
@@ -15,16 +16,15 @@ public class HealthUI : MonoBehaviour
 
     private void Start()
     {
+        _originalWidth = _rectTransform.sizeDelta.x;
+
         if (_health == null)
         {
             PlayerStateMachine player = PlayerStateMachine.Instance;
             _health = player.Health;
 
-            player.Stat.OnVigorChanged += (vigor) =>
-            {
-                _rectTransform.sizeDelta = new Vector2(_rectTransform.sizeDelta.x + vigor, _rectTransform.sizeDelta.y);
-                UpdateUI(_health.CurrentHealth, _health.MaxHealth);
-            };
+            player.CharacterStat.OnVigorChanged += UpdateHealthBarSize;
+            UpdateHealthBarSize(player.CharacterStat.Vigor);
         }
 
         _health.OnHealthChanged += UpdateUI;
@@ -34,5 +34,11 @@ public class HealthUI : MonoBehaviour
     private void UpdateUI(int health, int maxHealth)
     {
         _healthBar.fillAmount = (float)health / (float)maxHealth;
+    }
+
+    private void UpdateHealthBarSize(int vigor)
+    {
+        _rectTransform.sizeDelta = new Vector2(_originalWidth + vigor * 10, _rectTransform.sizeDelta.y);
+        UpdateUI(_health.CurrentHealth, _health.MaxHealth);
     }
 }

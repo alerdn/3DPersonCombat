@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
 
+public enum ControllerMode
+{
+    Gameplay,
+    UI
+}
+
 [CreateAssetMenu(fileName = "InputReader")]
 public class InputReader : ScriptableObject, IPlayerActions
 {
@@ -26,6 +32,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public Vector2 MovementValue { get; private set; }
 
     private Controls _constrols;
+    private ControllerMode _controllerMode;
 
     private void OnEnable()
     {
@@ -37,6 +44,24 @@ public class InputReader : ScriptableObject, IPlayerActions
     private void OnDisable()
     {
         _constrols.Player.Disable();
+    }
+
+    public void SetControllerMode(ControllerMode mode)
+    {
+        _controllerMode = mode;
+        switch (_controllerMode)
+        {
+            case ControllerMode.Gameplay:
+                _constrols.Player.Enable();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+            case ControllerMode.UI:
+                _constrols.Player.Disable();
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                break;
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -58,7 +83,10 @@ public class InputReader : ScriptableObject, IPlayerActions
         MovementValue = context.ReadValue<Vector2>();
     }
 
-    public void OnLook(InputAction.CallbackContext context) { }
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        if (_controllerMode == ControllerMode.UI) return;
+    }
 
     public void OnToggleTarget(InputAction.CallbackContext context)
     {
