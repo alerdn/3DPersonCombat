@@ -14,7 +14,7 @@ public class EnemyAttackingState : EnemyBaseState
         Weapon weapon = stateMachine.Weapon;
         _attack = weapon.Attacks[attackIndex];
 
-        int damage = weapon.GetAttackDamage(attackIndex, 0);
+        int damage = weapon.GetAttackDamage(attackIndex, stateMachine.CharacterStat.Strength);
         weapon.SetAttack(damage, _attack.Knockback, UnitType.Player);
 
         _transitionDelay = Random.Range(.2f, 1f);

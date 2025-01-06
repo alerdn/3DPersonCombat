@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
 
     public int GetDamageBase(int strength)
     {
-        return Mathf.RoundToInt(_rawDamage + strength * 10);
+        return Mathf.RoundToInt(_rawDamage + (strength - 10) * 10);
     }
 
     public int GetAttackDamage(int attackIndex, int strength)

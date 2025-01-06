@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -71,7 +72,8 @@ public class BonfireUI : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject _frame;
+    [SerializeField] private GameObject _restFrame;
+    [SerializeField] private GameObject _levelUpframe;
     [SerializeField] private Color _unchangedColor;
     [SerializeField] private Color _increasedColor;
 
@@ -104,13 +106,36 @@ public class BonfireUI : MonoBehaviour
     {
         _player = PlayerStateMachine.Instance;
 
-        _frame.SetActive(false);
+        _restFrame.SetActive(false);
+        _levelUpframe.SetActive(false);
     }
 
-    public void Show()
+    #region Rest Methods
+
+    public void ShowRestFrame()
     {
         _player.InputReader.SetControllerMode(ControllerMode.UI);
+        _restFrame.SetActive(true);
+    }
 
+    public void OnClick_Leave()
+    {
+        HideRestFrame();
+    }
+
+    private void HideRestFrame()
+    {
+        _player.InputReader.SetControllerMode(ControllerMode.Gameplay);
+        _player.SwitchState(new PlayerFreeLookState(_player));
+        _restFrame.SetActive(false);
+    }
+
+    #endregion
+
+    #region Level Up Methods
+
+    public void OnClick_ShowLevelUpFrame()
+    {
         // Action
         _nextLevel = _player.CharacterStat.Level;
         NextVigor = _player.CharacterStat.Vigor;
@@ -129,7 +154,8 @@ public class BonfireUI : MonoBehaviour
         // Info
         UpdateBaseStats();
 
-        _frame.SetActive(true);
+        _restFrame.SetActive(false);
+        _levelUpframe.SetActive(true);
     }
 
     public void OnClick_IncreaseVigor()
@@ -170,12 +196,12 @@ public class BonfireUI : MonoBehaviour
 
         _player.Inventory.Souls = _souls;
 
-        Hide();
+        HideLevelUpFrame();
     }
 
     public void OnClick_Cancel()
     {
-        Hide();
+        HideLevelUpFrame();
     }
 
     private void IncreaseAttribute(ref int attribute, TMP_Text attributeText)
@@ -228,10 +254,11 @@ public class BonfireUI : MonoBehaviour
         _weapon3DamageText.text = _player.PrimaryWeapons[2].GetDamageBase(_nextStrength).ToString();
     }
 
-    private void Hide()
+    private void HideLevelUpFrame()
     {
-        _player.InputReader.SetControllerMode(ControllerMode.Gameplay);
-        _player.SwitchState(new PlayerFreeLookState(_player));
-        _frame.SetActive(false);
+        _levelUpframe.SetActive(false);
+        _restFrame.SetActive(true);
     }
+
+    #endregion
 }
