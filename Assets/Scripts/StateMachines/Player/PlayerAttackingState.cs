@@ -3,17 +3,16 @@ using UnityEngine;
 public class PlayerAttackingState : PlayerBaseState
 {
     private Attack _attack;
-    private Weapon _weapon;
     private bool _alreadyAppliedForce;
 
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
-        _weapon = stateMachine.CurrentWeapon;
-        _attack = _weapon.Attacks[attackIndex];
+        Weapon weapon = stateMachine.CurrentWeapon;
+        _attack = weapon.Attacks[attackIndex];
 
-        int damage = GetAttackDamage(attackIndex);
+        int damage = weapon.GetAttackDamage(attackIndex, stateMachine.CharacterStat.Strength);
 
-        _weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
+        weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
     }
 
     public override void Enter()

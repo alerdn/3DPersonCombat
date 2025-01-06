@@ -2,25 +2,28 @@ using UnityEngine;
 
 public class EnemyAttackingState : EnemyBaseState
 {
-    private readonly int AttackHash = Animator.StringToHash("Attack");
     private readonly int LocomotionHash = Animator.StringToHash("Locomotion");
     private readonly int SpeedHash = Animator.StringToHash("Speed");
+
+    private Attack _attack;
     private float _transitionDelay;
     private bool _isTransitioning;
 
-    public EnemyAttackingState(EnemyStateMachine stateMachine) : base(stateMachine)
+    public EnemyAttackingState(EnemyStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
+        Weapon weapon = stateMachine.Weapon;
+        _attack = weapon.Attacks[attackIndex];
+
+        int damage = weapon.GetAttackDamage(attackIndex, 0);
+        weapon.SetAttack(damage, _attack.Knockback, UnitType.Player);
+
+        _transitionDelay = Random.Range(.2f, 1f);
     }
 
     public override void Enter()
     {
         FacePlayer();
-
-        stateMachine.Weapon.SetAttack(stateMachine.AttackDamage, stateMachine.AttackKnockback, UnitType.Player);
-        stateMachine.Animator.CrossFadeInFixedTime(AttackHash, .1f);
-
-        _transitionDelay = Random.Range(.2f, 1f);
-
+        stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, .1f);
         AudioManager.Instance.PlayCue("Swing");
     }
 

@@ -4,10 +4,10 @@ using UnityEngine.UI;
 public class HealthUI : MonoBehaviour
 {
     [SerializeField] private Health _health;
+    [SerializeField] private UnitType _unitType;
     [SerializeField] private Image _healthBar;
 
     private RectTransform _rectTransform;
-    private float _originalWidth;
 
     private void Awake()
     {
@@ -16,19 +16,16 @@ public class HealthUI : MonoBehaviour
 
     private void Start()
     {
-        _originalWidth = _rectTransform.sizeDelta.x;
-
-        if (_health == null)
+        if (_unitType == UnitType.Player)
         {
             PlayerStateMachine player = PlayerStateMachine.Instance;
             _health = player.Health;
 
-            player.CharacterStat.OnVigorChanged += UpdateHealthBarSize;
-            UpdateHealthBarSize(player.CharacterStat.Vigor);
+            player.Health.OnMaxHealthChanged += UpdateHealthBarSize;
+            UpdateHealthBarSize(player.Health.CurrentMaxHealth);
         }
 
         _health.OnHealthChanged += UpdateUI;
-
     }
 
     private void UpdateUI(int health, int maxHealth)
@@ -36,9 +33,9 @@ public class HealthUI : MonoBehaviour
         _healthBar.fillAmount = (float)health / (float)maxHealth;
     }
 
-    private void UpdateHealthBarSize(int vigor)
+    private void UpdateHealthBarSize(int maxHealth)
     {
-        _rectTransform.sizeDelta = new Vector2(_originalWidth + vigor * 10, _rectTransform.sizeDelta.y);
-        UpdateUI(_health.CurrentHealth, _health.MaxHealth);
+        _rectTransform.sizeDelta = new Vector2(maxHealth, _rectTransform.sizeDelta.y);
+        UpdateUI(_health.CurrentHealth, _health.CurrentMaxHealth);
     }
 }

@@ -117,9 +117,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Machadinha
-  <EquipOffset>k__BackingField: {x: 0, y: 0, z: 0}
-  <EquipRotation>k__BackingField: {x: 0, y: 0, z: 0}
-  <Attacks>k__BackingField: []
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 254236421bb02bd4b820506e4889a751,
+    type: 3}
+  <StaminaCost>k__BackingField: 20
+  <Attacks>k__BackingField:
+  - <AnimationName>k__BackingField: Axe_Attack1
+    <TransitionDuration>k__BackingField: 0.1
+    <ComboStateIndex>k__BackingField: -1
+    <ComboAttackTime>k__BackingField: 0
+    <ForceTime>k__BackingField: 0.25
+    <Force>k__BackingField: 8
+    <Knockback>k__BackingField: 20
+    <DamageMultiplier>k__BackingField: 1
+    <StaminaMultiplier>k__BackingField: 1
+  _rawDamage: 100
   _hitBox: {fileID: 115963298027722512}
 --- !u!1001 &3733752160874553221
 PrefabInstance:

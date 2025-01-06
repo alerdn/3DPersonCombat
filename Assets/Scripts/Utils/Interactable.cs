@@ -7,11 +7,14 @@ public class Interactable : MonoBehaviour
     [SerializeField] private UnityEvent _inRangeEvent;
     [SerializeField] private UnityEvent _outOfRangeEvent;
 
+    [SerializeField] private GameObject _canvas;
+
     private bool _inRange;
 
     private void Start()
     {
         _inRange = false;
+        _canvas.SetActive(false);
 
         PlayerStateMachine.Instance.InputReader.InteractEvent += OnInteract;
     }
@@ -31,7 +34,7 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !_inRange)
         {
             _inRange = true;
             _inRangeEvent?.Invoke();

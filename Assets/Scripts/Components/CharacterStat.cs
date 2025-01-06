@@ -1,12 +1,7 @@
-using System;
 using UnityEngine;
 
 public class CharacterStat : MonoBehaviour
 {
-    public event Action<int> OnStrengthChanged;
-    public event Action<int> OnVigorChanged;
-    public event Action<int> OnEnduranceChanged;
-
     public int Level => _strength + _vigor + _endurance - 30;
 
     public int Strength
@@ -14,7 +9,6 @@ public class CharacterStat : MonoBehaviour
         get => _strength; set
         {
             _strength = value;
-            OnStrengthChanged?.Invoke(value);
         }
     }
 
@@ -23,7 +17,6 @@ public class CharacterStat : MonoBehaviour
         get => _vigor; set
         {
             _vigor = value;
-            OnVigorChanged?.Invoke(value);
         }
     }
 
@@ -32,7 +25,6 @@ public class CharacterStat : MonoBehaviour
         get => _endurance; set
         {
             _endurance = value;
-            OnEnduranceChanged?.Invoke(value);
         }
     }
 

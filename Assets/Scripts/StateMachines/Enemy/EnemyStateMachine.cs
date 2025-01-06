@@ -17,8 +17,6 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float PlayerChasingRange { get; private set; } = 10f;
     [field: SerializeField] public float AttackRange { get; private set; } = 2f;
-    [field: SerializeField] public int AttackDamage { get; private set; } = 10;
-    [field: SerializeField] public float AttackKnockback { get; private set; }
     [field: SerializeField] public int SoulsValue;
 
     public PlayerStateMachine Player { get; private set; }

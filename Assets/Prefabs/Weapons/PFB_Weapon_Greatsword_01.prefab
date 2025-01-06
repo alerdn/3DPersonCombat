@@ -119,7 +119,6 @@ MonoBehaviour:
   <Name>k__BackingField: Espada Grande
   <Sprite>k__BackingField: {fileID: 21300000, guid: c0de80f93c5c37c4bb7fab61710a7fb6,
     type: 3}
-  <Damage>k__BackingField: 150
   <StaminaCost>k__BackingField: 40
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Greatsword_Attack1
@@ -158,6 +157,7 @@ MonoBehaviour:
     <Knockback>k__BackingField: 10
     <DamageMultiplier>k__BackingField: 2
     <StaminaMultiplier>k__BackingField: 2
+  _rawDamage: 150
   _hitBox: {fileID: 2463646147114728049}
 --- !u!1 &7276526258500151477
 GameObject:

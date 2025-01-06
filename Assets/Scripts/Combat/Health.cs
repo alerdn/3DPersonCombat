@@ -6,9 +6,18 @@ public class Health : MonoBehaviour
     public event Action OnTakeDamage;
     public event Action OnDie;
     public event Action<int, int> OnHealthChanged;
+    public event Action<int> OnMaxHealthChanged;
 
     public bool IsDead => _health == 0;
-    public int MaxHealth => _currentMaxHealth;
+    public int CurrentMaxHealth
+    {
+        get => _currentMaxHealth;
+        private set
+        {
+            _currentMaxHealth = value;
+            OnMaxHealthChanged?.Invoke(_currentMaxHealth);
+        }
+    }
     public int InitialMaxHealth => _initialMaxHealth;
     public int VigorMultiplier => _vigorMultiplier;
     public int CurrentHealth
@@ -18,7 +27,7 @@ public class Health : MonoBehaviour
             if (value == _health) return;
 
             _health = value;
-            OnHealthChanged?.Invoke(_health, _currentMaxHealth);
+            OnHealthChanged?.Invoke(_health, CurrentMaxHealth);
         }
     }
 
@@ -35,14 +44,19 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        _currentMaxHealth = _initialMaxHealth;
-        CurrentHealth = _currentMaxHealth;
+        CurrentMaxHealth = InitialMaxHealth;
+        CurrentHealth = CurrentMaxHealth;
     }
 
     public void SetMaxHealth(int vigor, bool restoreHealth = false)
     {
-        _currentMaxHealth = _initialMaxHealth * vigor * _vigorMultiplier;
-        if (restoreHealth) CurrentHealth = _currentMaxHealth;
+        CurrentMaxHealth = GetMaxHealthByVigor(vigor);
+        if (restoreHealth) CurrentHealth = CurrentMaxHealth;
+    }
+
+    public int GetMaxHealthByVigor(int vigor)
+    {
+        return InitialMaxHealth + vigor * VigorMultiplier;
     }
 
     public void SetBlocking(bool isBlocking)
@@ -82,7 +96,7 @@ public class Health : MonoBehaviour
 
     public void RestoreHealth(int heal = 0)
     {
-        if (heal == 0) heal = _currentMaxHealth;
-        CurrentHealth = Mathf.Min(CurrentHealth + heal, _currentMaxHealth);
+        if (heal == 0) heal = CurrentMaxHealth;
+        CurrentHealth = Mathf.Min(CurrentHealth + heal, CurrentMaxHealth);
     }
 }

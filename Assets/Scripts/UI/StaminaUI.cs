@@ -7,7 +7,6 @@ public class StaminaUI : MonoBehaviour
 
     private Stamina _stamina;
     private RectTransform _rectTransform;
-    private float _originalWidth;
 
     private void Awake()
     {
@@ -16,15 +15,13 @@ public class StaminaUI : MonoBehaviour
 
     private void Start()
     {
-        _originalWidth = _rectTransform.sizeDelta.x;
-        
         PlayerStateMachine player = PlayerStateMachine.Instance;
         _stamina = player.Stamina;
 
         _stamina.OnStaminaChanged += UpdateUI;
 
-        player.CharacterStat.OnEnduranceChanged += UpdateStaminaBarSize;
-        UpdateStaminaBarSize(player.CharacterStat.Endurance);
+        player.Stamina.OnMaxStaminaChanged += UpdateStaminaBarSize;
+        UpdateStaminaBarSize(player.Stamina.CurrentMaxStamina);
 
     }
 
@@ -33,9 +30,9 @@ public class StaminaUI : MonoBehaviour
         _staminaBar.fillAmount = stamina / maxStamina;
     }
 
-    private void UpdateStaminaBarSize(int endurance)
+    private void UpdateStaminaBarSize(float maxStamina)
     {
-        _rectTransform.sizeDelta = new Vector2(_originalWidth + endurance * 10, _rectTransform.sizeDelta.y);
-        UpdateUI(_stamina.CurrentStamina, _stamina.MaxStamina);
+        _rectTransform.sizeDelta = new Vector2(maxStamina, _rectTransform.sizeDelta.y);
+        UpdateUI(_stamina.CurrentStamina, _stamina.CurrentMaxStamina);
     }
 }

@@ -109,14 +109,6 @@ public abstract class PlayerBaseState : State
         stateMachine.SwitchState(new PlayerHangingState(stateMachine, ledgeForward, closestPoint));
     }
 
-    protected int GetAttackDamage(int attackIndex)
-    {
-        int baseDamage = stateMachine.CurrentWeapon.GetDamageBase(stateMachine.CharacterStat.Strength);
-        float damageMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].DamageMultiplier;
-        
-        return Mathf.RoundToInt(baseDamage * damageMultiplier);
-    }
-
     protected float GetAttackStaminaCost(int attackIndex)
     {
         float staminaMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaMultiplier;

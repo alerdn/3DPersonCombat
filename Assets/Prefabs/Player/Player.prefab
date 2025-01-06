@@ -1917,8 +1917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d38b248e33a9f449d1e93929576337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialMaxHealth: 5
-  _vigorMultiplier: 5
+  _initialMaxHealth: 200
+  _vigorMultiplier: 10
   _health: 0
   _currentMaxHealth: 0
 --- !u!114 &8318123543584311153
@@ -1933,7 +1933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0097cbe8cfd0746aee57e4ffdb1c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialMaxStamina: 10
+  _initialMaxStamina: 100
+  _enduranceMultiplier: 5
   _recoveryTime: 1.75
   _recoveryRate: 40
   _stamina: 0

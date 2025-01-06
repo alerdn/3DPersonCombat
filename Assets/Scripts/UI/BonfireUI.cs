@@ -5,10 +5,75 @@ using UnityEngine;
 
 public class BonfireUI : MonoBehaviour
 {
+    public int NextHp
+    {
+        get => _nextHp; private set
+        {
+            _nextHp = value;
+
+            _hpText.color = _nextHp > _player.Health.CurrentMaxHealth ?
+             _increasedColor :
+             _unchangedColor;
+        }
+    }
+    public float NextStamina
+    {
+        get => _nextStamina; private set
+        {
+            _nextStamina = value;
+
+            _staminaText.color = _nextStamina > _player.Stamina.CurrentMaxStamina ?
+             _increasedColor :
+             _unchangedColor;
+        }
+    }
+    public int NextVigor
+    {
+        get => _nextVigor; private set
+        {
+            _nextVigor = value;
+
+            _vigorText.color = _nextVigor > _player.CharacterStat.Vigor ?
+             _increasedColor :
+             _unchangedColor;
+        }
+    }
+    public int NextEndurance
+    {
+        get => _nextEndurance; private set
+        {
+            _nextEndurance = value;
+
+            _enduranceText.color = _nextEndurance > _player.CharacterStat.Endurance ?
+             _increasedColor :
+             _unchangedColor;
+        }
+    }
+    public int NextStrength
+    {
+        get => _nextStrength; private set
+        {
+            _nextStrength = value;
+
+            if (_nextStrength > _player.CharacterStat.Strength)
+            {
+                _weapon1DamageText.color = _increasedColor;
+                _weapon2DamageText.color = _increasedColor;
+                _weapon3DamageText.color = _increasedColor;
+            }
+            else
+            {
+                _strengthText.color = _unchangedColor;
+                _weapon1DamageText.color = _unchangedColor;
+                _weapon2DamageText.color = _unchangedColor;
+                _weapon3DamageText.color = _unchangedColor;
+            }
+        }
+    }
+
     [SerializeField] private GameObject _frame;
     [SerializeField] private Color _unchangedColor;
     [SerializeField] private Color _increasedColor;
-
 
     [Header("Action")]
     [SerializeField] private TMP_Text _levelText;
@@ -29,12 +94,11 @@ public class BonfireUI : MonoBehaviour
     private int _souls;
 
     private int _nextLevel;
+    private int _nextHp;
+    private float _nextStamina;
     private int _nextVigor;
     private int _nextEndurance;
     private int _nextStrength;
-
-    private int _nextHp;
-    private float _nextStamina;
 
     private void Start()
     {
@@ -49,18 +113,18 @@ public class BonfireUI : MonoBehaviour
 
         // Action
         _nextLevel = _player.CharacterStat.Level;
-        _nextVigor = _player.CharacterStat.Vigor;
-        _nextEndurance = _player.CharacterStat.Endurance;
-        _nextStrength = _player.CharacterStat.Strength;
+        NextVigor = _player.CharacterStat.Vigor;
+        NextEndurance = _player.CharacterStat.Endurance;
+        NextStrength = _player.CharacterStat.Strength;
         _souls = _player.Inventory.Souls;
 
-        _levelText.text = _player.CharacterStat.Level.ToString();
-        _soulsHeldText.text = _player.Inventory.Souls.ToString();
+        _levelText.text = _nextLevel.ToString();
+        _soulsHeldText.text = _souls.ToString();
         _soulsRequiredText.text = _player.CharacterStat.GetSoulsToNextLevel(_nextLevel + 1).ToString();
 
-        _vigorText.text = _player.CharacterStat.Vigor.ToString();
-        _enduranceText.text = _player.CharacterStat.Endurance.ToString();
-        _strengthText.text = _player.CharacterStat.Strength.ToString();
+        _vigorText.text = NextVigor.ToString();
+        _enduranceText.text = NextEndurance.ToString();
+        _strengthText.text = NextStrength.ToString();
 
         // Info
         UpdateBaseStats();
@@ -70,39 +134,39 @@ public class BonfireUI : MonoBehaviour
 
     public void OnClick_IncreaseVigor()
     {
-        IncreaseAttribute(ref _nextVigor, ref _vigorText);
+        IncreaseAttribute(ref _nextVigor, _vigorText);
     }
 
     public void OnClick_DecreaseVigor()
     {
-        DecreaseAttribute(ref _nextVigor, ref _vigorText, _player.CharacterStat.Vigor);
+        DecreaseAttribute(ref _nextVigor, _vigorText, _player.CharacterStat.Vigor);
     }
 
     public void OnClick_IncreaseEndurance()
     {
-        IncreaseAttribute(ref _nextEndurance, ref _enduranceText);
+        IncreaseAttribute(ref _nextEndurance, _enduranceText);
     }
 
     public void OnClick_DecreaseEndurance()
     {
-        DecreaseAttribute(ref _nextEndurance, ref _enduranceText, _player.CharacterStat.Endurance);
+        DecreaseAttribute(ref _nextEndurance, _enduranceText, _player.CharacterStat.Endurance);
     }
 
     public void OnClick_IncreaseStrength()
     {
-        IncreaseAttribute(ref _nextStrength, ref _strengthText);
+        IncreaseAttribute(ref _nextStrength, _strengthText);
     }
 
     public void OnClick_DecreaseStrength()
     {
-        DecreaseAttribute(ref _nextStrength, ref _strengthText, _player.CharacterStat.Strength);
+        DecreaseAttribute(ref _nextStrength, _strengthText, _player.CharacterStat.Strength);
     }
 
     public void OnClick_Confirm()
     {
-        _player.SetVigor(_nextVigor);
-        _player.SetEndurance(_nextEndurance);
-        _player.SetStrength(_nextStrength);
+        _player.SetVigor(NextVigor);
+        _player.SetEndurance(NextEndurance);
+        _player.SetStrength(NextStrength);
 
         _player.Inventory.Souls = _souls;
 
@@ -114,7 +178,7 @@ public class BonfireUI : MonoBehaviour
         Hide();
     }
 
-    private void IncreaseAttribute(ref int attribute, ref TMP_Text attributeText)
+    private void IncreaseAttribute(ref int attribute, TMP_Text attributeText)
     {
         if (attribute == 50) return;
 
@@ -132,7 +196,7 @@ public class BonfireUI : MonoBehaviour
         UpdateBaseStats();
     }
 
-    private void DecreaseAttribute(ref int attribute, ref TMP_Text attributeText, int playerAttribute)
+    private void DecreaseAttribute(ref int attribute, TMP_Text attributeText, int playerAttribute)
     {
         if (attribute <= playerAttribute) return;
 
@@ -150,65 +214,18 @@ public class BonfireUI : MonoBehaviour
 
     private void UpdateBaseStats()
     {
-        _nextHp = _player.Health.InitialMaxHealth * _nextVigor * _player.Health.VigorMultiplier;
-        _nextStamina = _player.Stamina.InitialMaxStamina * _nextEndurance;
+        NextVigor = _nextVigor;
+        NextEndurance = _nextEndurance;
+        NextStrength = _nextStrength;
 
-        _hpText.text = _nextHp.ToString();
+        NextHp = _player.Health.GetMaxHealthByVigor(NextVigor);
+        NextStamina = _player.Stamina.GetMaxStaminaByEndurance(NextEndurance);
+
+        _hpText.text = NextHp.ToString();
         _staminaText.text = _nextStamina.ToString();
         _weapon1DamageText.text = _player.PrimaryWeapons[0].GetDamageBase(_nextStrength).ToString();
         _weapon2DamageText.text = _player.PrimaryWeapons[1].GetDamageBase(_nextStrength).ToString();
         _weapon3DamageText.text = _player.PrimaryWeapons[2].GetDamageBase(_nextStrength).ToString();
-
-        if (_nextHp > _player.Health.MaxHealth)
-        {
-            _hpText.color = _increasedColor;
-        }
-        else
-        {
-            _hpText.color = _unchangedColor;
-        }
-
-        if (_nextStamina > _player.Stamina.MaxStamina)
-        {
-            _staminaText.color = _increasedColor;
-        }
-        else
-        {
-            _staminaText.color = _unchangedColor;
-        }
-
-        if (_nextVigor > _player.CharacterStat.Vigor)
-        {
-            _vigorText.color = _increasedColor;
-        }
-        else
-        {
-            _vigorText.color = _unchangedColor;
-        }
-
-        if (_nextEndurance > _player.CharacterStat.Endurance)
-        {
-            _enduranceText.color = _increasedColor;
-        }
-        else
-        {
-            _enduranceText.color = _unchangedColor;
-        }
-
-        if (_nextStrength > _player.CharacterStat.Strength)
-        {
-            _strengthText.color = _increasedColor;
-            _weapon1DamageText.color = _increasedColor;
-            _weapon2DamageText.color = _increasedColor;
-            _weapon3DamageText.color = _increasedColor;
-        }
-        else
-        {
-            _strengthText.color = _unchangedColor;
-            _weapon1DamageText.color = _unchangedColor;
-            _weapon2DamageText.color = _unchangedColor;
-            _weapon3DamageText.color = _unchangedColor;
-        }
     }
 
     private void Hide()
