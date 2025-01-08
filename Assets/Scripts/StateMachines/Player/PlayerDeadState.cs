@@ -14,6 +14,7 @@ public class PlayerDeadState : PlayerBaseState
 
         stateMachine.Ragdoll.ToggleRagdoll(true);
         stateMachine.CurrentWeapon.gameObject.SetActive(false);
+        stateMachine.Targeter.ClearTargets();
 
         stateMachine.DropSouls();
     }

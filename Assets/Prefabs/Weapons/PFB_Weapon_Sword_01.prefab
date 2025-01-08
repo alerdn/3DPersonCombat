@@ -119,6 +119,7 @@ MonoBehaviour:
   <Name>k__BackingField: Espada
   <Sprite>k__BackingField: {fileID: 21300000, guid: a13f1dd81e8c6e449bab1e66abc543c1,
     type: 3}
+  <MaxLevel>k__BackingField: 20
   <StaminaCost>k__BackingField: 30
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Sword_Attack1
@@ -146,8 +147,8 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.05
     <Force>k__BackingField: 15
     <Knockback>k__BackingField: 10
-    <DamageMultiplier>k__BackingField: 1.5
-    <StaminaMultiplier>k__BackingField: 1.5
+    <DamageMultiplier>k__BackingField: 1.25
+    <StaminaMultiplier>k__BackingField: 1.25
   - <AnimationName>k__BackingField: JumpingAttack
     <TransitionDuration>k__BackingField: 0.2
     <ComboStateIndex>k__BackingField: -1
@@ -155,9 +156,10 @@ MonoBehaviour:
     <ForceTime>k__BackingField: 0.05
     <Force>k__BackingField: 15
     <Knockback>k__BackingField: 10
-    <DamageMultiplier>k__BackingField: 2
-    <StaminaMultiplier>k__BackingField: 2
-  _rawDamage: 120
+    <DamageMultiplier>k__BackingField: 1.5
+    <StaminaMultiplier>k__BackingField: 1.5
+  _rawDamage: 110
+  _level: 0
   _hitBox: {fileID: 1296402759913339476}
 --- !u!1001 &881350420704847673
 PrefabInstance:

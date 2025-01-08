@@ -23,7 +23,7 @@ public class PlayerHealingState : PlayerBaseState
             return;
         }
 
-        stateMachine.Health.RestoreHealth(50);
+        stateMachine.Health.RestoreHealth(300);
         ReturnToLocomotion();
     }
 

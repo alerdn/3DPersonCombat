@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BonfireUI : MonoBehaviour
+public class BonfireLevelUpUI : MonoBehaviour
 {
     public int NextHp
     {
@@ -58,6 +55,7 @@ public class BonfireUI : MonoBehaviour
 
             if (_nextStrength > _player.CharacterStat.Strength)
             {
+                _strengthText.color = _increasedColor;
                 _weapon1DamageText.color = _increasedColor;
                 _weapon2DamageText.color = _increasedColor;
                 _weapon3DamageText.color = _increasedColor;
@@ -72,8 +70,7 @@ public class BonfireUI : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject _restFrame;
-    [SerializeField] private GameObject _levelUpframe;
+    [SerializeField] private GameObject _frame;
     [SerializeField] private Color _unchangedColor;
     [SerializeField] private Color _increasedColor;
 
@@ -102,39 +99,15 @@ public class BonfireUI : MonoBehaviour
     private int _nextEndurance;
     private int _nextStrength;
 
-    private void Start()
-    {
-        _player = PlayerStateMachine.Instance;
+    private BonfireUI _bonfireUI;
 
-        _restFrame.SetActive(false);
-        _levelUpframe.SetActive(false);
+    public void Init(PlayerStateMachine player, BonfireUI bonfireUI)
+    {
+        _player = player;
+        _bonfireUI = bonfireUI;
     }
 
-    #region Rest Methods
-
-    public void ShowRestFrame()
-    {
-        _player.InputReader.SetControllerMode(ControllerMode.UI);
-        _restFrame.SetActive(true);
-    }
-
-    public void OnClick_Leave()
-    {
-        HideRestFrame();
-    }
-
-    private void HideRestFrame()
-    {
-        _player.InputReader.SetControllerMode(ControllerMode.Gameplay);
-        _player.SwitchState(new PlayerFreeLookState(_player));
-        _restFrame.SetActive(false);
-    }
-
-    #endregion
-
-    #region Level Up Methods
-
-    public void OnClick_ShowLevelUpFrame()
+    public void ShowLevelUpFrame()
     {
         // Action
         _nextLevel = _player.CharacterStat.Level;
@@ -154,8 +127,7 @@ public class BonfireUI : MonoBehaviour
         // Info
         UpdateBaseStats();
 
-        _restFrame.SetActive(false);
-        _levelUpframe.SetActive(true);
+        _frame.SetActive(true);
     }
 
     public void OnClick_IncreaseVigor()
@@ -256,9 +228,12 @@ public class BonfireUI : MonoBehaviour
 
     private void HideLevelUpFrame()
     {
-        _levelUpframe.SetActive(false);
-        _restFrame.SetActive(true);
+        _bonfireUI.ShowMainFrame();
+        HideFrame();
     }
 
-    #endregion
+    public void HideFrame()
+    {
+        _frame.SetActive(false);
+    }
 }

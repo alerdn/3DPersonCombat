@@ -9,7 +9,8 @@ public class Targeter : MonoBehaviour
 
     [SerializeField] private CinemachineTargetGroup _cineTargetGroup;
 
-    private List<Target> _targets = new List<Target>();
+    [Header("Debug")]
+    [SerializeField] private List<Target> _targets = new List<Target>();
     private Camera _mainCamera;
 
     private void Start()
@@ -59,11 +60,25 @@ public class Targeter : MonoBehaviour
         CurrentTarget = null;
     }
 
+    public void ClearTargets()
+    {
+        foreach (Target target in _targets)
+        {
+            _cineTargetGroup.RemoveMember(target.transform);
+        }
+
+        _targets.Clear();
+        CurrentTarget = null;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Target target))
         {
-            AddTarget(target);
+            if (target.isActiveAndEnabled)
+            {
+                AddTarget(target);
+            }
         }
     }
 
@@ -78,7 +93,7 @@ public class Targeter : MonoBehaviour
     private void AddTarget(Target target)
     {
         _targets.Add(target);
-        target.OnDestroyed += RemoveTarget;
+        target.OnDisabled += RemoveTarget;
     }
 
     private void RemoveTarget(Target target)
@@ -89,7 +104,7 @@ public class Targeter : MonoBehaviour
             CurrentTarget = null;
         }
 
-        target.OnDestroyed -= RemoveTarget;
+        target.OnDisabled -= RemoveTarget;
         _targets.Remove(target);
     }
 

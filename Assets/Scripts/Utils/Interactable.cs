@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,7 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private GameObject _canvas;
 
-    private bool _inRange;
+    [SerializeField] private bool _inRange;
 
     private void Start()
     {
@@ -28,8 +29,8 @@ public class Interactable : MonoBehaviour
     {
         if (!_inRange) return;
 
+        _inRange = false;
         _onInteract?.Invoke();
-
     }
 
     private void OnTriggerEnter(Collider other)
