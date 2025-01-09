@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cineTargetGroup: {fileID: 0}
+  _targets: []
 --- !u!135 &8996740943105830216
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2473,7 +2474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialMaxHealth: 200
-  _vigorMultiplier: 10
+  _vigorMultiplier: 15
   _health: 0
   _currentMaxHealth: 0
 --- !u!114 &8680125968945254103
@@ -2489,7 +2490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialMaxStamina: 200
-  _enduranceMultiplier: 5
+  _enduranceMultiplier: 10
   _recoveryTime: 1.75
   _recoveryRate: 40
   _stamina: 0

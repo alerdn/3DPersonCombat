@@ -7,7 +7,6 @@ public class EnemyStateMachine : StateMachine
 
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
-    [field: SerializeField] public CharacterStat CharacterStat { get; private set; }
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public Weapon Weapon { get; private set; }

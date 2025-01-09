@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
         return Mathf.RoundToInt(_rawDamage + (Level * strength) + ((strength - 10) * (Level + 1)));
     }
 
-    public int GetAttackDamage(int attackIndex, int strength)
+    public int GetAttackDamage(int attackIndex, int strength = 0)
     {
         int baseDamage = GetDamageBase(strength);
         float damageMultiplier = Attacks[attackIndex].DamageMultiplier;

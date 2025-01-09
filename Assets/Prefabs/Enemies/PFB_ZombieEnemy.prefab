@@ -3489,7 +3489,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4645987162068126131}
   - component: {fileID: 539397430800255205}
-  - component: {fileID: 4220012214358534051}
   - component: {fileID: 3136058801688029}
   - component: {fileID: 7145247476216597481}
   - component: {fileID: 1387725855154189577}
@@ -3539,7 +3538,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 6731914125458489195}
   <CharacterController>k__BackingField: {fileID: 1899186007827444866}
-  <CharacterStat>k__BackingField: {fileID: 4220012214358534051}
   <Agent>k__BackingField: {fileID: 1387725855154189577}
   <ForceReceiver>k__BackingField: {fileID: 5842761406215660911}
   <Weapon>k__BackingField: {fileID: 1244319018341925334}
@@ -3550,21 +3548,6 @@ MonoBehaviour:
   <PlayerChasingRange>k__BackingField: 10
   <AttackRange>k__BackingField: 1.25
   SoulsValue: 300
---- !u!114 &4220012214358534051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9071966644997778012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40e7d7cb06112724b94f4558679c72ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _strength: 10
-  _vigor: 10
-  _endurance: 10
 --- !u!114 &3136058801688029
 MonoBehaviour:
   m_ObjectHideFlags: 0

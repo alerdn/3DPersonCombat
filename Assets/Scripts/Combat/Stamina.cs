@@ -28,7 +28,6 @@ public class Stamina : MonoBehaviour
         }
     }
 
-
     [SerializeField] private float _initialMaxStamina = 100f;
     [SerializeField] private float _enduranceMultiplier = 2f;
     [SerializeField] private float _recoveryTime = 1f;
@@ -53,7 +52,7 @@ public class Stamina : MonoBehaviour
 
         if (_remainingRecoveryTime == 0)
         {
-            float staminaPerFrame = _recoveryRate * Time.deltaTime;
+            float staminaPerFrame = CurrentMaxStamina * (_recoveryRate / 100f) * Time.deltaTime;
             if (_isBlocking)
             {
                 staminaPerFrame *= .25f;
