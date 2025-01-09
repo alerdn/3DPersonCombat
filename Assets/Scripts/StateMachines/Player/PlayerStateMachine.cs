@@ -6,8 +6,9 @@ public class PlayerStateMachine : StateMachine
     public static PlayerStateMachine Instance;
 
     public event Action<Weapon> OnWeaponSwitched;
-    public event Action<Weapon> OnShieldSwitched;
+    public event Action<Shield> OnShieldSwitched;
     public event Action<ItemInventory> OnItemSwitched;
+    public event Action<Spell> OnSpellSwitched;
 
     [field: SerializeField] public InputReader InputReader { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
@@ -15,11 +16,13 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Targeter Targeter { get; private set; }
     [field: SerializeField] public CharacterStat CharacterStat { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
+    [field: SerializeField] public Mana Mana { get; private set; }
     [field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
     [field: SerializeField] public LedgeDetector LedgeDetector { get; private set; }
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public Inventory Inventory { get; private set; }
+    [field: SerializeField] public Spellbook Spellbook { get; private set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
     [field: SerializeField] public float BlockingMovementSpeed { get; private set; }
     [field: SerializeField] public float RotationDamping { get; private set; }
@@ -29,32 +32,30 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public GameObject EstusFlask { get; private set; }
     [field: SerializeField] public SoulCollectableItem SoulDropPrefab { get; private set; }
-    [field: SerializeField] public Weapon[] PrimaryWeapons { get; private set; }
-    [field: SerializeField] public Weapon[] SecondaryWeapons { get; private set; }
+    [field: SerializeField] public Weapon[] Weapons { get; private set; }
+    [field: SerializeField] public Shield[] Shields { get; private set; }
 
-    public Weapon CurrentWeapon => CurrentPrimaryWeapon;
-
-    public Weapon CurrentPrimaryWeapon
+    public Weapon CurrentWeapon
     {
         get
         {
-            if (_currentPrimaryWeaponIndex <= -1) return null;
-            return PrimaryWeapons[_currentPrimaryWeaponIndex];
+            if (_currentWeaponIndex <= -1) return null;
+            return Weapons[_currentWeaponIndex];
         }
     }
-    public Weapon CurrentSecondaryWeapon
+    public Shield CurrentShield
     {
         get
         {
-            if (_currentSecondaryWeaponIndex <= -1) return null;
-            return SecondaryWeapons[_currentSecondaryWeaponIndex];
+            if (_currentShieldIndex <= -1) return null;
+            return Shields[_currentShieldIndex];
         }
     }
 
     public Transform MainCameraTransform { get; private set; }
 
-    private int _currentPrimaryWeaponIndex = -1;
-    private int _currentSecondaryWeaponIndex = -1;
+    private int _currentWeaponIndex = -1;
+    private int _currentShieldIndex = -1;
     private SoulCollectableItem _lastSoulsDropped;
 
     private void OnEnable()
@@ -87,39 +88,45 @@ public class PlayerStateMachine : StateMachine
         InputReader.SetControllerMode(ControllerMode.Gameplay);
 
         SwitchState(new PlayerFreeLookState(this));
-        SwitchPrimaryWeapon();
-        SwitchSecondaryWeapon();
+        SwitchWeapon();
+        SwitchShield();
 
         Health.SetStaminaComponent(Stamina);
         Inventory.ReplanishHealItem();
 
         Health.SetMaxHealth(CharacterStat.Vigor, true);
         Stamina.SetMaxStamina(CharacterStat.Endurance, true);
+        Mana.SetMaxMana(CharacterStat.Mind, true);
     }
 
-    public void SwitchPrimaryWeapon()
+    public void SwitchWeapon()
     {
-        CurrentPrimaryWeapon?.gameObject.SetActive(false);
-        _currentPrimaryWeaponIndex = (_currentPrimaryWeaponIndex + 1) % PrimaryWeapons.Length;
-        CurrentPrimaryWeapon?.gameObject.SetActive(true);
+        CurrentWeapon?.gameObject.SetActive(false);
+        _currentWeaponIndex = (_currentWeaponIndex + 1) % Weapons.Length;
+        CurrentWeapon?.gameObject.SetActive(true);
 
-        OnWeaponSwitched?.Invoke(CurrentPrimaryWeapon);
+        OnWeaponSwitched?.Invoke(CurrentWeapon);
     }
 
-    public void SwitchSecondaryWeapon()
+    public void SwitchShield()
     {
-        CurrentSecondaryWeapon?.gameObject.SetActive(false);
-        _currentSecondaryWeaponIndex = (_currentSecondaryWeaponIndex + 1) % SecondaryWeapons.Length;
-        CurrentSecondaryWeapon?.gameObject.SetActive(true);
+        CurrentShield?.gameObject.SetActive(false);
+        _currentShieldIndex = (_currentShieldIndex + 1) % Shields.Length;
+        CurrentShield?.gameObject.SetActive(true);
 
-        OnShieldSwitched?.Invoke(CurrentSecondaryWeapon);
+        OnShieldSwitched?.Invoke(CurrentShield);
     }
 
     public void SwitchItem()
     {
         Inventory.SwitchItem();
-
         OnItemSwitched?.Invoke(Inventory.CurrentItem);
+    }
+
+    public void SwitchSpell()
+    {
+        Spellbook.SwitchSpell();
+        OnSpellSwitched?.Invoke(Spellbook.CurrentSpell);
     }
 
     private void HandleTakeDamage()
@@ -151,7 +158,7 @@ public class PlayerStateMachine : StateMachine
         CurrentWeapon.gameObject.SetActive(true);
 
         Inventory.ReplanishHealItem();
-        Health.RestoreHealth();
+        RestoreStats();
 
         SetPosition(CheckpointManager.Instance.GetLastCheckpoint());
 
@@ -160,16 +167,18 @@ public class PlayerStateMachine : StateMachine
         EnemyManager.Instance.RespawnAll();
     }
 
+    public void RestoreStats()
+    {
+        Health.RestoreHealth();
+        Stamina.RestoreStamina();
+        Mana.RestoreMana();
+    }
+
     public void SetPosition(Vector3 position)
     {
         CharacterController.enabled = false;
         transform.position = position;
         CharacterController.enabled = true;
-    }
-
-    public void SetStrength(int nextStrength)
-    {
-        CharacterStat.Strength = nextStrength;
     }
 
     public void SetVigor(int nextVigor)
@@ -181,6 +190,22 @@ public class PlayerStateMachine : StateMachine
     public void SetEndurance(int nextEndurance)
     {
         CharacterStat.Endurance = nextEndurance;
-        Stamina.SetMaxStamina(CharacterStat.Endurance);
+        Stamina.SetMaxStamina(CharacterStat.Endurance, true);
+    }
+
+    public void SetMind(int nextMind)
+    {
+        CharacterStat.Mind = nextMind;
+        Mana.SetMaxMana(CharacterStat.Mind, true);
+    }
+
+    public void SetStrength(int nextStrength)
+    {
+        CharacterStat.Strength = nextStrength;
+    }
+
+    public void SetIntelligence(int nextIntelligence)
+    {
+        CharacterStat.Intelligence = nextIntelligence;
     }
 }

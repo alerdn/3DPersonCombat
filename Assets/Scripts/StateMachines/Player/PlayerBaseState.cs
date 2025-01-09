@@ -100,8 +100,30 @@ public abstract class PlayerBaseState : State
 
     protected bool CanAttack(int attackIndex)
     {
-        float staminaCost = GetAttackStaminaCost(attackIndex);
-        return stateMachine.Stamina.TryUseStamina(staminaCost);
+        if (stateMachine.CurrentWeapon is MeleeWeapon weapon)
+        {
+            if (weapon.Attacks.Length <= attackIndex) return false;
+
+            float staminaCost = GetAttackStaminaCost(attackIndex);
+            return stateMachine.Stamina.TryUseStamina(staminaCost);
+        }
+        else
+        {
+            float manaCost = stateMachine.Spellbook.CurrentSpell.ManaCost;
+            return stateMachine.Mana.TryUseMana(manaCost);
+        }
+    }
+
+    protected void EnterAttackingState(int attackIndex)
+    {
+        if (stateMachine.CurrentWeapon is Staff)
+        {
+            stateMachine.SwitchState(new PlayerCastingState(stateMachine));
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, attackIndex));
+        }
     }
 
     protected void HandleLedgeDetect(Vector3 ledgeForward, Vector3 closestPoint)
@@ -111,7 +133,8 @@ public abstract class PlayerBaseState : State
 
     protected float GetAttackStaminaCost(int attackIndex)
     {
-        float staminaMultiplier = stateMachine.CurrentWeapon.Attacks[attackIndex].StaminaMultiplier;
+        MeleeWeapon weapon = stateMachine.CurrentWeapon as MeleeWeapon;
+        float staminaMultiplier = weapon.Attacks[attackIndex].StaminaMultiplier;
         return stateMachine.CurrentWeapon.StaminaCost * staminaMultiplier;
     }
 }

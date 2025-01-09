@@ -34,7 +34,7 @@ public class PlayerFallingState : PlayerBaseState
         {
             if (CanAttack(3))
             {
-                stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 3));
+                EnterAttackingState(0);
                 return;
             }
         }

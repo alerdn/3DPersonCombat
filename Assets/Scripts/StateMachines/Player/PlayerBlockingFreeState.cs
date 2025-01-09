@@ -20,6 +20,7 @@ public class PlayerBlockingFreeState : PlayerBaseState
         stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.UseItemEvent += OnUseItem;
         stateMachine.InputReader.SwitchItemEvent += stateMachine.SwitchItem;
+        stateMachine.InputReader.SwitchSpellEvent += stateMachine.SwitchSpell;
     }
 
     public override void Tick(float deltaTime)
@@ -50,6 +51,7 @@ public class PlayerBlockingFreeState : PlayerBaseState
         stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.UseItemEvent -= OnUseItem;
         stateMachine.InputReader.SwitchItemEvent -= stateMachine.SwitchItem;
+        stateMachine.InputReader.SwitchSpellEvent -= stateMachine.SwitchSpell;
     }
 
     private void OnToggleTarget()

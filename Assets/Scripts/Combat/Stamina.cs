@@ -104,4 +104,10 @@ public class Stamina : MonoBehaviour
     {
         _isBlocking = isBlocking;
     }
+
+    public void RestoreStamina(float stamina = 0)
+    {
+        if (stamina == 0) CurrentStamina = CurrentMaxStamina;
+        else CurrentStamina = Mathf.Min(CurrentStamina + stamina, CurrentMaxStamina);
+    }
 }

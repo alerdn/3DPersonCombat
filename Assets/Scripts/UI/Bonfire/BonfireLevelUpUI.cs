@@ -5,7 +5,8 @@ public class BonfireLevelUpUI : MonoBehaviour
 {
     public int NextHp
     {
-        get => _nextHp; private set
+        get => _nextHp;
+        private set
         {
             _nextHp = value;
 
@@ -16,7 +17,8 @@ public class BonfireLevelUpUI : MonoBehaviour
     }
     public float NextStamina
     {
-        get => _nextStamina; private set
+        get => _nextStamina;
+        private set
         {
             _nextStamina = value;
 
@@ -25,9 +27,22 @@ public class BonfireLevelUpUI : MonoBehaviour
              _unchangedColor;
         }
     }
+    public float NextMana
+    {
+        get => _nextMana;
+        private set
+        {
+            _nextMana = value;
+
+            _manaText.color = _nextMana > _player.Mana.CurrentMaxMana ?
+             _increasedColor :
+             _unchangedColor;
+        }
+    }
     public int NextVigor
     {
-        get => _nextVigor; private set
+        get => _nextVigor;
+        private set
         {
             _nextVigor = value;
 
@@ -38,7 +53,8 @@ public class BonfireLevelUpUI : MonoBehaviour
     }
     public int NextEndurance
     {
-        get => _nextEndurance; private set
+        get => _nextEndurance;
+        private set
         {
             _nextEndurance = value;
 
@@ -47,9 +63,22 @@ public class BonfireLevelUpUI : MonoBehaviour
              _unchangedColor;
         }
     }
+    public int NextMind
+    {
+        get => _nextMind;
+        private set
+        {
+            _nextMind = value;
+
+            _mindText.color = _nextMind > _player.CharacterStat.Mind ?
+             _increasedColor :
+             _unchangedColor;
+        }
+    }
     public int NextStrength
     {
-        get => _nextStrength; private set
+        get => _nextStrength;
+        private set
         {
             _nextStrength = value;
 
@@ -69,6 +98,26 @@ public class BonfireLevelUpUI : MonoBehaviour
             }
         }
     }
+    public int NextIntelligence
+    {
+        get => _nextIntelligence;
+        private set
+        {
+            _nextIntelligence = value;
+
+            if (_nextIntelligence > _player.CharacterStat.Intelligence)
+            {
+                _intelligenceText.color = _increasedColor;
+                _weapon4DamageText.color = _increasedColor;
+            }
+            else
+            {
+                _intelligenceText.color = _unchangedColor;
+                _weapon4DamageText.color = _unchangedColor;
+            }
+        }
+
+    }
 
     [SerializeField] private GameObject _frame;
     [SerializeField] private Color _unchangedColor;
@@ -80,24 +129,31 @@ public class BonfireLevelUpUI : MonoBehaviour
     [SerializeField] private TMP_Text _soulsRequiredText;
     [SerializeField] private TMP_Text _vigorText;
     [SerializeField] private TMP_Text _enduranceText;
+    [SerializeField] private TMP_Text _mindText;
     [SerializeField] private TMP_Text _strengthText;
+    [SerializeField] private TMP_Text _intelligenceText;
 
     [Header("Info")]
     [SerializeField] private TMP_Text _hpText;
+    [SerializeField] private TMP_Text _manaText;
     [SerializeField] private TMP_Text _staminaText;
     [SerializeField] private TMP_Text _weapon1DamageText;
     [SerializeField] private TMP_Text _weapon2DamageText;
     [SerializeField] private TMP_Text _weapon3DamageText;
+    [SerializeField] private TMP_Text _weapon4DamageText;
 
     PlayerStateMachine _player;
     private int _souls;
 
     private int _nextLevel;
     private int _nextHp;
+    private float _nextMana;
     private float _nextStamina;
     private int _nextVigor;
     private int _nextEndurance;
+    private int _nextMind;
     private int _nextStrength;
+    private int _nextIntelligence;
 
     private BonfireUI _bonfireUI;
 
@@ -113,7 +169,9 @@ public class BonfireLevelUpUI : MonoBehaviour
         _nextLevel = _player.CharacterStat.Level;
         NextVigor = _player.CharacterStat.Vigor;
         NextEndurance = _player.CharacterStat.Endurance;
+        NextMind = _player.CharacterStat.Mind;
         NextStrength = _player.CharacterStat.Strength;
+        NextIntelligence = _player.CharacterStat.Intelligence;
         _souls = _player.Inventory.Souls;
 
         _levelText.text = _nextLevel.ToString();
@@ -122,13 +180,17 @@ public class BonfireLevelUpUI : MonoBehaviour
 
         _vigorText.text = NextVigor.ToString();
         _enduranceText.text = NextEndurance.ToString();
+        _mindText.text = NextMind.ToString();
         _strengthText.text = NextStrength.ToString();
+        _intelligenceText.text = NextIntelligence.ToString();
 
         // Info
         UpdateBaseStats();
 
         _frame.SetActive(true);
     }
+
+    #region Increase / Decrease Methods
 
     public void OnClick_IncreaseVigor()
     {
@@ -150,6 +212,16 @@ public class BonfireLevelUpUI : MonoBehaviour
         DecreaseAttribute(ref _nextEndurance, _enduranceText, _player.CharacterStat.Endurance);
     }
 
+    public void OnClick_IncreaseMind()
+    {
+        IncreaseAttribute(ref _nextMind, _mindText);
+    }
+
+    public void OnClick_DecreaseMind()
+    {
+        DecreaseAttribute(ref _nextMind, _mindText, _player.CharacterStat.Mind);
+    }
+
     public void OnClick_IncreaseStrength()
     {
         IncreaseAttribute(ref _nextStrength, _strengthText);
@@ -160,11 +232,25 @@ public class BonfireLevelUpUI : MonoBehaviour
         DecreaseAttribute(ref _nextStrength, _strengthText, _player.CharacterStat.Strength);
     }
 
+    public void OnClick_IncreaseIntelligence()
+    {
+        IncreaseAttribute(ref _nextIntelligence, _intelligenceText);
+    }
+
+    public void OnClick_DecreaseIntelligence()
+    {
+        DecreaseAttribute(ref _nextIntelligence, _intelligenceText, _player.CharacterStat.Intelligence);
+    }
+
+    #endregion
+
     public void OnClick_Confirm()
     {
         _player.SetVigor(NextVigor);
         _player.SetEndurance(NextEndurance);
+        _player.SetMind(NextMind);
         _player.SetStrength(NextStrength);
+        _player.SetIntelligence(NextIntelligence);
 
         _player.Inventory.Souls = _souls;
 
@@ -214,16 +300,21 @@ public class BonfireLevelUpUI : MonoBehaviour
     {
         NextVigor = _nextVigor;
         NextEndurance = _nextEndurance;
+        NextMind = _nextMind;
         NextStrength = _nextStrength;
+        NextIntelligence = _nextIntelligence;
 
         NextHp = _player.Health.GetMaxHealthByVigor(NextVigor);
+        NextMana = _player.Mana.GetMaxManaByMind(NextMind);
         NextStamina = _player.Stamina.GetMaxStaminaByEndurance(NextEndurance);
 
         _hpText.text = NextHp.ToString();
+        _manaText.text = _nextMana.ToString();
         _staminaText.text = _nextStamina.ToString();
-        _weapon1DamageText.text = _player.PrimaryWeapons[0].GetDamageBase(_nextStrength).ToString();
-        _weapon2DamageText.text = _player.PrimaryWeapons[1].GetDamageBase(_nextStrength).ToString();
-        _weapon3DamageText.text = _player.PrimaryWeapons[2].GetDamageBase(_nextStrength).ToString();
+        _weapon1DamageText.text = _player.Weapons[0].GetDamageBase(_nextStrength).ToString();
+        _weapon2DamageText.text = _player.Weapons[1].GetDamageBase(_nextStrength).ToString();
+        _weapon3DamageText.text = _player.Weapons[2].GetDamageBase(_nextStrength).ToString();
+        _weapon4DamageText.text = _player.Weapons[3].GetDamageBase(_nextIntelligence).ToString();
     }
 
     private void HideLevelUpFrame()

@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class PlayerAttackingState : PlayerBaseState
 {
+    private MeleeWeapon _weapon;
     private Attack _attack;
     private bool _alreadyAppliedForce;
 
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
-        Weapon weapon = stateMachine.CurrentWeapon;
-        _attack = weapon.Attacks[attackIndex];
+        _weapon = stateMachine.CurrentWeapon as MeleeWeapon;
+        _attack = _weapon.Attacks[attackIndex];
 
-        int damage = weapon.GetAttackDamage(attackIndex, stateMachine.CharacterStat.Strength);
+        int damage = _weapon.GetAttackDamage(attackIndex, stateMachine.CharacterStat.Strength);
 
-        weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
+        _weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
     }
 
     public override void Enter()
@@ -29,6 +30,7 @@ public class PlayerAttackingState : PlayerBaseState
 
         float normalizedTime = GetNormalizedTime(stateMachine.Animator, "Attack");
 
+        // Ajuste na direção do ataque
         if (!stateMachine.Targeter.CurrentTarget && normalizedTime < .5f)
         {
             Vector3 movement = CalculateFreelookMovement();
@@ -37,7 +39,6 @@ public class PlayerAttackingState : PlayerBaseState
                 FaceMovementDirection(movement, deltaTime);
             }
         }
-
 
         if (normalizedTime < 1f)
         {
@@ -59,7 +60,7 @@ public class PlayerAttackingState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.CurrentWeapon.DisableHitBox();
+        _weapon.DisableHitBox();
     }
 
     private void TryComboAttack(float normalizedTime)

@@ -100,7 +100,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwitchSecondaryWeapon"",
+                    ""name"": ""SwitchShield"",
                     ""type"": ""Button"",
                     ""id"": ""c69c7019-57d5-4265-aa80-afe04117637b"",
                     ""expectedControlType"": ""Button"",
@@ -127,36 +127,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SwitchSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""67c43dd8-6635-4b54-8bda-21efab769476"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""9710aad4-1836-461e-a3bd-22e0d77841f4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""IncreaseStrength"",
-                    ""type"": ""Button"",
-                    ""id"": ""65af2032-977d-4cc2-a345-aa30e3df8374"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""IncreaseVigor"",
-                    ""type"": ""Button"",
-                    ""id"": ""62fbc3dc-a9b1-4833-8d91-84d43a18d9d2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""IncreaseFortitude"",
-                    ""type"": ""Button"",
-                    ""id"": ""ecf190dc-ea3b-43ce-9882-53c1819f3348"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -369,7 +351,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""SwitchSecondaryWeapon"",
+                    ""action"": ""SwitchShield"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -380,7 +362,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchSecondaryWeapon"",
+                    ""action"": ""SwitchShield"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -474,34 +456,23 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7dd3ceca-3635-4209-b616-4e53717e7ce6"",
-                    ""path"": ""<Keyboard>/5"",
+                    ""id"": ""1ceae329-5dff-466f-b760-5ba9d8fd96c0"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""IncreaseStrength"",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c223fbc7-07f6-4973-81dd-8d69241c160f"",
-                    ""path"": ""<Keyboard>/6"",
+                    ""id"": ""5dd798f7-c019-424c-b200-62842a29527d"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""IncreaseVigor"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""67051502-0503-4d81-9154-f8e9c9f5295e"",
-                    ""path"": ""<Keyboard>/7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""IncreaseFortitude"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -548,13 +519,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_SwitchWeapon = m_Player.FindAction("SwitchWeapon", throwIfNotFound: true);
-        m_Player_SwitchSecondaryWeapon = m_Player.FindAction("SwitchSecondaryWeapon", throwIfNotFound: true);
+        m_Player_SwitchShield = m_Player.FindAction("SwitchShield", throwIfNotFound: true);
         m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
+        m_Player_SwitchSpell = m_Player.FindAction("SwitchSpell", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_IncreaseStrength = m_Player.FindAction("IncreaseStrength", throwIfNotFound: true);
-        m_Player_IncreaseVigor = m_Player.FindAction("IncreaseVigor", throwIfNotFound: true);
-        m_Player_IncreaseFortitude = m_Player.FindAction("IncreaseFortitude", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -624,13 +593,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_SwitchWeapon;
-    private readonly InputAction m_Player_SwitchSecondaryWeapon;
+    private readonly InputAction m_Player_SwitchShield;
     private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_SwitchItem;
+    private readonly InputAction m_Player_SwitchSpell;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_IncreaseStrength;
-    private readonly InputAction m_Player_IncreaseVigor;
-    private readonly InputAction m_Player_IncreaseFortitude;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -643,13 +610,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @SwitchWeapon => m_Wrapper.m_Player_SwitchWeapon;
-        public InputAction @SwitchSecondaryWeapon => m_Wrapper.m_Player_SwitchSecondaryWeapon;
+        public InputAction @SwitchShield => m_Wrapper.m_Player_SwitchShield;
         public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
+        public InputAction @SwitchSpell => m_Wrapper.m_Player_SwitchSpell;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @IncreaseStrength => m_Wrapper.m_Player_IncreaseStrength;
-        public InputAction @IncreaseVigor => m_Wrapper.m_Player_IncreaseVigor;
-        public InputAction @IncreaseFortitude => m_Wrapper.m_Player_IncreaseFortitude;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -683,27 +648,21 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchWeapon.started += instance.OnSwitchWeapon;
             @SwitchWeapon.performed += instance.OnSwitchWeapon;
             @SwitchWeapon.canceled += instance.OnSwitchWeapon;
-            @SwitchSecondaryWeapon.started += instance.OnSwitchSecondaryWeapon;
-            @SwitchSecondaryWeapon.performed += instance.OnSwitchSecondaryWeapon;
-            @SwitchSecondaryWeapon.canceled += instance.OnSwitchSecondaryWeapon;
+            @SwitchShield.started += instance.OnSwitchShield;
+            @SwitchShield.performed += instance.OnSwitchShield;
+            @SwitchShield.canceled += instance.OnSwitchShield;
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
             @SwitchItem.started += instance.OnSwitchItem;
             @SwitchItem.performed += instance.OnSwitchItem;
             @SwitchItem.canceled += instance.OnSwitchItem;
+            @SwitchSpell.started += instance.OnSwitchSpell;
+            @SwitchSpell.performed += instance.OnSwitchSpell;
+            @SwitchSpell.canceled += instance.OnSwitchSpell;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @IncreaseStrength.started += instance.OnIncreaseStrength;
-            @IncreaseStrength.performed += instance.OnIncreaseStrength;
-            @IncreaseStrength.canceled += instance.OnIncreaseStrength;
-            @IncreaseVigor.started += instance.OnIncreaseVigor;
-            @IncreaseVigor.performed += instance.OnIncreaseVigor;
-            @IncreaseVigor.canceled += instance.OnIncreaseVigor;
-            @IncreaseFortitude.started += instance.OnIncreaseFortitude;
-            @IncreaseFortitude.performed += instance.OnIncreaseFortitude;
-            @IncreaseFortitude.canceled += instance.OnIncreaseFortitude;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -732,27 +691,21 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchWeapon.started -= instance.OnSwitchWeapon;
             @SwitchWeapon.performed -= instance.OnSwitchWeapon;
             @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
-            @SwitchSecondaryWeapon.started -= instance.OnSwitchSecondaryWeapon;
-            @SwitchSecondaryWeapon.performed -= instance.OnSwitchSecondaryWeapon;
-            @SwitchSecondaryWeapon.canceled -= instance.OnSwitchSecondaryWeapon;
+            @SwitchShield.started -= instance.OnSwitchShield;
+            @SwitchShield.performed -= instance.OnSwitchShield;
+            @SwitchShield.canceled -= instance.OnSwitchShield;
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
             @SwitchItem.started -= instance.OnSwitchItem;
             @SwitchItem.performed -= instance.OnSwitchItem;
             @SwitchItem.canceled -= instance.OnSwitchItem;
+            @SwitchSpell.started -= instance.OnSwitchSpell;
+            @SwitchSpell.performed -= instance.OnSwitchSpell;
+            @SwitchSpell.canceled -= instance.OnSwitchSpell;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @IncreaseStrength.started -= instance.OnIncreaseStrength;
-            @IncreaseStrength.performed -= instance.OnIncreaseStrength;
-            @IncreaseStrength.canceled -= instance.OnIncreaseStrength;
-            @IncreaseVigor.started -= instance.OnIncreaseVigor;
-            @IncreaseVigor.performed -= instance.OnIncreaseVigor;
-            @IncreaseVigor.canceled -= instance.OnIncreaseVigor;
-            @IncreaseFortitude.started -= instance.OnIncreaseFortitude;
-            @IncreaseFortitude.performed -= instance.OnIncreaseFortitude;
-            @IncreaseFortitude.canceled -= instance.OnIncreaseFortitude;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -798,12 +751,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnSwitchWeapon(InputAction.CallbackContext context);
-        void OnSwitchSecondaryWeapon(InputAction.CallbackContext context);
+        void OnSwitchShield(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnSwitchItem(InputAction.CallbackContext context);
+        void OnSwitchSpell(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnIncreaseStrength(InputAction.CallbackContext context);
-        void OnIncreaseVigor(InputAction.CallbackContext context);
-        void OnIncreaseFortitude(InputAction.CallbackContext context);
     }
 }

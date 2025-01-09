@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,11 +9,14 @@ public class WeaponUpgradeSlotUI : MonoBehaviour
     [SerializeField] private TMP_Text _damge;
     [SerializeField] private TMP_Text _upgradeCost;
 
+    private PlayerStateMachine _player;
     private Weapon _weapon;
 
     public void Init(Weapon weapon)
     {
+        _player = PlayerStateMachine.Instance;
         _weapon = weapon;
+
         _weapon.OnLevelChanged += UpdateUI;
     }
 
@@ -23,7 +24,15 @@ public class WeaponUpgradeSlotUI : MonoBehaviour
     {
         _spriteImage.sprite = _weapon.Sprite;
         _name.text = $"{_weapon.Name} + {_weapon.Level}";
-        _damge.text = _weapon.GetDamageBase(PlayerStateMachine.Instance.CharacterStat.Strength).ToString();
+
+        var attribute = _weapon.DamageAttribute switch
+        {
+            DamageAttribute.Strength => _player.CharacterStat.Strength,
+            DamageAttribute.Intelligence => _player.CharacterStat.Intelligence,
+            _ => 0,
+        };
+
+        _damge.text = _weapon.GetDamageBase(attribute).ToString();
         _upgradeCost.text = _weapon.GetUpgradeCost().ToString();
     }
 

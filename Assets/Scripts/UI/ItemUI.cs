@@ -8,7 +8,8 @@ public enum ItemType
     None,
     Weapon,
     Shield,
-    Consumable
+    Consumable,
+    Spell
 }
 
 public class ItemUI : MonoBehaviour
@@ -34,6 +35,9 @@ public class ItemUI : MonoBehaviour
                 player.Inventory.CurrentItem.OnQuantityChanged += UpdateQuantity;
                 UpdateQuantity(player.Inventory.CurrentItem.Quantity);
                 break;
+            case ItemType.Spell:
+                player.OnSpellSwitched += OnSpellSwitched;
+                break;
             default:
                 break;
         }
@@ -46,10 +50,10 @@ public class ItemUI : MonoBehaviour
         _icon.sprite = weapon.Sprite;
     }
 
-    private void OnShieldSwitched(Weapon weapon)
+    private void OnShieldSwitched(Shield shield)
     {
         _icon.color = Color.white;
-        _icon.sprite = weapon.Sprite;
+        _icon.sprite = shield.Sprite;
     }
 
     private void OnItemSwitched(ItemInventory item)
@@ -70,5 +74,11 @@ public class ItemUI : MonoBehaviour
             _quantity.text = quantity.ToString();
             _icon.color = Color.white;
         }
+    }
+
+    private void OnSpellSwitched(Spell spell)
+    {
+        _icon.color = Color.white;
+        _icon.sprite = spell.Sprite;
     }
 }

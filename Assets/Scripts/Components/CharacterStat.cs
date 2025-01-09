@@ -2,15 +2,7 @@ using UnityEngine;
 
 public class CharacterStat : MonoBehaviour
 {
-    public int Level => _strength + _vigor + _endurance - 30;
-
-    public int Strength
-    {
-        get => _strength; set
-        {
-            _strength = value;
-        }
-    }
+    public int Level => _vigor + _endurance + _mind + _strength + _intelligence - 50;
 
     public int Vigor
     {
@@ -28,9 +20,35 @@ public class CharacterStat : MonoBehaviour
         }
     }
 
-    [SerializeField] private int _strength = 10;
+    public int Mind
+    {
+        get => _mind; set
+        {
+            _mind = value;
+        }
+    }
+
+    public int Strength
+    {
+        get => _strength; set
+        {
+            _strength = value;
+        }
+    }
+
+    public int Intelligence
+    {
+        get => _intelligence; set
+        {
+            _intelligence = value;
+        }
+    }
+
     [SerializeField] private int _vigor = 10;
     [SerializeField] private int _endurance = 10;
+    [SerializeField] private int _mind = 10;
+    [SerializeField] private int _strength = 10;
+    [SerializeField] private int _intelligence = 10;
 
     public int GetSoulsToNextLevel(int nextLevel = 0)
     {

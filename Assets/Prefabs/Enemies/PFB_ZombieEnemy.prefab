@@ -3499,7 +3499,7 @@ GameObject:
   - component: {fileID: 6731914125458489195}
   - component: {fileID: 4831793450491820941}
   - component: {fileID: 4106420288810139900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PFB_ZombieEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

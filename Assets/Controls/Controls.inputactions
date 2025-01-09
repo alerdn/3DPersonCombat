@@ -78,7 +78,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SwitchSecondaryWeapon",
+                    "name": "SwitchShield",
                     "type": "Button",
                     "id": "c69c7019-57d5-4265-aa80-afe04117637b",
                     "expectedControlType": "Button",
@@ -105,36 +105,18 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwitchSpell",
+                    "type": "Button",
+                    "id": "67c43dd8-6635-4b54-8bda-21efab769476",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "9710aad4-1836-461e-a3bd-22e0d77841f4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "IncreaseStrength",
-                    "type": "Button",
-                    "id": "65af2032-977d-4cc2-a345-aa30e3df8374",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "IncreaseVigor",
-                    "type": "Button",
-                    "id": "62fbc3dc-a9b1-4833-8d91-84d43a18d9d2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "IncreaseFortitude",
-                    "type": "Button",
-                    "id": "ecf190dc-ea3b-43ce-9882-53c1819f3348",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -347,7 +329,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse & Keyboard",
-                    "action": "SwitchSecondaryWeapon",
+                    "action": "SwitchShield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -358,7 +340,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "SwitchSecondaryWeapon",
+                    "action": "SwitchShield",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -452,34 +434,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7dd3ceca-3635-4209-b616-4e53717e7ce6",
-                    "path": "<Keyboard>/5",
+                    "id": "1ceae329-5dff-466f-b760-5ba9d8fd96c0",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "IncreaseStrength",
+                    "groups": "Mouse & Keyboard",
+                    "action": "SwitchSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c223fbc7-07f6-4973-81dd-8d69241c160f",
-                    "path": "<Keyboard>/6",
+                    "id": "5dd798f7-c019-424c-b200-62842a29527d",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "IncreaseVigor",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "67051502-0503-4d81-9154-f8e9c9f5295e",
-                    "path": "<Keyboard>/7",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "IncreaseFortitude",
+                    "groups": "Gamepad",
+                    "action": "SwitchSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

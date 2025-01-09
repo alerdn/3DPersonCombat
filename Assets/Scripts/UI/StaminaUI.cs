@@ -5,6 +5,7 @@ public class StaminaUI : MonoBehaviour
 {
     [SerializeField] private Image _staminaBar;
 
+    private PlayerStateMachine _player;
     private Stamina _stamina;
     private RectTransform _rectTransform;
 
@@ -15,14 +16,19 @@ public class StaminaUI : MonoBehaviour
 
     private void Start()
     {
-        PlayerStateMachine player = PlayerStateMachine.Instance;
-        _stamina = player.Stamina;
+        _player = PlayerStateMachine.Instance;
+        _stamina = _player.Stamina;
 
         _stamina.OnStaminaChanged += UpdateUI;
+        _player.Stamina.OnMaxStaminaChanged += UpdateStaminaBarSize;
 
-        player.Stamina.OnMaxStaminaChanged += UpdateStaminaBarSize;
-        UpdateStaminaBarSize(player.Stamina.CurrentMaxStamina);
+        UpdateStaminaBarSize(_player.Stamina.CurrentMaxStamina);
+    }
 
+    private void OnDestroy()
+    {
+        _stamina.OnStaminaChanged -= UpdateUI;
+        _player.Stamina.OnMaxStaminaChanged -= UpdateStaminaBarSize;
     }
 
     private void UpdateUI(float stamina, float maxStamina)

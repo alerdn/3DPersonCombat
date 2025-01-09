@@ -11,11 +11,25 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void EnableHitBox()
     {
-        _stateMachine.CurrentWeapon?.EnableHitBox();
+        if (_stateMachine.CurrentWeapon is MeleeWeapon weapon)
+        {
+            weapon.EnableHitBox();
+        }
     }
 
     public void DisableHitBox()
     {
-        _stateMachine.CurrentWeapon?.DisableHitBox();
+        if (_stateMachine.CurrentWeapon is MeleeWeapon weapon)
+        {
+            weapon.DisableHitBox();
+        }
+    }
+
+    public void CastSpell()
+    {
+        if (_stateMachine.CurrentWeapon is Staff staff)
+        {
+            staff.Cast();
+        }
     }
 }

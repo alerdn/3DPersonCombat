@@ -15,9 +15,9 @@ public class BonfireUpgradeUI : MonoBehaviour
         _bonfireUI = bonfireUI;
         _player = player;
 
-        for (int i = 0; i < _player.PrimaryWeapons.Count(); i++)
+        for (int i = 0; i < _player.Weapons.Count(); i++)
         {
-            _weaponUpgradeSlots[i].Init(_player.PrimaryWeapons[i]);
+            _weaponUpgradeSlots[i].Init(_player.Weapons[i]);
         }
     }
 

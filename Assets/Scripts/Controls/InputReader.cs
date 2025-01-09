@@ -21,11 +21,8 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action SwitchSecondaryWeaponEvent;
     public event Action UseItemEvent;
     public event Action SwitchItemEvent;
+    public event Action SwitchSpellEvent;
     public event Action InteractEvent;
-
-    public event Action IncreaseStrengthEvent;
-    public event Action IncreaseVigorEvent;
-    public event Action IncreaseFortitudeEvent;
 
     public bool IsAttacking { get; private set; }
     public bool IsBlocking { get; private set; }
@@ -126,7 +123,7 @@ public class InputReader : ScriptableObject, IPlayerActions
         SwitchWeaponEvent?.Invoke();
     }
 
-    public void OnSwitchSecondaryWeapon(InputAction.CallbackContext context)
+    public void OnSwitchShield(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
 
@@ -147,31 +144,17 @@ public class InputReader : ScriptableObject, IPlayerActions
         SwitchItemEvent?.Invoke();
     }
 
+    public void OnSwitchSpell(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        SwitchSpellEvent?.Invoke();
+    }
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
 
         InteractEvent?.Invoke();
-    }
-
-    public void OnIncreaseStrength(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-
-        IncreaseStrengthEvent?.Invoke();
-    }
-
-    public void OnIncreaseVigor(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-
-        IncreaseVigorEvent?.Invoke();
-    }
-
-    public void OnIncreaseFortitude(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-
-        IncreaseFortitudeEvent?.Invoke();
     }
 }

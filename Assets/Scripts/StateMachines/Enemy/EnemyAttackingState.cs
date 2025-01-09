@@ -11,7 +11,7 @@ public class EnemyAttackingState : EnemyBaseState
 
     public EnemyAttackingState(EnemyStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
-        Weapon weapon = stateMachine.Weapon;
+        MeleeWeapon weapon = stateMachine.Weapon;
         _attack = weapon.Attacks[attackIndex];
 
         int damage = weapon.GetAttackDamage(attackIndex);
