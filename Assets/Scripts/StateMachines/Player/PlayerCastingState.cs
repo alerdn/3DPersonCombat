@@ -34,16 +34,6 @@ public class PlayerCastingState : PlayerBaseState
 
         float normalizedTime = GetNormalizedTime(stateMachine.Animator, "Attack");
 
-        // Ajuste na direção do ataque
-        if (!stateMachine.Targeter.CurrentTarget && normalizedTime < .5f)
-        {
-            Vector3 movement = CalculateFreelookMovement();
-            if (movement != Vector3.zero)
-            {
-                FaceMovementDirection(movement, deltaTime);
-            }
-        }
-
         if (normalizedTime >= 1f)
         {
             ReturnToLocomotion();
