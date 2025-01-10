@@ -52,7 +52,7 @@ MonoBehaviour:
   <DamageAttribute>k__BackingField: 1
   <MaxLevel>k__BackingField: 20
   <StaminaCost>k__BackingField: 75
-  _rawDamage: 200
+  _rawDamage: 100
   _level: 0
   _castPosition: {fileID: 6405144250350679280}
 --- !u!1 &7640589599780471895

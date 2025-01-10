@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -31,6 +32,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public int DodgeStaminaCost { get; internal set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public GameObject EstusFlask { get; private set; }
+    [field: SerializeField] public GameObject AshenFlask { get; private set; }
     [field: SerializeField] public SoulCollectableItem SoulDropPrefab { get; private set; }
     [field: SerializeField] public Weapon[] Weapons { get; private set; }
     [field: SerializeField] public Shield[] Shields { get; private set; }
@@ -54,8 +56,8 @@ public class PlayerStateMachine : StateMachine
 
     public Transform MainCameraTransform { get; private set; }
 
-    private int _currentWeaponIndex = -1;
-    private int _currentShieldIndex = -1;
+    private int _currentWeaponIndex;
+    private int _currentShieldIndex;
     private SoulCollectableItem _lastSoulsDropped;
 
     private void OnEnable()
@@ -88,11 +90,11 @@ public class PlayerStateMachine : StateMachine
         InputReader.SetControllerMode(ControllerMode.Gameplay);
 
         SwitchState(new PlayerFreeLookState(this));
-        SwitchWeapon();
-        SwitchShield();
+        CurrentWeapon?.gameObject.SetActive(true);
+        CurrentShield?.gameObject.SetActive(true);
 
         Health.SetStaminaComponent(Stamina);
-        Inventory.ReplanishHealItem();
+        Inventory.ReplanishPotions();
 
         Health.SetMaxHealth(CharacterStat.Vigor, true);
         Stamina.SetMaxStamina(CharacterStat.Endurance, true);
@@ -131,7 +133,10 @@ public class PlayerStateMachine : StateMachine
 
     private void HandleTakeDamage()
     {
-        SwitchState(new PlayerImpactState(this));
+        if (Random.Range(1, 100) <= 60)
+        {
+            SwitchState(new PlayerImpactState(this));
+        }
     }
 
     private void HandleDie()
@@ -157,7 +162,7 @@ public class PlayerStateMachine : StateMachine
         Ragdoll.ToggleRagdoll(false);
         CurrentWeapon.gameObject.SetActive(true);
 
-        Inventory.ReplanishHealItem();
+        Inventory.ReplanishPotions();
         RestoreStats();
 
         SetPosition(CheckpointManager.Instance.GetLastCheckpoint());

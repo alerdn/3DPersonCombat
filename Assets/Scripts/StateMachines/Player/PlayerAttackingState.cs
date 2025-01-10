@@ -6,7 +6,7 @@ public class PlayerAttackingState : PlayerBaseState
     private Attack _attack;
     private bool _alreadyAppliedForce;
 
-    public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
+    public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex, bool isJumping = false) : base(stateMachine)
     {
         _weapon = stateMachine.CurrentWeapon as MeleeWeapon;
         _attack = _weapon.Attacks[attackIndex];
@@ -14,6 +14,11 @@ public class PlayerAttackingState : PlayerBaseState
         int damage = _weapon.GetAttackDamage(attackIndex, stateMachine.CharacterStat.Strength);
 
         _weapon.SetAttack(damage, _attack.Knockback, UnitType.Enemy);
+
+        if (isJumping)
+        {
+            stateMachine.ForceReceiver.Pusheable = false;
+        }
     }
 
     public override void Enter()
@@ -61,6 +66,7 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Exit()
     {
         _weapon.DisableHitBox();
+        stateMachine.ForceReceiver.Pusheable = true;
     }
 
     private void TryComboAttack(float normalizedTime)

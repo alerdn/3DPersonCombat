@@ -18,12 +18,14 @@ public class PlayerCastingState : PlayerBaseState
         Spell spell = stateMachine.Spellbook.CurrentSpell;
         _attackAnimationName = spell.AnimationName;
 
-        staff.SetAttack(spell, targetHealth, stateMachine.CharacterStat.Intelligence);
+        Vector3 castPoint = stateMachine.transform.position + Vector3.up * 1.5f + stateMachine.transform.forward * 1.5f;
+        staff.SetAttack(spell, targetHealth, stateMachine.CharacterStat.Intelligence, castPoint);
     }
 
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(_attackAnimationName, .1f);
+        AudioManager.Instance.PlayCue("Cast");
     }
 
     public override void Tick(float deltaTime)

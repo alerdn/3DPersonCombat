@@ -13,6 +13,8 @@ public abstract class EnemyBaseState : State
     {
         if (stateMachine.Player.Health.IsDead) return false;
 
+        if (stateMachine.HasNoticedPlayer) return true;
+
         float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
 
         return playerDistanceSqr <= stateMachine.PlayerChasingRange * stateMachine.PlayerChasingRange;

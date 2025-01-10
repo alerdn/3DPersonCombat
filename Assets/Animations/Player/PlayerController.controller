@@ -468,7 +468,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Staff_Attack1
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -872,7 +872,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heal
+  m_Name: Drink
   m_Speed: 4
   m_CycleOffset: 0
   m_Transitions: []
@@ -886,7 +886,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 00405ef4b8a1bea4dbdafe874229a642, type: 2}
-  m_Tag: Heal
+  m_Tag: Drink
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

@@ -13,6 +13,7 @@ public class EnemyChasingState : EnemyBaseState
 
     public override void Enter()
     {
+        stateMachine.HasNoticedPlayer = true;
         stateMachine.Animator.CrossFadeInFixedTime(LocomotionHash, .1f);
     }
 

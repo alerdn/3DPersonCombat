@@ -11,7 +11,7 @@ public class Bonfire : MonoBehaviour
 
         // player.SetPosition(_spawnPoint.position);
         player.RestoreStats();
-        player.Inventory.ReplanishHealItem();
+        player.Inventory.ReplanishPotions();
 
         CheckpointManager.Instance.SetLastCheckpoint(_spawnPoint.position);
 

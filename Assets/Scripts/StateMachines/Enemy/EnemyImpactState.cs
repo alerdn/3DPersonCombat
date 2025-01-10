@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyImpactState : EnemyBaseState
 {
-    private int ImpactHash = Animator.StringToHash("Impact");
+    private readonly int ImpactHash = Animator.StringToHash("Impact");
     private float _duration = 1f;
 
     public EnemyImpactState(EnemyStateMachine stateMachine) : base(stateMachine)
@@ -11,6 +11,7 @@ public class EnemyImpactState : EnemyBaseState
 
     public override void Enter()
     {
+        stateMachine.HasNoticedPlayer = true;
         stateMachine.Animator.CrossFadeInFixedTime(ImpactHash, 0.1f);
     }
 

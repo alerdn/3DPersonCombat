@@ -109,15 +109,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UseItem"",
-                    ""type"": ""Button"",
-                    ""id"": ""99c9d961-eb44-4c0c-bacb-80e8eb234323"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SwitchItem"",
                     ""type"": ""Button"",
                     ""id"": ""ba16c6cc-e3da-403d-8618-bde5359d4257"",
@@ -130,6 +121,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""SwitchSpell"",
                     ""type"": ""Button"",
                     ""id"": ""67c43dd8-6635-4b54-8bda-21efab769476"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""99c9d961-eb44-4c0c-bacb-80e8eb234323"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -149,7 +149,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""294a7578-b78e-4f73-976b-1441b43bb3ae"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse & Keyboard"",
@@ -171,7 +171,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1e8c8fa8-21fb-4545-a9a7-b8b60cde55da"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse & Keyboard"",
@@ -325,7 +325,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1a1128cc-7851-4137-b6ee-452689779e6b"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b7124d7-4950-4bb9-b676-31f70d71d053"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse & Keyboard"",
@@ -347,7 +358,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2bee7914-e111-447f-a2c8-20739f41d134"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchShield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""285f1505-7a7b-48d6-b918-a5036a712b17"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse & Keyboard"",
@@ -412,28 +434,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5bbbdfad-ae2d-44d4-971e-bc953a3e8109"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse & Keyboard"",
-                    ""action"": ""SwitchItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0df1eed8-8998-4b72-b019-c068dcc636a1"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""0804974e-5032-4cde-8c63-bd368495b1bf"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -456,7 +456,51 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5bbbdfad-ae2d-44d4-971e-bc953a3e8109"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ab25fa1-b3d4-4415-91e3-de1ea8f8c338"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0df1eed8-8998-4b72-b019-c068dcc636a1"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""1ceae329-5dff-466f-b760-5ba9d8fd96c0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse & Keyboard"",
+                    ""action"": ""SwitchSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ca5f426-3ab9-4167-9bc6-4ffdfd8d7ce8"",
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -520,9 +564,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_SwitchWeapon = m_Player.FindAction("SwitchWeapon", throwIfNotFound: true);
         m_Player_SwitchShield = m_Player.FindAction("SwitchShield", throwIfNotFound: true);
-        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_SwitchItem = m_Player.FindAction("SwitchItem", throwIfNotFound: true);
         m_Player_SwitchSpell = m_Player.FindAction("SwitchSpell", throwIfNotFound: true);
+        m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -594,9 +638,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_SwitchWeapon;
     private readonly InputAction m_Player_SwitchShield;
-    private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_SwitchItem;
     private readonly InputAction m_Player_SwitchSpell;
+    private readonly InputAction m_Player_UseItem;
     private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
@@ -611,9 +655,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @SwitchWeapon => m_Wrapper.m_Player_SwitchWeapon;
         public InputAction @SwitchShield => m_Wrapper.m_Player_SwitchShield;
-        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @SwitchItem => m_Wrapper.m_Player_SwitchItem;
         public InputAction @SwitchSpell => m_Wrapper.m_Player_SwitchSpell;
+        public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -651,15 +695,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchShield.started += instance.OnSwitchShield;
             @SwitchShield.performed += instance.OnSwitchShield;
             @SwitchShield.canceled += instance.OnSwitchShield;
-            @UseItem.started += instance.OnUseItem;
-            @UseItem.performed += instance.OnUseItem;
-            @UseItem.canceled += instance.OnUseItem;
             @SwitchItem.started += instance.OnSwitchItem;
             @SwitchItem.performed += instance.OnSwitchItem;
             @SwitchItem.canceled += instance.OnSwitchItem;
             @SwitchSpell.started += instance.OnSwitchSpell;
             @SwitchSpell.performed += instance.OnSwitchSpell;
             @SwitchSpell.canceled += instance.OnSwitchSpell;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -694,15 +738,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SwitchShield.started -= instance.OnSwitchShield;
             @SwitchShield.performed -= instance.OnSwitchShield;
             @SwitchShield.canceled -= instance.OnSwitchShield;
-            @UseItem.started -= instance.OnUseItem;
-            @UseItem.performed -= instance.OnUseItem;
-            @UseItem.canceled -= instance.OnUseItem;
             @SwitchItem.started -= instance.OnSwitchItem;
             @SwitchItem.performed -= instance.OnSwitchItem;
             @SwitchItem.canceled -= instance.OnSwitchItem;
             @SwitchSpell.started -= instance.OnSwitchSpell;
             @SwitchSpell.performed -= instance.OnSwitchSpell;
             @SwitchSpell.canceled -= instance.OnSwitchSpell;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -752,9 +796,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnBlock(InputAction.CallbackContext context);
         void OnSwitchWeapon(InputAction.CallbackContext context);
         void OnSwitchShield(InputAction.CallbackContext context);
-        void OnUseItem(InputAction.CallbackContext context);
         void OnSwitchItem(InputAction.CallbackContext context);
         void OnSwitchSpell(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }

@@ -49,8 +49,11 @@ MonoBehaviour:
   <Name>k__BackingField: Machado
   <Sprite>k__BackingField: {fileID: 21300000, guid: 254236421bb02bd4b820506e4889a751,
     type: 3}
+  <DamageAttribute>k__BackingField: 0
   <MaxLevel>k__BackingField: 20
-  <StaminaCost>k__BackingField: 25
+  <StaminaCost>k__BackingField: 60
+  _rawDamage: 100
+  _level: 0
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Axe_Attack1
     <TransitionDuration>k__BackingField: 0.1
@@ -88,8 +91,6 @@ MonoBehaviour:
     <Knockback>k__BackingField: 10
     <DamageMultiplier>k__BackingField: 1.5
     <StaminaMultiplier>k__BackingField: 1.5
-  _rawDamage: 100
-  _level: 0
   _hitBox: {fileID: 4743174051080882685}
 --- !u!1 &2457666168438364537
 GameObject:

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class EnemyStateMachine : StateMachine
 {
@@ -11,6 +12,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public MeleeWeapon Weapon { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
+    [field: SerializeField] public HealthUI HealthUI { get; private set; }
     [field: SerializeField] public Target Target { get; private set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
 
@@ -20,6 +22,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public int SoulsValue;
 
     public PlayerStateMachine Player { get; private set; }
+    public bool HasNoticedPlayer;
 
     private Vector3 _initialPosition;
 
@@ -61,6 +64,9 @@ public class EnemyStateMachine : StateMachine
         Ragdoll.ToggleRagdoll(false);
         Weapon.gameObject.SetActive(true);
         Target.enabled = true;
+
+        HasNoticedPlayer = false;
+        HealthUI.gameObject.SetActive(true);
 
         Health.RestoreHealth();
 

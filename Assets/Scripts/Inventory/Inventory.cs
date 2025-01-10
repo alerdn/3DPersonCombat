@@ -6,23 +6,14 @@ using UnityEngine;
 [Serializable]
 public record ItemInventory
 {
-    public event Action<int> OnQuantityChanged;
-
     public Item Item;
-    public int Quantity
-    {
-        get => _quantity; set
-        {
-            _quantity = value;
-            OnQuantityChanged?.Invoke(_quantity);
-        }
-    }
-
-    private int _quantity;
+    public int Quantity;
 }
 
 public class Inventory : MonoBehaviour
 {
+    public event Action<int> OnQuantityChanged;
+
     public ItemInventory CurrentItem
     {
         get
@@ -37,8 +28,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private List<ItemInventory> _items = new List<ItemInventory>();
     [SerializeField] private SOInt _souls;
 
-    [Header("Heal")]
-    [SerializeField] private int _healItemQuantity = 10;
+    [Header("Potions")]
+    [SerializeField] private int _potionQuantity = 10;
 
     private int _currentItemIndex;
 
@@ -48,6 +39,8 @@ public class Inventory : MonoBehaviour
 
         CurrentItem.Item.Use();
         CurrentItem.Quantity--;
+
+        OnQuantityChanged?.Invoke(CurrentItem.Quantity);
     }
 
     public void SwitchItem()
@@ -55,11 +48,11 @@ public class Inventory : MonoBehaviour
         _currentItemIndex = (_currentItemIndex + 1) % _items.Count;
     }
 
-    public ItemInventory GetHealItem()
+    public ItemInventory GetEstus()
     {
         foreach (ItemInventory item in _items)
         {
-            if (item.Item is HealItem)
+            if (item.Item is EstusFlaskItem)
             {
                 return item;
             }
@@ -68,8 +61,24 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    public void ReplanishHealItem()
+    public ItemInventory GetAshen()
     {
-        GetHealItem().Quantity = _healItemQuantity;
+        foreach (ItemInventory item in _items)
+        {
+            if (item.Item is AshenFlaskItem)
+            {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public void ReplanishPotions()
+    {
+        GetEstus().Quantity = _potionQuantity;
+        GetAshen().Quantity = _potionQuantity;
+
+        OnQuantityChanged?.Invoke(CurrentItem.Quantity);
     }
 }

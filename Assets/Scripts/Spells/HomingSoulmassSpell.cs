@@ -1,13 +1,18 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Homing Soulmass Spell", menuName = "Spells/Homing Soulmass Spell")]
 public class HomingSoulmassSpell : Spell
 {
+    private SpellEffect _lastEffect;
+
     public override void Cast()
     {
-        SpellEffect effect = Instantiate(EffectPrefab, castPosition, Quaternion.identity);
-        effect.transform.rotation = Quaternion.LookRotation(PlayerStateMachine.Instance.transform.forward);
-        effect.StartCoroutine(MoveEffectTo(effect.transform, targetHealth));
+        if (_lastEffect != null)
+        {
+            Destroy(_lastEffect.gameObject);
+        }
 
-        Debug.Log($"Casting {Name} at {targetHealth?.name ?? "random"} for {GetDamage()} damage");
+        _lastEffect = Instantiate(EffectPrefab, castPosition, Quaternion.identity);
+        _lastEffect.StartCoroutine(FollowPlayer(_lastEffect.transform, 60f));
     }
 }

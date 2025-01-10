@@ -32,7 +32,6 @@ public abstract class Spell : ScriptableObject
     {
         // Cast sem target
         float spawnTime = Time.time;
-
         if (!targetHealth)
         {
             while (Time.time < spawnTime + 2f)
@@ -47,6 +46,7 @@ public abstract class Spell : ScriptableObject
                     break;
                 }
 
+                yield return new WaitForEndOfFrame();
                 yield return null;
             }
         }
@@ -57,17 +57,46 @@ public abstract class Spell : ScriptableObject
             // A posição dos inimigos sempre é no pé, então precisa ajustar
             Vector3 targetPosition = targetHealth.transform.position + Vector3.up;
             float distanceToTarget = Vector3.Distance(effect.position, targetPosition);
-            while (distanceToTarget > 0.1f)
+            while (distanceToTarget > 0.2f)
             {
                 targetPosition = targetHealth.transform.position + Vector3.up;
                 distanceToTarget = Vector3.Distance(effect.position, targetPosition);
                 effect.position = Vector3.MoveTowards(effect.position, targetPosition, 10 * Time.deltaTime);
                 effect.LookAt(targetPosition);
 
+                yield return new WaitForEndOfFrame();
                 yield return null;
             }
 
             targetHealth.TakeDamage(GetDamage());
+        }
+
+        Destroy(effect.gameObject);
+    }
+
+    protected IEnumerator FollowPlayer(Transform effect, float duration)
+    {
+        float spawnTime = Time.time;
+        while (Time.time < spawnTime + duration)
+        {
+            effect.position = Vector3.MoveTowards(effect.position, PlayerStateMachine.Instance.transform.position + Vector3.up * 2f, 10 * Time.deltaTime);
+            Vector3 forward = PlayerStateMachine.Instance.transform.forward;
+            forward.y = 0;
+
+            effect.rotation = Quaternion.LookRotation(forward);
+
+            Collider[] colliders = Physics.OverlapSphere(effect.position, 10f, LayerMask.GetMask("Enemy"));
+            if (colliders.Length > 0)
+            {
+                if (colliders[0].TryGetComponent(out targetHealth))
+                {
+                    yield return MoveEffectTo(effect, targetHealth);
+                }
+                break;
+            }
+
+            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         Destroy(effect.gameObject);

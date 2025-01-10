@@ -32,9 +32,9 @@ public class PlayerFallingState : PlayerBaseState
 
         if (stateMachine.InputReader.IsAttacking)
         {
-            if (CanAttack(3))
+            if (CanAttack(3, true))
             {
-                EnterAttackingState(0);
+                EnterAttackingState(3, true);
                 return;
             }
         }

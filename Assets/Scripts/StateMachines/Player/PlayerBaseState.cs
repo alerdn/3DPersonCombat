@@ -98,7 +98,7 @@ public abstract class PlayerBaseState : State
         stateMachine.Inventory.UseItem();
     }
 
-    protected bool CanAttack(int attackIndex)
+    protected bool CanAttack(int attackIndex, bool isJumping = false)
     {
         if (stateMachine.CurrentWeapon is MeleeWeapon weapon)
         {
@@ -109,20 +109,24 @@ public abstract class PlayerBaseState : State
         }
         else
         {
+            if (isJumping) return false;
+
             float manaCost = stateMachine.Spellbook.CurrentSpell.ManaCost;
             return stateMachine.Mana.TryUseMana(manaCost);
         }
     }
 
-    protected void EnterAttackingState(int attackIndex)
+    protected void EnterAttackingState(int attackIndex, bool isJumping = false)
     {
         if (stateMachine.CurrentWeapon is Staff)
         {
+            if (isJumping) return;
+
             stateMachine.SwitchState(new PlayerCastingState(stateMachine));
         }
         else
         {
-            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, attackIndex));
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, attackIndex, isJumping));
         }
     }
 

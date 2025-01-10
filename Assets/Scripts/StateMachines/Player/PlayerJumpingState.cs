@@ -34,9 +34,9 @@ public class PlayerJumpingState : PlayerBaseState
 
         if (stateMachine.InputReader.IsAttacking)
         {
-            if (CanAttack(3))
+            if (CanAttack(3, true))
             {
-                EnterAttackingState(3);
+                EnterAttackingState(3, true);
                 return;
             }
         }

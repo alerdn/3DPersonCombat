@@ -15,8 +15,8 @@ MonoBehaviour:
   <Name>k__BackingField: Flecha de Almas
   <Sprite>k__BackingField: {fileID: 21300000, guid: fcd10c169067d554887da62d71186acf,
     type: 3}
-  <ManaCost>k__BackingField: 20
-  <RawDamage>k__BackingField: 200
+  <ManaCost>k__BackingField: 40
+  <RawDamage>k__BackingField: 100
   <AnimationName>k__BackingField: Staff_Attack1
   <EffectPrefab>k__BackingField: {fileID: 4128394457648778201, guid: e7995f8fd3e502b4dade8a3fc63803fe,
     type: 3}

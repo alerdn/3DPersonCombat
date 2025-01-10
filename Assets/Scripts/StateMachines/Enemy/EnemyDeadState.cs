@@ -12,6 +12,8 @@ public class EnemyDeadState : EnemyBaseState
         stateMachine.Weapon.gameObject.SetActive(false);
         stateMachine.Target.enabled = false;
 
+        stateMachine.HealthUI.gameObject.SetActive(false);
+
         PlayerStateMachine.Instance.Inventory.Souls += stateMachine.SoulsValue;
     }
 

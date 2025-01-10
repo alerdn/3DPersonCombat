@@ -404,6 +404,91 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &156078271530651842
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6830310137512435842}
+    m_Modifications:
+    - target: {fileID: 546847966671330427, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_Name
+      value: PFB_Ashen
+      objectReference: {fileID: 0}
+    - target: {fileID: 546847966671330427, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.155
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4784251
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.8757145
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.06494867
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.003909431
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 123.131
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 7.251999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 12.414001
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a1504f0a35c4d8c45b8e7422f4bccf8d, type: 3}
+--- !u!1 &413287765223607481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 546847966671330427, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 156078271530651842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8471132186181965528 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8621298758341936666, guid: a1504f0a35c4d8c45b8e7422f4bccf8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 156078271530651842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5312635396190587986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1116,6 +1201,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6740853391387075913}
+    - targetCorrespondingSourceObject: {fileID: -6330318480650085402, guid: db54937ace12f0e448b463dfa668cba6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8471132186181965528}
     - targetCorrespondingSourceObject: {fileID: 9175088765034030054, guid: db54937ace12f0e448b463dfa668cba6,
         type: 3}
       insertIndex: -1
@@ -2442,11 +2531,12 @@ MonoBehaviour:
   <DodgeStaminaCost>k__BackingField: 15
   <JumpForce>k__BackingField: 4
   <EstusFlask>k__BackingField: {fileID: 6253110495443517427}
+  <AshenFlask>k__BackingField: {fileID: 413287765223607481}
   <SoulDropPrefab>k__BackingField: {fileID: 5634801220878805813, guid: d9cf568305873fa4cab493763c9056b7,
     type: 3}
   <Weapons>k__BackingField:
-  - {fileID: 7727282403555558442}
   - {fileID: 8792201946367753236}
+  - {fileID: 7727282403555558442}
   - {fileID: 6200496811991077646}
   - {fileID: 4243314627104440012}
   <Shields>k__BackingField:
@@ -2465,6 +2555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vigor: 10
   _endurance: 10
+  _mind: 10
   _strength: 10
   _intelligence: 10
 --- !u!114 &1345978522182001735
@@ -2514,7 +2605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialMaxMana: 200
-  _intelligenceMultiplier: 10
+  _mindMultiplier: 10
   _recoveryTime: 1.75
   _recoveryRate: 1
   _mana: 0
@@ -2574,9 +2665,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _items:
   - Item: {fileID: 11400000, guid: cf858b1429ec8fc43bfeab6e4c286e88, type: 2}
-  - Item: {fileID: 11400000, guid: 7690cd194e8c96a4cb3c97f873d32fdc, type: 2}
+    Quantity: 0
+  - Item: {fileID: 11400000, guid: d1d7cee859db4794785d1bc7658a678b, type: 2}
+    Quantity: 0
   _souls: {fileID: 11400000, guid: 975ce7851e28ea14ea9e9dedd890d51c, type: 2}
-  _healItemQuantity: 10
+  _potionQuantity: 10
 --- !u!114 &4959893385512528952
 MonoBehaviour:
   m_ObjectHideFlags: 0

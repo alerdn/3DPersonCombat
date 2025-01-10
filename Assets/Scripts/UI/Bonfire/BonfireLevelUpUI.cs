@@ -311,10 +311,10 @@ public class BonfireLevelUpUI : MonoBehaviour
         _hpText.text = NextHp.ToString();
         _manaText.text = _nextMana.ToString();
         _staminaText.text = _nextStamina.ToString();
-        _weapon1DamageText.text = _player.Weapons[0].GetDamageBase(_nextStrength).ToString();
-        _weapon2DamageText.text = _player.Weapons[1].GetDamageBase(_nextStrength).ToString();
-        _weapon3DamageText.text = _player.Weapons[2].GetDamageBase(_nextStrength).ToString();
-        _weapon4DamageText.text = _player.Weapons[3].GetDamageBase(_nextIntelligence).ToString();
+        _weapon1DamageText.text = GetWeaponDamageText(_player.Weapons[0]);
+        _weapon2DamageText.text = GetWeaponDamageText(_player.Weapons[1]);
+        _weapon3DamageText.text = GetWeaponDamageText(_player.Weapons[2]);
+        _weapon4DamageText.text = GetWeaponDamageText(_player.Weapons[3]);
     }
 
     private void HideLevelUpFrame()
@@ -326,5 +326,17 @@ public class BonfireLevelUpUI : MonoBehaviour
     public void HideFrame()
     {
         _frame.SetActive(false);
+    }
+
+    private string GetWeaponDamageText(Weapon weapon)
+    {
+        if (!weapon) return "-";
+
+        return weapon.DamageAttribute switch
+        {
+            DamageAttribute.Strength => weapon.GetDamageBase(NextStrength).ToString(),
+            DamageAttribute.Intelligence => weapon.GetDamageBase(NextIntelligence).ToString(),
+            _ => "-"
+        };
     }
 }

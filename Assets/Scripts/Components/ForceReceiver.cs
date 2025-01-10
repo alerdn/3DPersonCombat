@@ -1,10 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ForceReceiver : MonoBehaviour
 {
     public Vector3 Movement => _impact + Vector3.up * _verticalVelocity;
+
+    public bool Pusheable;
 
     [SerializeField] private CharacterController _controller;
     [SerializeField] private NavMeshAgent _agent;

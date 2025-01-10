@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea4da6e04050b8d4f80bb6943cb6e99f, type: 3}
+  m_Script: {fileID: 11500000, guid: e637388af7aedd7489f3199ef84ed9c0, type: 3}
   m_Name: Homing Soulmass Spell
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Massa de Almas Guiadas
   <Sprite>k__BackingField: {fileID: 21300000, guid: b57004841018007488dc875f98b49b63,
     type: 3}
-  <ManaCost>k__BackingField: 40
-  <RawDamage>k__BackingField: 400
+  <ManaCost>k__BackingField: 150
+  <RawDamage>k__BackingField: 300
   <AnimationName>k__BackingField: Staff_Attack1
-  <EffectPrefab>k__BackingField: {fileID: 4128394457648778201, guid: e7995f8fd3e502b4dade8a3fc63803fe,
+  <EffectPrefab>k__BackingField: {fileID: 4128394457648778201, guid: 96b75232bf44cbf45b6e55503c75430f,
     type: 3}

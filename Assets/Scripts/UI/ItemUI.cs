@@ -26,17 +26,25 @@ public class ItemUI : MonoBehaviour
         {
             case ItemType.Weapon:
                 player.OnWeaponSwitched += OnWeaponSwitched;
+                OnWeaponSwitched(player.CurrentWeapon);
                 break;
             case ItemType.Shield:
                 player.OnShieldSwitched += OnShieldSwitched;
+                OnShieldSwitched(player.CurrentShield);
                 break;
             case ItemType.Consumable:
                 player.OnItemSwitched += OnItemSwitched;
-                player.Inventory.CurrentItem.OnQuantityChanged += UpdateQuantity;
+                player.Inventory.OnQuantityChanged += UpdateQuantity;
+
+                OnItemSwitched(player.Inventory.CurrentItem);
                 UpdateQuantity(player.Inventory.CurrentItem.Quantity);
                 break;
             case ItemType.Spell:
                 player.OnSpellSwitched += OnSpellSwitched;
+                player.OnWeaponSwitched += ToggleSpellOnWeaponSwitched;
+
+                OnSpellSwitched(player.Spellbook.CurrentSpell);
+                ToggleSpellOnWeaponSwitched(player.CurrentWeapon);
                 break;
             default:
                 break;
@@ -80,5 +88,17 @@ public class ItemUI : MonoBehaviour
     {
         _icon.color = Color.white;
         _icon.sprite = spell.Sprite;
+    }
+
+    private void ToggleSpellOnWeaponSwitched(Weapon weapon)
+    {
+        if (weapon is Staff)
+        {
+            _icon.color = Color.white;
+        }
+        else
+        {
+            _icon.color = Color.gray;
+        }
     }
 }
