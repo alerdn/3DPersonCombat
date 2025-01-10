@@ -20,6 +20,11 @@ public class WeaponUpgradeSlotUI : MonoBehaviour
         _weapon.OnLevelChanged += UpdateUI;
     }
 
+    private void OnDestroy()
+    {
+        _weapon.OnLevelChanged -= UpdateUI;
+    }
+
     public void UpdateUI()
     {
         _spriteImage.sprite = _weapon.Sprite;

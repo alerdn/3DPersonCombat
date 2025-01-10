@@ -96,9 +96,46 @@ public class PlayerStateMachine : StateMachine
         Health.SetStaminaComponent(Stamina);
         Inventory.ReplanishPotions();
 
+        LoadData();
+
         Health.SetMaxHealth(CharacterStat.Vigor, true);
         Stamina.SetMaxStamina(CharacterStat.Endurance, true);
         Mana.SetMaxMana(CharacterStat.Mind, true);
+    }
+
+    private void LoadData()
+    {
+        CharacterStat.Vigor = PlayerPrefs.GetInt("Vigor", 10);
+        CharacterStat.Endurance = PlayerPrefs.GetInt("Endurance", 10);
+        CharacterStat.Mind = PlayerPrefs.GetInt("Mind", 10);
+        CharacterStat.Strength = PlayerPrefs.GetInt("Strength", 10);
+        CharacterStat.Intelligence = PlayerPrefs.GetInt("Intelligence", 10);
+        Inventory.Souls = PlayerPrefs.GetInt("Souls", 0);
+
+        foreach (var weapon in Weapons)
+        {
+            weapon.Level = PlayerPrefs.GetInt(weapon.Name, 0);
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    public void SaveData()
+    {
+        PlayerPrefs.SetInt("Vigor", CharacterStat.Vigor);
+        PlayerPrefs.SetInt("Endurance", CharacterStat.Endurance);
+        PlayerPrefs.SetInt("Mind", CharacterStat.Mind);
+        PlayerPrefs.SetInt("Strength", CharacterStat.Strength);
+        PlayerPrefs.SetInt("Intelligence", CharacterStat.Intelligence);
+        PlayerPrefs.SetInt("Souls", Inventory.Souls);
+
+        foreach (var weapon in Weapons)
+        {
+            PlayerPrefs.SetInt(weapon.Name, weapon.Level);
+        }
     }
 
     public void SwitchWeapon()

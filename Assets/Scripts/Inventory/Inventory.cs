@@ -13,6 +13,7 @@ public record ItemInventory
 public class Inventory : MonoBehaviour
 {
     public event Action<int> OnQuantityChanged;
+    public event Action OnSoulsRecovered;
 
     public ItemInventory CurrentItem
     {
@@ -80,5 +81,11 @@ public class Inventory : MonoBehaviour
         GetAshen().Quantity = _potionQuantity;
 
         OnQuantityChanged?.Invoke(CurrentItem.Quantity);
+    }
+
+    public void RecoverSouls(int souls)
+    {
+        Souls += souls;
+        OnSoulsRecovered?.Invoke();
     }
 }

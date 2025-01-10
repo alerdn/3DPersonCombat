@@ -7,14 +7,25 @@ using UnityEngine.UI;
 public class BossArea : MonoBehaviour
 {
     [SerializeField] EnemyStateMachine _boss;
-    [SerializeField] private Image _bossHealthBar;
     [SerializeField] private GameObject _canvas;
+    [SerializeField] private Image _bossHealthBar;
 
     private void Start()
     {
         _boss.Health.OnHealthChanged += UpdateBossHealthBar;
 
+        _boss.Health.OnDie += () =>
+        {
+            HideBossHealth();
+            _boss.Health.OnDie -= HideBossHealth;
+        };
+
         _canvas.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        _boss.Health.OnHealthChanged -= UpdateBossHealthBar;
     }
 
     private void UpdateBossHealthBar(int arg1, int arg2)

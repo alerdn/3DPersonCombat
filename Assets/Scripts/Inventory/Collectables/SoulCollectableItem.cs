@@ -12,6 +12,6 @@ public class SoulCollectableItem : CollectableItem
     protected override void OnCollect()
     {
         AudioManager.Instance.PlayCue("SoulRecovered");
-        PlayerStateMachine.Instance.Inventory.Souls += _souls;
+        PlayerStateMachine.Instance.Inventory.RecoverSouls(_souls);
     }
 }

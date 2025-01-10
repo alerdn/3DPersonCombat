@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
 
     public int Level
     {
-        get => _level; protected set
+        get => _level; set
         {
             _level = value;
             OnLevelChanged?.Invoke();

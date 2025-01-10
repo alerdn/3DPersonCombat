@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf21bc32e5af84f880f55467aec3ea, type: 3}
   m_Name: SO Souls
   m_EditorClassIdentifier: 
-  _value: 155792
-  _resetOnEnable: 1
+  _value: 6609
+  _resetOnEnable: 0
