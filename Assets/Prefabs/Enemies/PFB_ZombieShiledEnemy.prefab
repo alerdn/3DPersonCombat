@@ -3627,6 +3627,7 @@ MonoBehaviour:
   <PlayerChasingRange>k__BackingField: 10
   <AttackRange>k__BackingField: 1.25
   SoulsValue: 30000
+  CanBeStunned: 1
   HasNoticedPlayer: 0
 --- !u!114 &3136058801688029
 MonoBehaviour:

@@ -14,11 +14,7 @@ public class BossArea : MonoBehaviour
     {
         _boss.Health.OnHealthChanged += UpdateBossHealthBar;
 
-        _boss.Health.OnDie += () =>
-        {
-            HideBossHealth();
-            _boss.Health.OnDie -= HideBossHealth;
-        };
+        _boss.Health.OnDie += OnDie;
 
         _canvas.SetActive(false);
     }
@@ -26,6 +22,12 @@ public class BossArea : MonoBehaviour
     private void OnDestroy()
     {
         _boss.Health.OnHealthChanged -= UpdateBossHealthBar;
+    }
+
+    private void OnDie()
+    {
+        HideBossHealth();
+        _boss.Health.OnDie -= HideBossHealth;
     }
 
     private void UpdateBossHealthBar(int arg1, int arg2)

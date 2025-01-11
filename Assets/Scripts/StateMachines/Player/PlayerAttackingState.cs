@@ -25,6 +25,8 @@ public class PlayerAttackingState : PlayerBaseState
     {
         stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
         AudioManager.Instance.PlayCue("Swing");
+
+        stateMachine.InputReader.DodgeEvent += OnDodge;
     }
 
     public override void Tick(float deltaTime)
@@ -67,6 +69,8 @@ public class PlayerAttackingState : PlayerBaseState
     {
         _weapon.DisableHitBox();
         stateMachine.ForceReceiver.Pusheable = true;
+
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
     }
 
     private void TryComboAttack(float normalizedTime)

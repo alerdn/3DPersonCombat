@@ -29,11 +29,20 @@ public class EnemyAttackingState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
-
-        if (!_isTransitioning && GetNormalizedTime(stateMachine.Animator, "Attack") >= 1f)
+        if (!_isTransitioning)
         {
-            _isTransitioning = true;
-            stateMachine.Animator.CrossFadeInFixedTime(LocomotionHash, .1f);
+            float normalizedTime = GetNormalizedTime(stateMachine.Animator, "Attack");
+
+            if (normalizedTime < .3f)
+            {
+                FacePlayer();
+            }
+
+            if (normalizedTime >= 1f)
+            {
+                _isTransitioning = true;
+                stateMachine.Animator.CrossFadeInFixedTime(LocomotionHash, .1f);
+            }
         }
 
         if (_isTransitioning)

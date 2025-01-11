@@ -23,8 +23,18 @@ public class GameMenu : MonoBehaviour
 
     private void OnPause()
     {
-        _frame.SetActive(!_frame.activeInHierarchy);
-        _inputReader.SetControllerMode(ControllerMode.UI);
+        bool isActive = _frame.activeInHierarchy;
+
+        if (isActive)
+        {
+            _frame.SetActive(false);
+            _inputReader.SetControllerMode(ControllerMode.Gameplay);
+        }
+        else
+        {
+            _frame.SetActive(true);
+            _inputReader.SetControllerMode(ControllerMode.UI);
+        }
     }
 
     public void OnClick_Continue()

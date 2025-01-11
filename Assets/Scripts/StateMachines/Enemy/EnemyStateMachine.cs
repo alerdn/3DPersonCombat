@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 public class EnemyStateMachine : StateMachine
 {
@@ -20,6 +19,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float PlayerChasingRange { get; private set; } = 10f;
     [field: SerializeField] public float AttackRange { get; private set; } = 2f;
     [field: SerializeField] public int SoulsValue;
+    [field: SerializeField] public bool CanBeStunned;
 
     public PlayerStateMachine Player { get; private set; }
     public bool HasNoticedPlayer;
@@ -51,7 +51,10 @@ public class EnemyStateMachine : StateMachine
 
     private void HandleTakeDamage()
     {
-        SwitchState(new EnemyImpactState(this));
+        if (CanBeStunned)
+        {
+            SwitchState(new EnemyImpactState(this));
+        }
     }
 
     private void HandleDie()
