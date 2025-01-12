@@ -25,29 +25,32 @@ public class Interactable : MonoBehaviour
         PlayerStateMachine.Instance.InputReader.InteractEvent -= OnInteract;
     }
 
-    private void OnInteract()
+    private void Update()
     {
-        if (!_inRange) return;
+        Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player"));
 
-        _inRange = false;
-        _onInteract?.Invoke();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && !_inRange)
+        if (colliders.Length > 0 && !_inRange)
         {
             _inRange = true;
             _inRangeEvent?.Invoke();
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        else if (colliders.Length == 0 && _inRange)
         {
             _inRange = false;
             _outOfRangeEvent?.Invoke();
         }
+    }
+
+    private void OnInteract()
+    {
+        if (!_inRange) return;
+
+        _onInteract?.Invoke();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, transform.localScale);
     }
 }

@@ -13,7 +13,6 @@ public class BossArea : MonoBehaviour
     private void Start()
     {
         _boss.Health.OnHealthChanged += UpdateBossHealthBar;
-
         _boss.Health.OnDie += OnDie;
 
         _canvas.SetActive(false);
@@ -22,27 +21,30 @@ public class BossArea : MonoBehaviour
     private void OnDestroy()
     {
         _boss.Health.OnHealthChanged -= UpdateBossHealthBar;
+        _boss.Health.OnDie -= OnDie;
+    }
+
+    private void Update()
+    {
+        Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale / 2, Quaternion.identity, LayerMask.GetMask("Player"));
+        if (colliders.Length > 0 && !_boss.Health.IsDead)
+        {
+            ShowBossHealth();
+        }
+        else
+        {
+            HideBossHealth();
+        }
     }
 
     private void OnDie()
     {
         HideBossHealth();
-        _boss.Health.OnDie -= HideBossHealth;
     }
 
     private void UpdateBossHealthBar(int arg1, int arg2)
     {
         _bossHealthBar.fillAmount = (float)arg1 / (float)arg2;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            ShowBossHealth();
-            ShowBossHealth();
-            PlayerStateMachine.Instance.Health.OnDie += HideBossHealth;
-        }
     }
 
     public void ShowBossHealth()
@@ -53,6 +55,11 @@ public class BossArea : MonoBehaviour
     private void HideBossHealth()
     {
         _canvas.SetActive(false);
-        PlayerStateMachine.Instance.Health.OnDie -= HideBossHealth;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, transform.localScale);
     }
 }
