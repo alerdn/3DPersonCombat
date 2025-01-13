@@ -47,7 +47,7 @@ public class GameMenu : MonoBehaviour
 
     public void OnClick_Quit()
     {
-        LoadSceneRoutine("SCN_Menu");
+        StartCoroutine(LoadSceneRoutine("SCN_Menu"));
         _mainFrame.SetActive(false);
         _loadingFrame.SetActive(true);
     }
