@@ -18,14 +18,18 @@ public class MessageUI : MonoBehaviour
 
         PlayerStateMachine.Instance.Health.OnDie += ShowDeathMessage;
         PlayerStateMachine.Instance.Inventory.OnSoulsRecovered += ShowRecoverMessage;
-        _bossHealth.OnDie += ShowWinMessage;
+
+        if (_bossHealth)
+            _bossHealth.OnDie += ShowWinMessage;
     }
 
     private void OnDestroy()
     {
         PlayerStateMachine.Instance.Health.OnDie -= ShowDeathMessage;
         PlayerStateMachine.Instance.Inventory.OnSoulsRecovered -= ShowRecoverMessage;
-        _bossHealth.OnDie -= ShowWinMessage;
+
+        if (_bossHealth)
+            _bossHealth.OnDie -= ShowWinMessage;
     }
 
     public void ShowDeathMessage()

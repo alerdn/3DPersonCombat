@@ -29,4 +29,12 @@ public class MeleeWeapon : Weapon
 
         return Mathf.RoundToInt(baseDamage * damageMultiplier);
     }
+
+    public int GetAttackDamage(Attack attack, int strength = 0)
+    {
+        int baseDamage = GetDamageBase(strength);
+        float damageMultiplier = attack.DamageMultiplier;
+
+        return Mathf.RoundToInt(baseDamage * damageMultiplier);
+    }
 }
