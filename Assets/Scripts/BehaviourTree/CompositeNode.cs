@@ -28,7 +28,7 @@ public abstract class CompositeNode : Node
         return node;
     }
 
-    public override void Reset()
+    public override void OnReset()
     {
         currentChild = 0;
         foreach (Node child in children)

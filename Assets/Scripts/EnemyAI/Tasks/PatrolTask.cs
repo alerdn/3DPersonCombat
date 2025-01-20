@@ -59,7 +59,7 @@ public class PatrolTask : Node
 
     public override void OnStop() { }
 
-    public override void Reset()
+    public override void OnReset()
     {
         _waitCounter = 0f;
         _isWaiting = false;

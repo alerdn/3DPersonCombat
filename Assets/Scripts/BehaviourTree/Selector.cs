@@ -4,15 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BehaviourTree/Selector")]
 public class Selector : CompositeNode
 {
-    public override void OnStart()
-    {
-    }
+    public override void OnStart() { }
 
     public override NodeState OnUpdate(float deltaTime)
     {
         foreach (Node child in children)
         {
-            switch (child.Evaluate(deltaTime))
+            switch (child.Evaluate(deltaTime, out tree.CurrentNode))
             {
                 case NodeState.Running:
                     return NodeState.Running;
@@ -25,10 +23,9 @@ public class Selector : CompositeNode
         }
 
         Reset();
+        tree.CurrentNode = this;
         return NodeState.Failure;
     }
 
-    public override void OnStop()
-    {
-    }
+    public override void OnStop() { }
 }

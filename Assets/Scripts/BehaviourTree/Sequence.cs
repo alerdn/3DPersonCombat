@@ -4,15 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BehaviourTree/Sequence")]
 public class Sequence : CompositeNode
 {
-    public override void OnStart()
-    {
-    }
+    public override void OnStart() { }
 
     public override NodeState OnUpdate(float deltaTime)
     {
         if (currentChild < children.Count)
         {
-            switch (children[currentChild].Evaluate(deltaTime))
+            switch (children[currentChild].Evaluate(deltaTime, out tree.CurrentNode))
             {
                 case NodeState.Running:
                     return NodeState.Running;
@@ -26,10 +24,9 @@ public class Sequence : CompositeNode
         }
 
         Reset();
+        tree.CurrentNode = this;
         return NodeState.Success;
     }
 
-    public override void OnStop()
-    {
-    }
+    public override void OnStop() { }
 }

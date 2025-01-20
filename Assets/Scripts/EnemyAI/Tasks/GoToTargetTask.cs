@@ -30,6 +30,17 @@ public class GoToTargetTask : Node
 
     public override void OnStop()
     {
+        ResetPath();
+    }
+
+    public override void OnReset()
+    {
+        ResetPath();
+    }
+
+    private void ResetPath()
+    {
+
         if (tree.Agent.isOnNavMesh)
         {
             tree.Agent.ResetPath();

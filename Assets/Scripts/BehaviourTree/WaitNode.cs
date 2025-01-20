@@ -20,9 +20,7 @@ public class WaitNode : Node
         return NodeState.Running;
     }
 
-    public override void OnStop() { }
-
-    public override void Reset()
+    public override void OnStop()
     {
         _waitCount = 0f;
     }

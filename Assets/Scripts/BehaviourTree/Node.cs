@@ -13,6 +13,7 @@ public abstract class Node : ScriptableObject
 {
     public Node Parent;
     public readonly string Name;
+    public Node CurrentNode;
 
     protected EnemyBT tree;
 
@@ -29,14 +30,14 @@ public abstract class Node : ScriptableObject
         return Instantiate(this);
     }
 
-    public virtual void Reset() { }
-
     public abstract void OnStart();
     public abstract NodeState OnUpdate(float deltaTime);
     public abstract void OnStop();
+    public virtual void OnReset() { }
 
-    public NodeState Evaluate(float deltaTime)
+    public NodeState Evaluate(float deltaTime, out Node currentNode)
     {
+        currentNode = this;
         if (!_isStarted)
         {
             OnStart();
@@ -51,6 +52,12 @@ public abstract class Node : ScriptableObject
         }
 
         return state;
+    }
+
+    public void Reset()
+    {
+        _isStarted = false;
+        OnReset();
     }
 
     public void SetData(string key, object value)

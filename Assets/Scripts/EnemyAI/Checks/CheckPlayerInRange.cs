@@ -15,7 +15,7 @@ public class CheckPlayerInRange : Node
 
         float playerDistanceSqr = (tree.Player.transform.position - tree.transform.position).sqrMagnitude;
 
-        if (playerDistanceSqr <= tree.PlayerChasingRange * tree.PlayerChasingRange)
+        if (playerDistanceSqr <= Mathf.Pow(tree.PlayerChasingRange, 2f))
         {
             tree.HasNoticedPlayer = true;
             return NodeState.Success;
