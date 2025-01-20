@@ -1,11 +1,8 @@
 using UnityEngine;
 
-public class CheckPlayerInRange : EnemyNodeBase
+[CreateAssetMenu(menuName = "BehaviourTree/Checks/CheckPlayerInRange")]
+public class CheckPlayerInRange : Node
 {
-    public CheckPlayerInRange(EnemyBT tree) : base(tree)
-    {
-    }
-
     public override void OnStart()
     {
     }

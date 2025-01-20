@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class AttackTask : EnemyNodeBase
+[CreateAssetMenu(menuName = "BehaviourTree/Tasks/AttackTask")]
+public class AttackTask : Node
 {
+    [field: SerializeField] public int AttackIndex { get; set; }
+
     private MeleeWeapon _weapon;
     private Attack _attack;
 
-    public AttackTask(EnemyBT tree, int attackIndex) : base(tree)
-    {
-        _weapon = tree.Weapon;
-        _attack = _weapon.Attacks[attackIndex];
-    }
-
     public override void OnStart()
     {
+        _weapon = tree.Weapon;
+        _attack = _weapon.Attacks[AttackIndex];
+
         int damage = _weapon.GetAttackDamage(_attack);
         _weapon.SetAttack(damage, _attack.Knockback, UnitType.Player);
 

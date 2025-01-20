@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,50 +9,27 @@ public enum NodeState
     Failure
 }
 
-public abstract class Node
+public abstract class Node : ScriptableObject
 {
     public Node Parent;
     public readonly string Name;
-    public readonly int Priority;
 
-    protected List<Node> children = new List<Node>();
-    protected int currentChild = 0;
+    protected EnemyBT tree;
 
     private bool _isStarted;
-
     private Dictionary<string, object> _dataContext = new Dictionary<string, object>();
 
-    public Node(string name = "Node", int priority = 0)
+    public virtual void SetBehaviourTree(EnemyBT enemyBT)
     {
-        Name = name;
-        Priority = priority;
+        tree = enemyBT;
     }
 
-    public Node(string name, int priority, List<Node> children)
+    public virtual Node Instantiate()
     {
-        Name = name;
-        Priority = priority;
-
-        foreach (Node child in children)
-        {
-            AddChild(child);
-        }
+        return Instantiate(this);
     }
 
-    public void AddChild(Node node)
-    {
-        node.Parent = this;
-        children.Add(node);
-    }
-
-    public virtual void Reset()
-    {
-        currentChild = 0;
-        foreach (Node child in children)
-        {
-            child.Reset();
-        }
-    }
+    public virtual void Reset() { }
 
     public abstract void OnStart();
     public abstract NodeState OnUpdate(float deltaTime);
@@ -121,6 +99,38 @@ public abstract class Node
         }
 
         return false;
+    }
+
+    protected void FacePlayer()
+    {
+        if (tree.Player == null) return;
+
+        Vector3 lookPos = tree.Player.transform.position - tree.transform.position;
+        lookPos.y = 0;
+
+        tree.transform.rotation = Quaternion.LookRotation(lookPos);
+    }
+
+    protected bool IsInChaseRange()
+    {
+        if (tree.Player.Health.IsDead) return false;
+
+        if (tree.HasNoticedPlayer) return true;
+
+        float playerDistanceSqr = (tree.Player.transform.position - tree.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= tree.PlayerChasingRange * tree.PlayerChasingRange;
+    }
+
+    protected void Move(float deltaTime)
+    {
+        Move(Vector3.zero, deltaTime);
+    }
+
+    protected void Move(Vector3 motion, float deltaTime)
+    {
+        Vector3 force = tree.ForceReceiver.Movement;
+        tree.CharacterController.Move((motion + force) * deltaTime);
     }
 
     protected float GetNormalizedTime(Animator animator, string tag)

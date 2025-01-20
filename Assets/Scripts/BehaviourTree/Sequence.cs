@@ -1,10 +1,9 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Sequence : Node
+[CreateAssetMenu(menuName = "BehaviourTree/Sequence")]
+public class Sequence : CompositeNode
 {
-    public Sequence(string name = "Sequence", int priority = 0) : base(name, priority) { }
-    public Sequence(string name, int priority, List<Node> children) : base(name, priority, children) { }
-
     public override void OnStart()
     {
     }

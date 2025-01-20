@@ -1,14 +1,9 @@
 using UnityEngine;
 
-public class CheckPlayerInAttackRange : EnemyNodeBase
+[CreateAssetMenu(menuName = "BehaviourTree/Checks/CheckPlayerInAttackRange")]
+public class CheckPlayerInAttackRange : Node
 {
-    public CheckPlayerInAttackRange(EnemyBT tree) : base(tree)
-    {
-    }
-
-    public override void OnStart()
-    {
-    }
+    public override void OnStart() { }
 
     public override NodeState OnUpdate(float deltaTime)
     {
@@ -20,11 +15,9 @@ public class CheckPlayerInAttackRange : EnemyNodeBase
         {
             return NodeState.Success;
         }
-        
+
         return NodeState.Failure;
     }
 
-    public override void OnStop()
-    {
-    }
+    public override void OnStop() { }
 }

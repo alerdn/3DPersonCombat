@@ -2,12 +2,7 @@ using UnityEngine;
 
 public abstract class BehaviourTree : MonoBehaviour
 {
-    public Node Root { get; private set; }
-
-    protected virtual void Start()
-    {
-        Root = SetupTree();
-    }
+    [field: SerializeField] public Node Root { get; protected set; }
 
     private void Update()
     {

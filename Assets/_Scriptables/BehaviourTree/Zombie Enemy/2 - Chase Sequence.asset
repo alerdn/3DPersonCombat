@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d759690220f2c0419f8c2adc9278554, type: 3}
+  m_Name: 2 - Chase Sequence
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 0}
+  children:
+  - {fileID: 11400000, guid: da2ccf35c2257c043ad6cdc10bcc1188, type: 2}
+  - {fileID: 11400000, guid: a6a5afc8cc8ffda4da2f10a8b0157ec2, type: 2}

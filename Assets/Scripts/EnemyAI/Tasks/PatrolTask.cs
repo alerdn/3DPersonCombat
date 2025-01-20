@@ -1,26 +1,16 @@
 using UnityEngine;
 
-public class PatrolTask : EnemyNodeBase
+[CreateAssetMenu(menuName = "BehaviourTree/Tasks/PatrolTask")]
+public class PatrolTask : Node
 {
     private readonly int LocomotionHash = Animator.StringToHash("Locomotion");
     private readonly int SpeedHash = Animator.StringToHash("Speed");
-    private Transform[] _waypoints;
 
     private int _currentWaypointIndex;
 
     private float _waitTime = .1f;
     private float _waitCounter = 0f;
     private bool _isWaiting = false;
-
-    public PatrolTask(EnemyBT tree, Transform[] waypoints) : base(tree)
-    {
-        _waypoints = waypoints;
-    }
-
-    public PatrolTask(EnemyBT tree, string name, int priority, Transform[] waypoints) : base(tree, name, priority)
-    {
-        _waypoints = waypoints;
-    }
 
     public override void OnStart()
     {
@@ -41,13 +31,13 @@ public class PatrolTask : EnemyNodeBase
         }
         else
         {
-            Transform wp = _waypoints[_currentWaypointIndex];
+            Transform wp = tree.Waypoints[_currentWaypointIndex];
             if (Vector3.Distance(tree.transform.position, wp.position) <= tree.Agent.stoppingDistance)
             {
                 _waitCounter = 0f;
                 _isWaiting = true;
 
-                _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+                _currentWaypointIndex = (_currentWaypointIndex + 1) % tree.Waypoints.Length;
                 tree.Animator.SetFloat(SpeedHash, 0f, .1f, Time.deltaTime);
             }
             else
@@ -67,9 +57,7 @@ public class PatrolTask : EnemyNodeBase
         return NodeState.Running;
     }
 
-    public override void OnStop()
-    {
-    }
+    public override void OnStop() { }
 
     public override void Reset()
     {

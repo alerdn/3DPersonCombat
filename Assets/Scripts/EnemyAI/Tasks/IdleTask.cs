@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class IdleTask : EnemyNodeBase
+[CreateAssetMenu(menuName = "BehaviourTree/Tasks/IdleTask")]
+public class IdleTask : Node
 {
     private readonly int LocomotionHash = Animator.StringToHash("Locomotion");
     private readonly int SpeedHash = Animator.StringToHash("Speed");
-
-    public IdleTask(EnemyBT tree) : base(tree)
-    {
-    }
 
     public override void OnStart()
     {
@@ -21,7 +18,5 @@ public class IdleTask : EnemyNodeBase
         return NodeState.Success;
     }
 
-    public override void OnStop()
-    {
-    }
+    public override void OnStop() { }
 }

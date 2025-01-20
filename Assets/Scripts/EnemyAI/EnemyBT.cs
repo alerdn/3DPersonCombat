@@ -26,11 +26,11 @@ public class EnemyBT : BehaviourTree
 
     private Vector3 _initialPosition;
 
-    override protected void Start()
+    private void Start()
     {
-        base.Start();
-
         Player = PlayerStateMachine.Instance;
+
+        Root = SetupTree();
 
         Agent.updatePosition = false;
         Agent.updateRotation = false;
@@ -40,26 +40,13 @@ public class EnemyBT : BehaviourTree
 
     protected override Node SetupTree()
     {
-        Node actions = new PrioritySelector("Root");
+        Node root = Root.Instantiate();
 
-        actions.AddChild(new Sequence("Attack Sequence", 3, new List<Node>()
-        {
-            new CheckPlayerInAttackRange(this),
-            new AttackTask(this, 0),
-            new IdleTask(this),
-            new WaitNode(1f),
-        }));
+        root.SetBehaviourTree(this);
 
-        actions.AddChild(new Sequence("Follow Sequence", 2, new List<Node>()
-        {
-            new CheckPlayerInRange(this),
-            new GoToTargetTask(this)
-        }));
-
-        actions.AddChild(new PatrolTask(this, "Patrol", 1, Waypoints));
-
-        return actions;
+        return root;
     }
+
 
     private void HandleTakeDamage()
     {

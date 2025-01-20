@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class GoToTargetTask : EnemyNodeBase
+[CreateAssetMenu(menuName = "BehaviourTree/Tasks/GoToTargetTask")]
+public class GoToTargetTask : Node
 {
     private readonly int LocomotionHash = Animator.StringToHash("Locomotion");
     private readonly int SpeedHash = Animator.StringToHash("Speed");
-
-    public GoToTargetTask(EnemyBT tree) : base(tree)
-    {
-    }
 
     public override void OnStart()
     {

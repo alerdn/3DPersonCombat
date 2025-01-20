@@ -1,19 +1,18 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Selector : Node
+[CreateAssetMenu(menuName = "BehaviourTree/Selector")]
+public class Selector : CompositeNode
 {
-    public Selector() : base() { }
-    public Selector(string name, int priority, List<Node> children) : base(name, priority, children) { }
-
     public override void OnStart()
     {
     }
 
     public override NodeState OnUpdate(float deltaTime)
     {
-        if (currentChild < children.Count)
+        foreach (Node child in children)
         {
-            switch (children[currentChild].Evaluate(deltaTime))
+            switch (child.Evaluate(deltaTime))
             {
                 case NodeState.Running:
                     return NodeState.Running;
@@ -21,8 +20,7 @@ public class Selector : Node
                     Reset();
                     return NodeState.Success;
                 default:
-                    currentChild++;
-                    return NodeState.Running;
+                    continue;
             }
         }
 
