@@ -3613,6 +3613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16475fdc41cf3fa4b9bf2633be296984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentNode: {fileID: 0}
   <Root>k__BackingField: {fileID: 11400000, guid: d6caea5ce42058946837195a47889977,
     type: 2}
   <Animator>k__BackingField: {fileID: 6731914125458489195}
@@ -3626,8 +3627,9 @@ MonoBehaviour:
   <Ragdoll>k__BackingField: {fileID: 4831793450491820941}
   <Waypoints>k__BackingField: []
   <MovementSpeed>k__BackingField: 4
+  <RetreatSpeed>k__BackingField: 2
   <PlayerChasingRange>k__BackingField: 10
-  <AttackRange>k__BackingField: 1
+  <AttackRange>k__BackingField: 1.2
   SoulsValue: 2000
   CanBeStunned: 0
   HasNoticedPlayer: 0

@@ -13,34 +13,15 @@ public class GoToTargetTask : Node
 
     public override NodeState OnUpdate(float deltaTime)
     {
-        if (tree.Agent.isOnNavMesh)
-        {
-            tree.Agent.destination = tree.Player.transform.position;
-            Move(tree.Agent.desiredVelocity.normalized * tree.MovementSpeed, deltaTime);
-        }
-
-        // Atualizamos a velocity do agent porque nós estamos lidando com a movimentação manualmente
-        tree.Agent.velocity = tree.CharacterController.velocity;
-
         FacePlayer();
-        tree.Animator.SetFloat(SpeedHash, 1f, .1f, deltaTime);
+        MoveTo(tree.Player.transform.position, tree.MovementSpeed, deltaTime);
 
+        tree.Animator.SetFloat(SpeedHash, tree.Agent.velocity.magnitude, .1f, deltaTime);
         return NodeState.Running;
     }
 
     public override void OnStop()
     {
-        ResetPath();
-    }
-
-    public override void OnReset()
-    {
-        ResetPath();
-    }
-
-    private void ResetPath()
-    {
-
         if (tree.Agent.isOnNavMesh)
         {
             tree.Agent.ResetPath();

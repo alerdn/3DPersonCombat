@@ -57,9 +57,7 @@ public class PatrolTask : Node
         return NodeState.Running;
     }
 
-    public override void OnStop() { }
-
-    public override void OnReset()
+    public override void OnStop()
     {
         _waitCounter = 0f;
         _isWaiting = false;

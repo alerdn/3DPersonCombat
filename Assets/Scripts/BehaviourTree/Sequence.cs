@@ -1,11 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "BehaviourTree/Sequence")]
 public class Sequence : CompositeNode
 {
-    public override void OnStart() { }
-
     public override NodeState OnUpdate(float deltaTime)
     {
         if (currentChild < children.Count)
@@ -15,7 +12,6 @@ public class Sequence : CompositeNode
                 case NodeState.Running:
                     return NodeState.Running;
                 case NodeState.Failure:
-                    Reset();
                     return NodeState.Failure;
                 default:
                     currentChild++;
@@ -23,10 +19,7 @@ public class Sequence : CompositeNode
             }
         }
 
-        Reset();
         tree.CurrentNode = this;
         return NodeState.Success;
     }
-
-    public override void OnStop() { }
 }

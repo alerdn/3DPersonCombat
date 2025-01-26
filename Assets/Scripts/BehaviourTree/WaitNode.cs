@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BehaviourTree/WaitNode")]
 public class WaitNode : Node
 {
-    private readonly float _duration;
+    [SerializeField] private float _duration;
     private float _waitCount;
 
     public override void OnStart() { }

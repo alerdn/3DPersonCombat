@@ -9,7 +9,7 @@ public class CheckPlayerInAttackRange : Node
     {
         if (tree.Player.Health.IsDead) return NodeState.Failure;
 
-        float playerDistanceSqr = (tree.Player.transform.position - tree.transform.position).sqrMagnitude;
+        float playerDistanceSqr = GetDistanceSqrToPlayer();
         float attackRangeSqr = Mathf.Pow(tree.AttackRange, 2f);
 
         if (playerDistanceSqr <= attackRangeSqr)

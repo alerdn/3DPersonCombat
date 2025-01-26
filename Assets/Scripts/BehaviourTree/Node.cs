@@ -33,7 +33,6 @@ public abstract class Node : ScriptableObject
     public abstract void OnStart();
     public abstract NodeState OnUpdate(float deltaTime);
     public abstract void OnStop();
-    public virtual void OnReset() { }
 
     public NodeState Evaluate(float deltaTime, out Node currentNode)
     {
@@ -52,12 +51,6 @@ public abstract class Node : ScriptableObject
         }
 
         return state;
-    }
-
-    public void Reset()
-    {
-        _isStarted = false;
-        OnReset();
     }
 
     public void SetData(string key, object value)
@@ -138,6 +131,23 @@ public abstract class Node : ScriptableObject
     {
         Vector3 force = tree.ForceReceiver.Movement;
         tree.CharacterController.Move((motion + force) * deltaTime);
+    }
+
+    protected void MoveTo(Vector3 targetPosition, float moveSpeed, float deltaTime)
+    {
+        if (tree.Agent.isOnNavMesh)
+        {
+            tree.Agent.destination = targetPosition;
+            Move(tree.Agent.desiredVelocity.normalized * moveSpeed, deltaTime);
+        }
+
+        // Atualizamos a velocity do agent porque nós estamos lidando com a movimentação manualmente
+        tree.Agent.velocity = tree.CharacterController.velocity;
+    }
+
+    protected float GetDistanceSqrToPlayer()
+    {
+        return (tree.Player.transform.position - tree.transform.position).sqrMagnitude;
     }
 
     protected float GetNormalizedTime(Animator animator, string tag)

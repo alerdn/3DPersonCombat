@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: 1 - Attack Sequence
   m_EditorClassIdentifier: 
   Parent: {fileID: 0}
+  CurrentNode: {fileID: 0}
   children:
   - {fileID: 11400000, guid: 148bc64298f2fa3489471ac18f30dd30, type: 2}
   - {fileID: 11400000, guid: 5046e9555b5632e4daf198a0fe124d14, type: 2}
+  - {fileID: 11400000, guid: 9b95215232b9bf14b898c4878cc36420, type: 2}
+  - {fileID: 11400000, guid: 674a36463e2b30946948537d78e8dd6b, type: 2}
+  - {fileID: 11400000, guid: 0d9e96df853e05847a1fac3ffe35aa25, type: 2}

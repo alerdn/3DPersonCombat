@@ -6,6 +6,8 @@ public abstract class CompositeNode : Node
     [SerializeField] protected List<Node> children = new List<Node>();
     protected int currentChild = 0;
 
+    public override void OnStart() { }
+
     public override void SetBehaviourTree(EnemyBT enemyBT)
     {
         base.SetBehaviourTree(enemyBT);
@@ -28,13 +30,8 @@ public abstract class CompositeNode : Node
         return node;
     }
 
-    public override void OnReset()
+    public override void OnStop()
     {
         currentChild = 0;
-        foreach (Node child in children)
-        {
-            child.Reset();
-        }
     }
-
 }
